@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>社区活动奖品层运营后台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#1677ff',
+              'bg-main': '#f5f5f5'
+            },
+            fontFamily: {
+              sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif']
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      html, body { min-height: 100%; }
+      body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .thin-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+      .thin-scrollbar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 999px; }
+      .prize-grid { grid-template-columns: 240px 88px 170px 90px 120px 94px 110px 96px 86px 132px; }
+      .record-grid { grid-template-columns: 168px 150px 160px 150px 96px 96px 100px 150px 110px; }
+      .exception-grid { grid-template-columns: 168px 150px 132px 136px 1fr 86px 126px 128px; }
+      .fulfill-grid { grid-template-columns: 160px 150px 150px 120px 180px 100px 96px 120px; }
+      .flow-line::after { content: ""; position: absolute; left: 18px; top: 36px; bottom: -18px; width: 2px; background: #e5e7eb; }
+      .flow-line:last-child::after { display: none; }
+      @media (max-width: 1280px) {
+        .layout-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body class="bg-bg-main text-gray-900">
+    <div class="flex min-h-screen">
+      <aside class="fixed inset-y-0 left-0 z-20 w-[244px] border-r border-gray-100 bg-white">
+        <div class="flex h-16 items-center px-6">
+          <div class="flex size-9 items-center justify-center rounded-xl bg-primary text-white shadow-sm">
+            <i data-lucide="boxes" class="size-5"></i>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm font-bold text-gray-900">会员运营后台</p>
+            <p class="text-[10px] font-bold uppercase tracking-wider text-gray-400">Reward Layer</p>
+          </div>
+        </div>
+        <nav class="space-y-1 px-3 py-5 text-sm font-medium text-gray-600">
+          <button class="flex w-full items-center rounded-xl px-4 py-3 hover:bg-gray-50">
+            <i data-lucide="home" class="mr-3 size-4"></i>首页
+          </button>
+          <button class="flex w-full items-center justify-between rounded-xl px-4 py-3 hover:bg-gray-50">
+            <span class="flex items-center"><i data-lucide="message-square" class="mr-3 size-4"></i>社区管理</span>
+            <i data-lucide="chevron-right" class="size-4"></i>
+          </button>
+          <div class="rounded-2xl bg-blue-50/70 p-1">
+            <button class="flex w-full items-center justify-between rounded-xl px-3 py-3 font-bold text-primary">
+              <span class="flex items-center"><i data-lucide="calendar-range" class="mr-3 size-4"></i>活动管理</span>
+              <i data-lucide="chevron-up" class="size-4"></i>
+            </button>
+            <div class="space-y-1 pb-1 pl-9 pr-1">
+              <button class="block w-full rounded-xl px-3 py-2 text-left text-gray-600 hover:bg-white">活动列表</button>
+              <button class="block w-full rounded-xl bg-primary px-3 py-2 text-left font-bold text-white shadow-sm">奖品层工作台</button>
+              <button class="block w-full rounded-xl px-3 py-2 text-left text-gray-600 hover:bg-white">活动审核规则</button>
+            </div>
+          </div>
+          <button class="flex w-full items-center justify-between rounded-xl px-4 py-3 hover:bg-gray-50">
+            <span class="flex items-center"><i data-lucide="store" class="mr-3 size-4"></i>积分商城</span>
+            <i data-lucide="chevron-right" class="size-4"></i>
+          </button>
+          <button class="flex w-full items-center justify-between rounded-xl px-4 py-3 hover:bg-gray-50">
+            <span class="flex items-center"><i data-lucide="ticket" class="mr-3 size-4"></i>优惠券系统</span>
+            <i data-lucide="chevron-right" class="size-4"></i>
+          </button>
+          <button class="flex w-full items-center justify-between rounded-xl px-4 py-3 hover:bg-gray-50">
+            <span class="flex items-center"><i data-lucide="shield-check" class="mr-3 size-4"></i>风控管理</span>
+            <i data-lucide="chevron-right" class="size-4"></i>
+          </button>
+          <button class="flex w-full items-center justify-between rounded-xl px-4 py-3 hover:bg-gray-50">
+            <span class="flex items-center"><i data-lucide="bar-chart-3" class="mr-3 size-4"></i>数据中心</span>
+            <i data-lucide="chevron-right" class="size-4"></i>
+          </button>
+        </nav>
+        <div class="absolute bottom-0 w-full border-t border-gray-100 bg-white p-4">
+          <button class="flex items-center text-sm font-bold text-gray-500 hover:text-primary">
+            <i data-lucide="panel-left-close" class="mr-2 size-4"></i>收起菜单
+          </button>
+        </div>
+      </aside>
+
+      <main class="ml-[244px] min-w-0 flex-1">
+        <header class="sticky top-0 z-10 border-b border-gray-100 bg-white/95 px-8 py-5 backdrop-blur">
+          <div class="flex items-start justify-between gap-6">
+            <div>
+              <div class="flex items-center text-xs font-bold text-gray-400">
+                <span>活动管理</span>
+                <i data-lucide="chevron-right" class="mx-1 size-3"></i>
+                <span class="text-gray-500">社区活动奖品层</span>
+              </div>
+              <div class="mt-2 flex items-center gap-2">
+                <h1 class="text-2xl font-bold text-gray-900">社区活动奖品层工作台</h1>
+                <span class="rounded-full bg-blue-50 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-blue-500">V1</span>
+              </div>
+              <p class="mt-2 text-sm font-medium text-gray-500">统一配置活动奖品，查看发放结果，处理发奖异常和实物履约</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <button class="flex items-center rounded-xl border border-gray-200 bg-white px-5 py-2 text-sm font-bold text-gray-700 shadow-sm transition-colors hover:bg-gray-50">
+                <i data-lucide="download" class="mr-2 size-4"></i>导出配置
+              </button>
+              <button class="flex items-center rounded-xl border border-gray-200 bg-white px-5 py-2 text-sm font-bold text-gray-700 shadow-sm transition-colors hover:bg-gray-50">
+                <i data-lucide="history" class="mr-2 size-4"></i>操作日志
+              </button>
+              <button id="openPrizeModal" class="flex items-center rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white shadow-sm transition-colors hover:bg-blue-700">
+                <i data-lucide="plus" class="mr-2 size-4"></i>新增奖品
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div class="p-8">
+          <section class="mb-6 rounded-2xl border border-gray-100 bg-white px-4 shadow-sm">
+            <div class="flex gap-2 overflow-x-auto thin-scrollbar text-sm font-bold text-gray-500">
+              <button class="module-tab rounded-xl px-4 py-4 text-primary" data-target="config">奖品配置</button>
+              <button class="module-tab rounded-xl px-4 py-4 hover:text-primary" data-target="records">奖励记录</button>
+              <button class="module-tab rounded-xl px-4 py-4 hover:text-primary" data-target="exceptions">异常处理</button>
+              <button class="module-tab rounded-xl px-4 py-4 hover:text-primary" data-target="fulfillment">实物履约</button>
+            </div>
+          </section>
+
+          <section id="config" class="module-panel space-y-6">
+            <div class="space-y-6">
+                <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <h2 class="text-lg font-bold text-gray-900">活动奖品配置</h2>
+                      <p class="mt-1 text-sm font-medium text-gray-500">奖品来源引用既有码池、券模板、商城商品；不重复建设商品库、券库或码池</p>
+                    </div>
+                    <button id="saveConfig" class="flex items-center rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white shadow-sm transition-colors hover:bg-blue-700">
+                      <i data-lucide="save" class="mr-2 size-4"></i>保存配置
+                    </button>
+                  </div>
+
+                  <div class="mt-6 grid grid-cols-3 gap-4">
+                    <label class="block">
+                      <span class="text-xs font-bold text-gray-500">奖品类型</span>
+                      <select id="prizeTypeSelect" class="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-700 outline-none focus:border-primary focus:ring-2 focus:ring-blue-100">
+                        <option>优惠券</option>
+                        <option>软件码</option>
+                        <option>实物商品</option>
+                        <option>积分</option>
+                        <option>会员权益</option>
+                      </select>
+                    </label>
+                    <label class="block">
+                      <span class="text-xs font-bold text-gray-500">奖品来源</span>
+                      <select id="sourceSelect" class="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-700 outline-none focus:border-primary focus:ring-2 focus:ring-blue-100">
+                        <option>券模板：满100减20</option>
+                        <option>码池：WIN11-PRO-2024</option>
+                        <option>商品：10002345</option>
+                        <option>系统积分</option>
+                        <option>权益：VIP-7DAY</option>
+                      </select>
+                    </label>
+                    <label class="block">
+                      <span class="text-xs font-bold text-gray-500">展示名称</span>
+                      <input id="displayNameInput" class="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-700 outline-none focus:border-primary focus:ring-2 focus:ring-blue-100" value="满 100 减 20 优惠券" />
+                    </label>
+                    <label class="block">
+                      <span class="text-xs font-bold text-gray-500">活动可发放上限</span>
+                      <input id="limitInput" type="number" class="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-700 outline-none focus:border-primary focus:ring-2 focus:ring-blue-100" value="5000" />
+                    </label>
+                    <label class="block">
+                      <span class="text-xs font-bold text-gray-500">单用户限制</span>
+                      <input type="number" class="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-700 outline-none focus:border-primary focus:ring-2 focus:ring-blue-100" value="2" />
+                    </label>
+                    <label class="block">
+                      <span class="text-xs font-bold text-gray-500">优惠券发放模式</span>
+                      <select class="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-700 outline-none focus:border-primary focus:ring-2 focus:ring-blue-100">
+                        <option>领取资格</option>
+                        <option>直接到账</option>
+                      </select>
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="rounded-2xl border border-gray-100 bg-white shadow-sm">
+                  <div class="flex items-center justify-between border-b border-gray-100 p-5">
+                    <div>
+                      <h3 class="text-base font-bold text-gray-900">已配置奖品</h3>
+                      <p class="mt-1 text-xs font-medium text-gray-500">维护活动可用奖品、发放上限和启停状态</p>
+                    </div>
+                    <div class="flex gap-3">
+                      <input id="configSearch" class="rounded-xl border border-gray-200 px-4 py-2 text-sm font-medium outline-none focus:border-primary focus:ring-2 focus:ring-blue-100" placeholder="搜索奖品/来源" />
+                      <select id="configTypeFilter" class="rounded-xl border border-gray-200 px-4 py-2 text-sm font-bold outline-none focus:border-primary focus:ring-2 focus:ring-blue-100">
+                        <option>全部类型</option>
+                        <option>优惠券</option>
+                        <option>软件码</option>
+                        <option>实物商品</option>
+                        <option>积分</option>
+                        <option>会员权益</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="overflow-x-auto thin-scrollbar">
+                    <div class="min-w-[1160px]">
+                      <div class="grid prize-grid bg-gray-50 px-4 py-3 text-xs font-bold text-gray-500">
+                        <span>奖品名称</span><span>类型</span><span>来源对象</span><span>共享库存</span><span>发放上限</span><span>单用户限制</span><span>发放模式</span><span>审核规则</span><span>状态</span><span>操作</span>
+                      </div>
+                      <div id="prizeRows" class="divide-y divide-gray-100"></div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </section>
+
+          <section id="records" class="module-panel hidden space-y-6">
+            <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h2 class="text-lg font-bold text-gray-900">用户奖励记录</h2>
+                  <p class="mt-1 text-sm font-medium text-gray-500">记录活动、用户、奖品、来源对象、审核状态、发放状态和库存占用状态</p>
+                </div>
+                <button class="flex items-center rounded-xl border border-gray-200 bg-white px-5 py-2 text-sm font-bold text-gray-700 shadow-sm hover:bg-gray-50">
+                  <i data-lucide="filter" class="mr-2 size-4"></i>高级筛选
+                </button>
+              </div>
+              <div class="mt-5 grid grid-cols-6 gap-3">
+                <input class="rounded-xl border border-gray-200 px-4 py-2 text-sm font-medium outline-none focus:border-primary focus:ring-2 focus:ring-blue-100" placeholder="活动名称/ID" />
+                <input class="rounded-xl border border-gray-200 px-4 py-2 text-sm font-medium outline-none focus:border-primary focus:ring-2 focus:ring-blue-100" placeholder="用户ID/手机号" />
+                <select class="rounded-xl border border-gray-200 px-4 py-2 text-sm font-bold outline-none focus:border-primary focus:ring-2 focus:ring-blue-100"><option>全部奖品类型</option></select>
+                <select class="rounded-xl border border-gray-200 px-4 py-2 text-sm font-bold outline-none focus:border-primary focus:ring-2 focus:ring-blue-100"><option>全部审核状态</option></select>
+                <select class="rounded-xl border border-gray-200 px-4 py-2 text-sm font-bold outline-none focus:border-primary focus:ring-2 focus:ring-blue-100"><option>全部发放状态</option></select>
+                <button class="rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white shadow-sm hover:bg-blue-700">查询</button>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-gray-100 bg-white shadow-sm">
+              <div class="overflow-x-auto thin-scrollbar">
+                <div class="min-w-[1180px]">
+                  <div class="grid record-grid bg-gray-50 px-4 py-3 text-xs font-bold text-gray-500">
+                    <span>奖励编号</span><span>活动信息</span><span>用户信息</span><span>奖品名称</span><span>奖品类型</span><span>审核状态</span><span>发放状态</span><span>库存占用</span><span>操作</span>
+                  </div>
+                  <div id="recordRows" class="divide-y divide-gray-100"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="exceptions" class="module-panel hidden space-y-6">
+            <div class="grid grid-cols-[1fr_320px] gap-6">
+              <div class="rounded-2xl border border-gray-100 bg-white shadow-sm">
+                <div class="flex items-center justify-between border-b border-gray-100 p-6">
+                  <div>
+                    <h2 class="text-lg font-bold text-gray-900">发奖异常处理</h2>
+                    <p class="mt-1 text-sm font-medium text-gray-500">发奖失败同时支持自动重试和人工补发，用户端不展示技术性失败原因</p>
+                  </div>
+                  <button id="bulkRetry" class="flex items-center rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white shadow-sm hover:bg-blue-700">
+                    <i data-lucide="refresh-cw" class="mr-2 size-4"></i>批量重试
+                  </button>
+                </div>
+                <div class="overflow-x-auto thin-scrollbar">
+                  <div class="min-w-[1120px]">
+                    <div class="grid exception-grid bg-gray-50 px-4 py-3 text-xs font-bold text-gray-500">
+                      <span>奖励编号</span><span>活动信息</span><span>奖品类型</span><span>失败环节</span><span>失败原因</span><span>次数</span><span>处理状态</span><span>操作</span>
+                    </div>
+                    <div id="exceptionRows" class="divide-y divide-gray-100"></div>
+                  </div>
+                </div>
+              </div>
+              <aside class="space-y-6">
+                <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                  <h3 class="text-base font-bold text-gray-900">异常规则</h3>
+                  <ul class="mt-4 space-y-3 text-sm font-medium text-gray-600">
+                    <li>自动重试次数、间隔、终止条件待系统设计细化。</li>
+                    <li>人工补发必须记录处理结果和备注。</li>
+                    <li>已发放成功的权益不能重复补发。</li>
+                  </ul>
+                </div>
+                <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                  <h3 class="text-base font-bold text-gray-900">今日处理</h3>
+                  <div class="mt-4 space-y-3 text-sm font-medium">
+                    <div class="flex justify-between"><span class="text-gray-500">自动重试成功</span><span class="font-bold text-green-500">27</span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">待人工补发</span><span class="font-bold text-red-500">6</span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">已标记处理</span><span class="font-bold text-gray-900">13</span></div>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </section>
+
+          <section id="fulfillment" class="module-panel hidden space-y-6">
+            <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h2 class="text-lg font-bold text-gray-900">实物履约管理</h2>
+                  <p class="mt-1 text-sm font-medium text-gray-500">V1 仅维护基础发货状态，不包含成本、供应商、物流单号、导出发货、退换货</p>
+                </div>
+                <button class="flex items-center rounded-xl border border-gray-200 bg-white px-5 py-2 text-sm font-bold text-gray-700 shadow-sm hover:bg-gray-50">
+                  <i data-lucide="truck" class="mr-2 size-4"></i>标记已发货
+                </button>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-gray-100 bg-white shadow-sm">
+              <div class="overflow-x-auto thin-scrollbar">
+                <div class="min-w-[1120px]">
+                  <div class="grid fulfill-grid bg-gray-50 px-4 py-3 text-xs font-bold text-gray-500">
+                    <span>奖励编号</span><span>活动名称</span><span>用户信息</span><span>商品规格</span><span>收货信息</span><span>审核状态</span><span>发货状态</span><span>操作</span>
+                  </div>
+                  <div id="fulfillRows" class="divide-y divide-gray-100"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </main>
+    </div>
+
+    <div id="rewardModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/30 p-4 backdrop-blur-sm">
+      <div class="w-full max-w-3xl rounded-2xl bg-white p-6 shadow-xl">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-bold text-gray-900">奖励详情</h2>
+            <p class="mt-1 text-xs font-medium text-gray-500">库存、审核、发放与异常处理的完整留痕</p>
+          </div>
+          <button class="modal-close text-gray-400 hover:text-gray-600"><i data-lucide="x" class="size-5"></i></button>
+        </div>
+        <div class="mt-6 grid grid-cols-[1fr_280px] gap-6">
+          <div>
+            <dl class="grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
+              <div><dt class="text-gray-500">奖励编号</dt><dd id="modalRewardId" class="mt-1 font-bold text-gray-900">RWD-20250616-000123</dd></div>
+              <div><dt class="text-gray-500">活动信息</dt><dd id="modalActivity" class="mt-1 font-bold text-gray-900">社区夏日活动</dd></div>
+              <div><dt class="text-gray-500">用户</dt><dd id="modalUser" class="mt-1 font-bold text-gray-900">张三 100086</dd></div>
+              <div><dt class="text-gray-500">奖品</dt><dd id="modalPrize" class="mt-1 font-bold text-gray-900">满 100 减 20 优惠券</dd></div>
+              <div><dt class="text-gray-500">库存占用</dt><dd class="mt-1"><span class="rounded-full bg-green-50 px-3 py-1 text-[10px] font-bold text-green-600">已占用</span></dd></div>
+              <div><dt class="text-gray-500">幂等标识</dt><dd class="mt-1 font-bold text-gray-900">ACT-20250616-U100086-P02</dd></div>
+              <div><dt class="text-gray-500">审核状态</dt><dd id="modalReview" class="mt-1"></dd></div>
+              <div><dt class="text-gray-500">发放状态</dt><dd id="modalIssue" class="mt-1"></dd></div>
+            </dl>
+            <div class="mt-6 border-t border-gray-100 pt-5">
+              <label class="text-sm font-bold text-gray-900">处理备注</label>
+              <textarea class="mt-3 h-24 w-full resize-none rounded-xl border border-gray-200 bg-gray-50 p-3 text-sm font-medium text-gray-700 outline-none focus:border-primary focus:ring-2 focus:ring-blue-100">用户活动触发后已占用库存，等待活动层审核结果。</textarea>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-gray-900">状态时间线</h3>
+            <div id="modalTimeline" class="mt-4 space-y-4"></div>
+          </div>
+        </div>
+        <div class="mt-6 flex justify-end gap-3 border-t border-gray-100 pt-5">
+          <button class="modal-close rounded-xl border border-gray-200 bg-white px-5 py-2 text-sm font-bold text-gray-700 shadow-sm hover:bg-gray-50">关闭</button>
+          <button id="modalRetry" class="rounded-xl border border-blue-100 bg-white px-5 py-2 text-sm font-bold text-primary shadow-sm hover:bg-blue-50">自动重试</button>
+          <button id="modalReissue" class="rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white shadow-sm hover:bg-blue-700">人工补发</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="prizeModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/30 p-4 backdrop-blur-sm">
+      <div class="w-full max-w-xl rounded-2xl bg-white p-6 shadow-xl">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold text-gray-900">新增奖品</h2>
+          <button class="prize-modal-close text-gray-400 hover:text-gray-600"><i data-lucide="x" class="size-5"></i></button>
+        </div>
+        <div class="mt-5 grid grid-cols-2 gap-4">
+          <label><span class="text-sm font-bold text-gray-700">奖品类型</span><select class="mt-2 w-full rounded-xl border border-gray-200 px-4 py-2 text-sm font-bold"><option>软件码</option><option>优惠券</option><option>实物商品</option></select></label>
+          <label><span class="text-sm font-bold text-gray-700">奖品来源</span><input class="mt-2 w-full rounded-xl border border-gray-200 px-4 py-2 text-sm font-medium" placeholder="选择码池/券模板/商品" /></label>
+          <label><span class="text-sm font-bold text-gray-700">活动可发放上限</span><input class="mt-2 w-full rounded-xl border border-gray-200 px-4 py-2 text-sm font-medium" placeholder="必须大于 0" /></label>
+          <label><span class="text-sm font-bold text-gray-700">单用户限制</span><input class="mt-2 w-full rounded-xl border border-gray-200 px-4 py-2 text-sm font-medium" value="1" /></label>
+        </div>
+        <div class="mt-6 flex justify-end gap-3">
+          <button class="prize-modal-close rounded-xl border border-gray-200 bg-white px-5 py-2 text-sm font-bold text-gray-700 shadow-sm hover:bg-gray-50">取消</button>
+          <button class="rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white shadow-sm hover:bg-blue-700" onclick="toast('奖品草稿已保存')">保存</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="reissueModal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/30 p-4 backdrop-blur-sm">
+      <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold text-gray-900">人工补发</h2>
+          <button class="reissue-close text-gray-400 hover:text-gray-600"><i data-lucide="x" class="size-5"></i></button>
+        </div>
+        <div class="mt-5 space-y-4">
+          <label class="block">
+            <span class="text-sm font-bold text-gray-700">补发方式</span>
+            <select class="mt-2 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700">
+              <option>补发原奖品</option>
+              <option>替换同等权益</option>
+            </select>
+          </label>
+          <label class="block">
+            <span class="text-sm font-bold text-gray-700">处理备注</span>
+            <textarea id="reissueRemark" class="mt-2 h-24 w-full resize-none rounded-xl border border-gray-200 bg-gray-50 p-3 text-sm font-medium text-gray-700" placeholder="必须填写补发原因和处理说明"></textarea>
+          </label>
+          <div class="rounded-xl border border-red-100 bg-red-50 p-3 text-sm font-medium text-red-600">人工补发会写入操作记录，已发放成功的权益不能重复补发。</div>
+        </div>
+        <div class="mt-6 flex justify-end gap-3">
+          <button class="reissue-close rounded-xl border border-gray-200 bg-white px-5 py-2 text-sm font-bold text-gray-700 shadow-sm hover:bg-gray-50">取消</button>
+          <button id="confirmReissue" class="rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white shadow-sm hover:bg-blue-700">确认补发</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-6 left-1/2 z-[70] hidden -translate-x-1/2 rounded-xl bg-gray-900 px-5 py-3 text-sm font-bold text-white shadow-xl"></div>
+
+    <script>
+      const badgeMap = {
+        '启用': 'green', '停用': 'red', '需审核': 'amber', '无需审核': 'blue',
+        '直接到账': 'blue', '领取资格': 'green', '待审核': 'amber', '审核通过': 'green',
+        '审核拒绝': 'red', '发放中': 'blue', '发放成功': 'green', '发放失败': 'red',
+        '已占用': 'green', '待人工补发': 'red', '自动重试中': 'purple', '待填写地址': 'blue',
+        '待发货': 'blue', '已发货': 'purple', '已完成': 'green'
+      };
+
+      const badgeClasses = {
+        green: 'bg-green-50 text-green-500',
+        blue: 'bg-blue-50 text-blue-500',
+        red: 'bg-red-50 text-red-500',
+        purple: 'bg-purple-50 text-purple-500',
+        amber: 'bg-amber-50 text-amber-500',
+        gray: 'bg-gray-50 text-gray-500'
+      };
+
+      const prizes = [
+        { name: '满 100 减 20 优惠券', type: '优惠券', source: '券模板：满100减20', sourceSystem: '优惠券系统', shared: '是', limit: '5,000', userLimit: '2', mode: '领取资格', audit: '需审核', status: '启用', icon: 'ticket', stock: ['12,000','1,256','3,742','7,002'] },
+        { name: 'Windows 11 专业版激活码', type: '软件码', source: '码池：WIN11-PRO-2024', sourceSystem: '软件码码池', shared: '是', limit: '2,000', userLimit: '1', mode: '直接到账', audit: '需审核', status: '启用', icon: 'code-2', stock: ['8,400','650','1,120','6,630'] },
+        { name: '罗技 MX Master 3S 鼠标', type: '实物商品', source: '商品：10002345', sourceSystem: '积分商城商品库', shared: '是', limit: '300', userLimit: '1', mode: '领取资格', audit: '需审核', status: '启用', icon: 'package', stock: ['480','42','96','342'] },
+        { name: '500 积分', type: '积分', source: '系统积分', sourceSystem: '积分账户', shared: '是', limit: '不限制', userLimit: '1', mode: '直接到账', audit: '无需审核', status: '启用', icon: 'coins', stock: ['不限制','0','18,920','不限制'] },
+        { name: '7 天会员体验卡', type: '会员权益', source: '权益：VIP-7DAY', sourceSystem: '会员权益', shared: '是', limit: '1,000', userLimit: '1', mode: '领取资格', audit: '需审核', status: '启用', icon: 'crown', stock: ['2,400','180','760','1,460'] }
+      ];
+
+      const records = [
+        { id: 'RWD-20250616-000123', activity: '社区夏日活动', user: '张三 100086', prize: '满 100 减 20 优惠券', type: '优惠券', review: '待审核', issue: '待发放', stock: '已占用' },
+        { id: 'RWD-20250616-000124', activity: '社区夏日活动', user: '李四 100092', prize: 'Windows 11 专业版激活码', type: '软件码', review: '审核通过', issue: '发放成功', stock: '已占用' },
+        { id: 'RWD-20250616-000125', activity: '积分互动任务', user: '王五 100183', prize: '罗技 MX Master 3S 鼠标', type: '实物商品', review: '审核通过', issue: '待填写地址', stock: '已占用' },
+        { id: 'RWD-20250616-000126', activity: '内容互动活动', user: '赵六 100207', prize: '满 100 减 20 优惠券', type: '优惠券', review: '审核通过', issue: '发放失败', stock: '已占用' }
+      ];
+
+      const exceptions = [
+        { id: 'RWD-20250616-000126', activity: '内容互动活动', type: '优惠券', step: '按模板发券', reason: '优惠券系统超时，未返回发券结果', retry: 2, status: '待人工补发' },
+        { id: 'RWD-20250616-000130', activity: '社区夏日活动', type: '软件码', step: '码池分配', reason: '码池并发锁等待超时', retry: 1, status: '自动重试中' },
+        { id: 'RWD-20250616-000131', activity: '积分互动任务', type: '实物商品', step: '库存占用', reason: '商城库存占用失败', retry: 3, status: '待人工补发' }
+      ];
+
+      const fulfillment = [
+        { id: 'RWD-20250616-000125', activity: '积分互动任务', user: '王五 100183', sku: 'MX Master 3S / 黑色', address: '王五 138****2098 上海市浦东新区', review: '审核通过', ship: '待填写地址' },
+        { id: 'RWD-20250616-000127', activity: '社区夏日活动', user: '陈七 100331', sku: '手办礼盒 / 标准版', address: '陈七 136****8812 杭州市西湖区', review: '审核通过', ship: '待发货' },
+        { id: 'RWD-20250616-000128', activity: '会员任务', user: '周八 100404', sku: '周边礼包 / L', address: '周八 139****6671 北京市朝阳区', review: '审核通过', ship: '已发货' }
+      ];
+
+      function badge(text) {
+        const key = badgeMap[text] || 'gray';
+        return `<span class="badge ${key} rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider ${badgeClasses[key]}">${text}</span>`;
+      }
+
+      function toast(message) {
+        const el = document.getElementById('toast');
+        el.textContent = message;
+        el.classList.remove('hidden');
+        setTimeout(() => el.classList.add('hidden'), 1800);
+      }
+
+      function renderPrizes() {
+        const q = document.getElementById('configSearch').value.trim().toLowerCase();
+        const type = document.getElementById('configTypeFilter').value;
+        const filtered = prizes.filter(p => (!q || `${p.name}${p.source}`.toLowerCase().includes(q)) && (type === '全部类型' || p.type === type));
+        document.getElementById('prizeRows').innerHTML = filtered.map((p, i) => `
+          <div class="grid prize-grid w-full items-center px-4 py-4 text-left text-sm">
+            <span class="flex min-w-0 items-center"><span class="mr-3 flex size-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-primary"><i data-lucide="${p.icon}" class="size-4"></i></span><span class="truncate font-bold text-gray-900">${p.name}</span></span>
+            <span class="font-medium text-gray-600">${p.type}</span>
+            <span class="truncate font-medium text-gray-600">${p.source}</span>
+            <span class="font-medium text-gray-600">${p.shared}</span>
+            <span class="font-medium text-gray-600">${p.limit}</span>
+            <span class="font-medium text-gray-600">${p.userLimit}</span>
+            <span>${badge(p.mode)}</span>
+            <span>${badge(p.audit)}</span>
+            <span>${badge(p.status)}</span>
+            <span class="flex gap-3"><span class="font-bold text-primary">编辑</span><span class="font-bold text-primary">复制</span><span class="font-bold text-primary">停用</span></span>
+          </div>`).join('');
+        lucide.createIcons();
+      }
+
+      function renderRecords() {
+        document.getElementById('recordRows').innerHTML = records.map(r => `
+          <div class="grid record-grid items-center px-4 py-4 text-sm">
+            <span class="font-bold text-gray-900">${r.id}</span><span class="font-medium text-gray-600">${r.activity}</span><span class="font-medium text-gray-600">${r.user}</span><span class="font-medium text-gray-900">${r.prize}</span><span class="font-medium text-gray-600">${r.type}</span><span>${badge(r.review)}</span><span>${badge(r.issue)}</span><span>${badge(r.stock)}</span><button class="open-reward font-bold text-primary" data-id="${r.id}">查看详情</button>
+          </div>`).join('');
+        document.querySelectorAll('.open-reward').forEach(btn => btn.addEventListener('click', () => openReward(btn.dataset.id)));
+      }
+
+      function renderExceptions() {
+        document.getElementById('exceptionRows').innerHTML = exceptions.map(e => `
+          <div class="grid exception-grid items-center px-4 py-4 text-sm">
+            <span class="font-bold text-gray-900">${e.id}</span><span class="font-medium text-gray-600">${e.activity}</span><span class="font-medium text-gray-600">${e.type}</span><span class="font-medium text-gray-900">${e.step}</span><span class="font-medium text-gray-600">${e.reason}</span><span class="font-bold text-gray-900">${e.retry}</span><span>${badge(e.status)}</span><span class="flex gap-3"><button class="retry-one font-bold text-primary">重试</button><button class="open-reissue font-bold text-primary">补发</button></span>
+          </div>`).join('');
+        document.querySelectorAll('.retry-one').forEach(btn => btn.addEventListener('click', () => toast('已提交自动重试')));
+        document.querySelectorAll('.open-reissue').forEach(btn => btn.addEventListener('click', openReissue));
+      }
+
+      function renderFulfillment() {
+        document.getElementById('fulfillRows').innerHTML = fulfillment.map(f => `
+          <div class="grid fulfill-grid items-center px-4 py-4 text-sm">
+            <span class="font-bold text-gray-900">${f.id}</span><span class="font-medium text-gray-600">${f.activity}</span><span class="font-medium text-gray-600">${f.user}</span><span class="font-medium text-gray-900">${f.sku}</span><span class="font-medium text-gray-600">${f.address}</span><span>${badge(f.review)}</span><span>${badge(f.ship)}</span><span class="font-bold text-primary">查看/标记</span>
+          </div>`).join('');
+      }
+
+      function openReward(id) {
+        const r = records.find(item => item.id === id) || records[0];
+        document.getElementById('modalRewardId').textContent = r.id;
+        document.getElementById('modalActivity').textContent = r.activity;
+        document.getElementById('modalUser').textContent = r.user;
+        document.getElementById('modalPrize').textContent = r.prize;
+        document.getElementById('modalReview').innerHTML = badge(r.review);
+        document.getElementById('modalIssue').innerHTML = badge(r.issue);
+        const steps = ['活动触发发奖', '占用共享库存', r.review, r.issue];
+        document.getElementById('modalTimeline').innerHTML = steps.map((step, idx) => `
+          <div class="relative flex gap-3 ${idx < steps.length - 1 ? 'flow-line' : ''}">
+            <span class="flex size-9 items-center justify-center rounded-full ${idx < 2 ? 'bg-blue-50 text-primary' : 'bg-gray-50 text-gray-500'}"><i data-lucide="${idx < 2 ? 'check' : 'circle'}" class="size-4"></i></span>
+            <div><p class="text-sm font-bold text-gray-900">${step}</p><p class="text-xs font-medium text-gray-400">2026-06-16 09:4${idx}:22</p></div>
+          </div>`).join('');
+        document.getElementById('rewardModal').classList.remove('hidden');
+        document.getElementById('rewardModal').classList.add('flex');
+        lucide.createIcons();
+      }
+
+      function openReissue() {
+        document.getElementById('reissueModal').classList.remove('hidden');
+        document.getElementById('reissueModal').classList.add('flex');
+      }
+
+      document.querySelectorAll('.module-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.module-tab').forEach(item => item.classList.remove('text-primary', 'bg-blue-50'));
+          tab.classList.add('text-primary', 'bg-blue-50');
+          document.querySelectorAll('.module-panel').forEach(panel => panel.classList.add('hidden'));
+          document.getElementById(tab.dataset.target).classList.remove('hidden');
+        });
+      });
+      document.getElementById('configSearch').addEventListener('input', renderPrizes);
+      document.getElementById('configTypeFilter').addEventListener('change', renderPrizes);
+      document.getElementById('saveConfig').addEventListener('click', () => {
+        const limit = Number(document.getElementById('limitInput').value);
+        if (!limit || limit < 1) return toast('活动可发放上限必须大于 0');
+        toast('配置已保存，已保留活动奖品快照');
+      });
+      document.getElementById('openPrizeModal').addEventListener('click', () => {
+        document.getElementById('prizeModal').classList.remove('hidden');
+        document.getElementById('prizeModal').classList.add('flex');
+      });
+      document.querySelectorAll('.prize-modal-close').forEach(btn => btn.addEventListener('click', () => {
+        document.getElementById('prizeModal').classList.add('hidden');
+        document.getElementById('prizeModal').classList.remove('flex');
+      }));
+      document.querySelectorAll('.modal-close').forEach(btn => btn.addEventListener('click', () => {
+        document.getElementById('rewardModal').classList.add('hidden');
+        document.getElementById('rewardModal').classList.remove('flex');
+      }));
+      document.getElementById('modalRetry').addEventListener('click', () => toast('已提交自动重试'));
+      document.getElementById('modalReissue').addEventListener('click', openReissue);
+      document.getElementById('bulkRetry').addEventListener('click', () => toast('已提交批量自动重试'));
+      document.querySelectorAll('.reissue-close').forEach(btn => btn.addEventListener('click', () => {
+        document.getElementById('reissueModal').classList.add('hidden');
+        document.getElementById('reissueModal').classList.remove('flex');
+      }));
+      document.getElementById('confirmReissue').addEventListener('click', () => {
+        const remark = document.getElementById('reissueRemark').value.trim();
+        if (!remark) return toast('请填写处理备注');
+        document.getElementById('reissueModal').classList.add('hidden');
+        document.getElementById('reissueModal').classList.remove('flex');
+        toast('人工补发已记录');
+      });
+
+      renderPrizes();
+      renderRecords();
+      renderExceptions();
+      renderFulfillment();
+      document.querySelector('.module-tab').classList.add('bg-blue-50');
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

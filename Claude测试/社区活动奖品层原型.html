@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社区活动权益层 - 原型</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#1677ff',
+        'bg-main': '#f5f5f5',
+      }
+    }
+  }
+}
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+  .page { display: none; }
+  .page.active { display: block; }
+  .nav-item { transition: all 0.2s; }
+  .nav-item:hover { background: #f0f5ff; }
+  .nav-item.active { background: #e6f0ff; color: #1677ff; font-weight: 600; border-left: 3px solid #1677ff; }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); backdrop-filter: blur(2px); z-index: 50; align-items: center; justify-content: center; }
+  .modal-overlay.show { display: flex; }
+  .toast { position: fixed; top: 20px; right: 20px; z-index: 100; padding: 12px 24px; border-radius: 12px; font-size: 14px; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateX(120%); transition: transform 0.3s; }
+  .toast.show { transform: translateX(0); }
+  .toast.success { background: #f6ffed; border: 1px solid #b7eb8f; color: #52c41a; }
+  .toast.error { background: #fff2f0; border: 1px solid #ffccc7; color: #ff4d4f; }
+  input, select, textarea { outline: none; }
+  input:focus, select:focus, textarea:focus { border-color: #1677ff; box-shadow: 0 0 0 2px rgba(22,119,255,0.1); }
+</style>
+</head>
+<body class="bg-bg-main min-h-screen flex">
+
+<!-- ========== SIDEBAR ========== -->
+<aside class="w-60 bg-white border-r border-gray-100 flex flex-col shrink-0 h-screen sticky top-0">
+  <div class="px-5 py-6 border-b border-gray-100">
+    <h1 class="text-lg font-bold text-gray-900">社区活动权益层</h1>
+    <p class="text-xs text-gray-400 mt-1">V1.0 原型</p>
+  </div>
+  <nav class="flex-1 overflow-y-auto py-3 space-y-0.5 px-2">
+    <div class="px-3 py-2.5 text-sm font-bold text-gray-700">权益中心</div>
+    <a href="#" class="nav-item active flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="prize-config">
+      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+      权益管理
+    </a>
+    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="reward-records">
+      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+      发放记录
+    </a>
+    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="exception-handling">
+      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+      异常处理
+    </a>
+    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="physical-fulfillment">
+      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
+      实物履约管理
+    </a>
+    <div class="px-3 py-2.5 text-sm font-bold text-gray-700 mt-4">用户端</div>
+    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="user-rewards">
+      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+      我的奖励
+    </a>
+    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="user-code-detail">
+      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      软件码详情
+    </a>
+    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="user-coupon-detail">
+      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+      优惠券详情
+    </a>
+    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="user-physical-detail">
+      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      实物领取
+    </a>
+  </nav>
+</aside>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main class="flex-1 p-8 max-w-[1600px] mx-auto w-full space-y-8 overflow-y-auto">
+
+  <!-- ========== PAGE: 活动权益配置 ========== -->
+  <div class="page active" id="page-prize-config">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">权益管理</h2>
+      <p class="text-sm text-gray-500 mt-1">为活动配置可发放权益，引用既有码池、券模板、商城商品</p>
+    </div>
+
+    <!-- 筛选区 -->
+    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-4">
+      <div class="flex items-center gap-4 flex-wrap">
+        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm text-gray-700 bg-white">
+          <option>全部权益类型</option>
+          <option>软件码</option>
+          <option>优惠券</option>
+          <option>实物商品</option>
+        </select>
+        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm text-gray-700 bg-white">
+          <option>全部状态</option>
+          <option>已启用</option>
+          <option>已停用</option>
+        </select>
+        <input type="text" placeholder="搜索权益名称..." class="border border-gray-200 rounded-xl px-4 py-2 text-sm flex-1 min-w-[200px]">
+        <button class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm">
+          <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          查询
+        </button>
+      </div>
+    </div>
+
+    <button onclick="openPrizeForm('add')" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm mb-4">
+      <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+      新增权益
+    </button>
+
+    <!-- 权益列表 -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50/50 text-left">
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">权益名称</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">权益类型</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">发放上限</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">已发放</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">状态</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-6 py-4"><span class="font-bold text-gray-900">星巴克50元礼品卡</span></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td>
+            <td class="px-6 py-4 text-gray-900 font-bold">500</td>
+            <td class="px-6 py-4"><button onclick="showModal('modal-distribution-detail')" class="text-primary hover:text-blue-700 font-bold transition-colors text-sm underline decoration-dotted underline-offset-2">128</button></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已启用</span></td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-2">
+                <button onclick="switchPage('code-detail')" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">软件码明细</button>
+                <span class="text-gray-200">|</span>
+                <button onclick="editRow(this)" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">编辑</button>
+                <button onclick="toggleStatus(this)" class="text-red-500 hover:text-red-600 font-bold transition-colors text-xs">停用</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-6 py-4"><span class="font-bold text-gray-900">满100减20优惠券</span></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td>
+            <td class="px-6 py-4 text-gray-900 font-bold">2,000</td>
+            <td class="px-6 py-4"><button onclick="showModal('modal-distribution-detail')" class="text-primary hover:text-blue-700 font-bold transition-colors text-sm underline decoration-dotted underline-offset-2">356</button></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已启用</span></td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-2">
+                <button onclick="editRow(this)" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">编辑</button>
+                <button onclick="toggleStatus(this)" class="text-red-500 hover:text-red-600 font-bold transition-colors text-xs">停用</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-6 py-4"><span class="font-bold text-gray-900">社区定制保温杯</span></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td>
+            <td class="px-6 py-4 text-gray-900 font-bold">200</td>
+            <td class="px-6 py-4"><button onclick="showModal('modal-distribution-detail')" class="text-primary hover:text-blue-700 font-bold transition-colors text-sm underline decoration-dotted underline-offset-2">45</button></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-400">已停用</span></td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-2">
+                <button onclick="editRow(this)" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">编辑</button>
+                <button onclick="toggleStatus(this)" class="text-green-500 hover:text-green-600 font-bold transition-colors text-xs">启用</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
+        <span>共 3 条记录</span>
+        <div class="flex items-center gap-2">
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50 transition-colors">上一页</button>
+          <span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span>
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50 transition-colors">下一页</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: 发放记录 ========== -->
+  <div class="page" id="page-reward-records">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">发放记录</h2>
+      <p class="text-sm text-gray-500 mt-1">查看用户奖励记录、审核状态、发放状态、库存占用和失败原因</p>
+    </div>
+
+    <!-- 筛选区 -->
+    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
+      <div class="grid grid-cols-4 gap-4 mb-4">
+        <input type="text" placeholder="活动名称 / 活动ID" class="border border-gray-200 rounded-xl px-4 py-2 text-sm">
+        <input type="text" placeholder="用户ID / 手机号" class="border border-gray-200 rounded-xl px-4 py-2 text-sm">
+        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm text-gray-700 bg-white">
+          <option>全部权益类型</option><option>软件码/虚拟商品</option><option>优惠券</option><option>实物商品</option>
+        </select>
+        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm text-gray-700 bg-white">
+          <option>全部审核状态</option><option>待审核</option><option>审核通过</option><option>审核拒绝</option>
+        </select>
+      </div>
+      <div class="grid grid-cols-4 gap-4">
+        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm text-gray-700 bg-white">
+          <option>全部发放状态</option><option>待发放</option><option>发放中</option><option>发放成功</option><option>发放失败</option>
+        </select>
+        <input type="date" class="border border-gray-200 rounded-xl px-4 py-2 text-sm" placeholder="创建时间起">
+        <input type="date" class="border border-gray-200 rounded-xl px-4 py-2 text-sm" placeholder="创建时间止">
+        <div class="flex items-center gap-2">
+          <button class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm">
+            <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            查询
+          </button>
+          <button class="bg-white text-gray-700 border border-gray-200 px-5 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors flex items-center shadow-sm">重置</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 记录列表 -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50/50 text-left">
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">奖励编号</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">活动信息</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">用户信息</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">权益名称</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">权益类型</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">审核状态</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">发放状态</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">创建时间</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-6 py-4 font-mono text-xs text-primary font-bold">#RW20260616001</td>
+            <td class="px-6 py-4 text-gray-600">618大促抽奖</td>
+            <td class="px-6 py-4 text-gray-600">user_123456 / 138****8888</td>
+            <td class="px-6 py-4 font-bold text-gray-900">星巴克50元礼品卡</td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">审核通过</span></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">发放成功</span></td>
+            <td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 14:30</td>
+            <td class="px-6 py-4"><button onclick="showModal('modal-reward-detail')" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">详情</button></td>
+          </tr>
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-6 py-4 font-mono text-xs text-primary font-bold">#RW20260616002</td>
+            <td class="px-6 py-4 text-gray-600">618大促抽奖</td>
+            <td class="px-6 py-4 text-gray-600">user_789012 / 139****6666</td>
+            <td class="px-6 py-4 font-bold text-gray-900">满100减20优惠券</td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">待审核</span></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-500">待发放</span></td>
+            <td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 15:10</td>
+            <td class="px-6 py-4"><button onclick="showModal('modal-reward-detail')" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">详情</button></td>
+          </tr>
+          <tr class="hover:bg-gray-50/30 transition-colors bg-red-50/20">
+            <td class="px-6 py-4 font-mono text-xs text-primary font-bold">#RW20260616003</td>
+            <td class="px-6 py-4 text-gray-600">社区签到活动</td>
+            <td class="px-6 py-4 text-gray-600">user_456789 / 137****9999</td>
+            <td class="px-6 py-4 font-bold text-gray-900">社区定制保温杯</td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">审核通过</span></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">发放失败</span></td>
+            <td class="px-6 py-4 text-gray-500 text-xs">2026-06-14 09:45</td>
+            <td class="px-6 py-4"><button onclick="showModal('modal-reward-detail')" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">详情</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
+        <span>共 156 条记录</span>
+        <div class="flex items-center gap-2">
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button>
+          <span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span>
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">2</button>
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">3</button>
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: 异常处理 ========== -->
+  <div class="page" id="page-exception-handling">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">异常处理</h2>
+      <p class="text-sm text-gray-500 mt-1">发奖失败后进入异常队列，支持系统重试和人工补发</p>
+    </div>
+
+    <!-- 统计卡片 -->
+    <div class="grid grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+        <div class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">待处理异常</div>
+        <div class="text-3xl font-bold text-red-500">23</div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+        <div class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">自动重试中</div>
+        <div class="text-3xl font-bold text-blue-500">8</div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+        <div class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">今日已处理</div>
+        <div class="text-3xl font-bold text-green-500">15</div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+        <div class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">累计重试成功</div>
+        <div class="text-3xl font-bold text-gray-900">342</div>
+      </div>
+    </div>
+
+    <!-- 异常列表 -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50/50 text-left">
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">奖励编号</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">活动/用户</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">权益类型</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">失败环节</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">失败原因</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">重试次数</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">最后失败时间</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">处理状态</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-6 py-4 font-mono text-xs text-primary font-bold">#RW20260616003</td>
+            <td class="px-6 py-4 text-gray-600 text-xs">社区签到活动 · user_456789</td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td>
+            <td class="px-6 py-4 text-gray-600 text-xs">库存占用</td>
+            <td class="px-6 py-4 text-xs text-red-500">商城库存接口超时</td>
+            <td class="px-6 py-4 text-gray-900 font-bold">3</td>
+            <td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 16:20</td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">待人工处理</span></td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-2">
+                <button onclick="showToast('重试已触发','success')" class="bg-primary text-white px-3 py-1 rounded-lg text-[10px] font-bold hover:bg-blue-700 transition-colors">立即重试</button>
+                <button onclick="showModal('modal-manual-reissue')" class="bg-red-500 text-white px-3 py-1 rounded-lg text-[10px] font-bold hover:bg-red-600 transition-colors">人工补发</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-6 py-4 font-mono text-xs text-primary font-bold">#RW20260615012</td>
+            <td class="px-6 py-4 text-gray-600 text-xs">618大促抽奖 · user_234567</td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td>
+            <td class="px-6 py-4 text-gray-600 text-xs">发券</td>
+            <td class="px-6 py-4 text-xs text-red-500">券模板已失效</td>
+            <td class="px-6 py-4 text-gray-900 font-bold">1</td>
+            <td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 11:05</td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">自动重试中</span></td>
+            <td class="px-6 py-4">
+              <button onclick="showModal('modal-reward-detail')" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">详情</button>
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-6 py-4 font-mono text-xs text-primary font-bold">#RW20260614008</td>
+            <td class="px-6 py-4 text-gray-600 text-xs">新手任务活动 · user_890123</td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td>
+            <td class="px-6 py-4 text-gray-600 text-xs">软件码分配</td>
+            <td class="px-6 py-4 text-xs text-red-500">码池可用码不足</td>
+            <td class="px-6 py-4 text-gray-900 font-bold">5</td>
+            <td class="px-6 py-4 text-gray-500 text-xs">2026-06-14 18:45</td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">待人工处理</span></td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-2">
+                <button onclick="showToast('重试已触发','success')" class="bg-primary text-white px-3 py-1 rounded-lg text-[10px] font-bold hover:bg-blue-700 transition-colors">立即重试</button>
+                <button onclick="showModal('modal-manual-reissue')" class="bg-red-500 text-white px-3 py-1 rounded-lg text-[10px] font-bold hover:bg-red-600 transition-colors">人工补发</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
+        <span>共 23 条待处理异常</span>
+        <div class="flex items-center gap-2">
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button>
+          <span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span>
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: 实物履约管理 ========== -->
+  <div class="page" id="page-physical-fulfillment">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">实物履约管理</h2>
+      <p class="text-sm text-gray-500 mt-1">查看实物权益的收货信息并维护发货状态</p>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50/50 text-left">
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">奖励编号</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">活动名称</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">用户信息</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商品名称</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">收货人</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">手机号</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">审核状态</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">发货状态</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-6 py-4 font-mono text-xs text-primary font-bold">#RW20260610001</td>
+            <td class="px-6 py-4 text-gray-600 text-xs">社区签到活动</td>
+            <td class="px-6 py-4 text-gray-600 text-xs">user_456789</td>
+            <td class="px-6 py-4 text-gray-900 font-bold text-xs">社区定制保温杯 · 500ml</td>
+            <td class="px-6 py-4 text-gray-600 text-xs">张小明</td>
+            <td class="px-6 py-4 text-gray-600 text-xs">138****8888</td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">审核通过</span></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">待发货</span></td>
+            <td class="px-6 py-4">
+              <button onclick="showModal('modal-ship-status')" class="bg-primary text-white px-3 py-1 rounded-lg text-[10px] font-bold hover:bg-blue-700 transition-colors">标记已发货</button>
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-6 py-4 font-mono text-xs text-primary font-bold">#RW20260608005</td>
+            <td class="px-6 py-4 text-gray-600 text-xs">618大促抽奖</td>
+            <td class="px-6 py-4 text-gray-600 text-xs">user_111222</td>
+            <td class="px-6 py-4 text-gray-900 font-bold text-xs">品牌蓝牙耳机</td>
+            <td class="px-6 py-4 text-gray-600 text-xs">李小红</td>
+            <td class="px-6 py-4 text-gray-600 text-xs">139****6666</td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">审核通过</span></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">已发货</span></td>
+            <td class="px-6 py-4">
+              <button onclick="showModal('modal-ship-status-complete')" class="bg-green-500 text-white px-3 py-1 rounded-lg text-[10px] font-bold hover:bg-green-600 transition-colors">标记已完成</button>
+            </td>
+          </tr>
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-6 py-4 font-mono text-xs text-primary font-bold">#RW20260605003</td>
+            <td class="px-6 py-4 text-gray-600 text-xs">社区签到活动</td>
+            <td class="px-6 py-4 text-gray-600 text-xs">user_333444</td>
+            <td class="px-6 py-4 text-gray-900 font-bold text-xs">精美书籍套装</td>
+            <td class="px-6 py-4 text-gray-400 text-xs">—</td>
+            <td class="px-6 py-4 text-gray-400 text-xs">—</td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">审核通过</span></td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-500">待填写地址</span></td>
+            <td class="px-6 py-4"><span class="text-gray-400 text-xs">等待用户操作</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: 我的奖励 (用户端) ========== -->
+  <div class="page" id="page-user-rewards">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">我的奖励</h2>
+      <p class="text-sm text-gray-500 mt-1">查看在社区活动中获得的所有奖励</p>
+    </div>
+    <div class="grid grid-cols-1 gap-4 max-w-2xl">
+      <!-- 软件码奖励卡片 -->
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex items-start space-x-4">
+        <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-gray-900">星巴克50元礼品卡</span>
+            <span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已到账</span>
+          </div>
+          <p class="text-xs text-gray-500 mt-1">来源：618大促抽奖 · 获得时间：2026-06-15</p>
+          <div class="flex items-center gap-3 mt-3">
+            <a href="#" class="text-primary hover:text-blue-700 font-bold text-sm transition-colors" onclick="switchPage('user-code-detail'); return false;">查看软件码 →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 优惠券（直接到账） -->
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex items-start space-x-4">
+        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+        </div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-gray-900">满100减20优惠券</span>
+            <span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已到账</span>
+          </div>
+          <p class="text-xs text-gray-500 mt-1">来源：618大促抽奖 · 获得时间：2026-06-15 · 直接到账</p>
+          <div class="flex items-center gap-3 mt-3">
+            <a href="#" class="text-primary hover:text-blue-700 font-bold text-sm transition-colors" onclick="switchPage('user-coupon-detail'); return false;">查看优惠券 →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 优惠券（待领取） -->
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex items-start space-x-4">
+        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+        </div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-gray-900">满50减10优惠券</span>
+            <span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">待领取</span>
+          </div>
+          <p class="text-xs text-gray-500 mt-1">来源：新手任务活动 · 获得时间：2026-06-14 · 领取资格</p>
+          <div class="flex items-center gap-3 mt-3">
+            <button onclick="showToast('领取成功！优惠券已到账','success'); this.innerText='已领取'; this.className='bg-gray-100 text-gray-400 px-5 py-2 rounded-xl text-sm font-bold cursor-not-allowed'" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">立即领取</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 实物商品（待填写地址） -->
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex items-start space-x-4">
+        <div class="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        </div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-gray-900">社区定制保温杯</span>
+            <span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">待填写地址</span>
+          </div>
+          <p class="text-xs text-gray-500 mt-1">来源：社区签到活动 · 获得时间：2026-06-10 · 500ml</p>
+          <div class="flex items-center gap-3 mt-3">
+            <a href="#" class="text-primary hover:text-blue-700 font-bold text-sm transition-colors" onclick="switchPage('user-physical-detail'); return false;">填写收货地址 →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 审核中 -->
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex items-start space-x-4">
+        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-gray-900">品牌蓝牙耳机</span>
+            <span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">审核中</span>
+          </div>
+          <p class="text-xs text-gray-500 mt-1">来源：618大促抽奖 · 获得时间：2026-06-16</p>
+          <p class="text-xs text-gray-400 mt-3">奖励审核中，请耐心等待</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: 软件码详情 (用户端) ========== -->
+  <div class="page" id="page-user-code-detail">
+    <div class="max-w-lg">
+      <button onclick="switchPage('user-rewards')" class="text-gray-500 hover:text-gray-700 font-bold text-sm transition-colors flex items-center mb-6">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        返回我的奖励
+      </button>
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div class="bg-purple-50 px-6 py-8 text-center">
+          <svg class="w-16 h-16 text-purple-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <h3 class="text-lg font-bold text-gray-900">星巴克50元礼品卡</h3>
+          <p class="text-sm text-gray-500 mt-1">软件码 · 618大促抽奖</p>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="bg-gray-50 rounded-xl p-4">
+            <div class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-2">软件码</div>
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-lg font-bold text-gray-900" id="code-text">****-****-****-8F3A</span>
+              <button onclick="document.getElementById('code-text').innerText='ABCD-EFGH-IJKL-8F3A'; showToast('软件码已复制','success')" class="bg-primary text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-700 transition-colors flex items-center">
+                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                复制
+              </button>
+            </div>
+          </div>
+          <div class="text-xs text-gray-400">获得时间：2026-06-15 14:30 · 状态：<span class="text-green-500 font-bold">已到账</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: 优惠券详情 (用户端) ========== -->
+  <div class="page" id="page-user-coupon-detail">
+    <div class="max-w-lg">
+      <button onclick="switchPage('user-rewards')" class="text-gray-500 hover:text-gray-700 font-bold text-sm transition-colors flex items-center mb-6">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        返回我的奖励
+      </button>
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div class="bg-blue-50 px-6 py-8 text-center">
+          <svg class="w-16 h-16 text-blue-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+          <h3 class="text-lg font-bold text-gray-900">满100减20优惠券</h3>
+          <p class="text-sm text-gray-500 mt-1">优惠券 · 618大促抽奖 · 直接到账</p>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-gray-50 rounded-xl p-3">
+              <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">面额</div>
+              <div class="text-lg font-bold text-gray-900 mt-1">¥20</div>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-3">
+              <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">使用门槛</div>
+              <div class="text-lg font-bold text-gray-900 mt-1">满 ¥100</div>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-3">
+              <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">有效期</div>
+              <div class="text-sm font-bold text-gray-900 mt-1">2026-06-15 ~ 2026-07-15</div>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-3">
+              <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">适用范围</div>
+              <div class="text-sm font-bold text-gray-900 mt-1">全场通用</div>
+            </div>
+          </div>
+          <div class="text-xs text-gray-400">获得时间：2026-06-15 14:30 · 状态：<span class="text-green-500 font-bold">已到账</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: 实物领取 (用户端) ========== -->
+  <div class="page" id="page-user-physical-detail">
+    <div class="max-w-lg">
+      <button onclick="switchPage('user-rewards')" class="text-gray-500 hover:text-gray-700 font-bold text-sm transition-colors flex items-center mb-6">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        返回我的奖励
+      </button>
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div class="bg-orange-50 px-6 py-8 text-center">
+          <svg class="w-16 h-16 text-orange-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          <h3 class="text-lg font-bold text-gray-900">社区定制保温杯</h3>
+          <p class="text-sm text-gray-500 mt-1">实物商品 · 社区签到活动 · 500ml</p>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="text-sm font-bold text-gray-900">填写收货信息</div>
+          <div class="space-y-3">
+            <div>
+              <label class="text-xs text-gray-500 font-bold mb-1 block">收货人 <span class="text-red-500">*</span></label>
+              <input type="text" placeholder="请输入收货人姓名" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+            </div>
+            <div>
+              <label class="text-xs text-gray-500 font-bold mb-1 block">手机号 <span class="text-red-500">*</span></label>
+              <input type="tel" placeholder="请输入手机号" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+            </div>
+            <div>
+              <label class="text-xs text-gray-500 font-bold mb-1 block">地区 <span class="text-red-500">*</span></label>
+              <select class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-700 bg-white">
+                <option>请选择省市区</option><option>北京市 朝阳区</option><option>上海市 浦东新区</option><option>广东省 广州市 天河区</option><option>广东省 深圳市 南山区</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-xs text-gray-500 font-bold mb-1 block">详细地址 <span class="text-red-500">*</span></label>
+              <input type="text" placeholder="街道、门牌号等" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+            </div>
+          </div>
+          <button onclick="showToast('收货信息提交成功！','success')" class="w-full bg-primary text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ========== PAGE: 软件码明细 ========== -->
+  <div class="page" id="page-code-detail">
+    <div class="flex items-center gap-3 mb-6">
+      <button onclick="switchPage('prize-config')" class="text-gray-500 hover:text-gray-700 font-bold text-sm flex items-center transition-colors">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        返回权益管理
+      </button>
+    </div>
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">软件码明细</h2>
+      <p class="text-sm text-gray-500 mt-1">星巴克50元礼品卡 · 码池总数 2,340 · 未发放 2,212 · 已发放 39 · 已使用 89</p>
+    </div>
+    <div class="grid grid-cols-4 gap-3 mb-6">
+      <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm text-center">
+        <div class="text-xs text-gray-400 uppercase font-bold tracking-wider">码池总数</div>
+        <div class="text-2xl font-bold text-gray-900 mt-1">2,340</div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm text-center">
+        <div class="text-xs text-gray-400 uppercase font-bold tracking-wider">未发放</div>
+        <div class="text-2xl font-bold text-gray-500 mt-1">2,212</div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm text-center">
+        <div class="text-xs text-gray-400 uppercase font-bold tracking-wider">已发放</div>
+        <div class="text-2xl font-bold text-blue-500 mt-1">39</div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm text-center">
+        <div class="text-xs text-gray-400 uppercase font-bold tracking-wider">已使用</div>
+        <div class="text-2xl font-bold text-green-500 mt-1">89</div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
+      <div class="flex items-center gap-4 flex-wrap">
+        <input type="text" placeholder="搜索软件码" class="border border-gray-200 rounded-xl px-4 py-2 text-sm flex-1 min-w-[200px]">
+        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
+          <option>全部状态</option><option>未发放</option><option>已发放</option><option>已使用</option>
+        </select>
+        <button class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm"><svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>查询</button>
+        <button onclick="showModal('modal-page-import')" class="bg-white text-primary border border-primary px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-50 transition-colors flex items-center shadow-sm"><svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 0115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>导入软件码</button>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50/50 text-left">
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">软件码</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">码状态</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">导入时间</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">核销时间</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0001-8F3A</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已使用</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-01 10:00</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 18:20</td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0002-2A7B</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">已发放</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-01 10:00</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0003-9C4D</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已使用</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-01 10:00</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-16 10:15</td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0200-5K8P</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-500">未发放</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-10 14:00</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0201-7M2Q</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">已发放</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-10 14:00</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0202-3R6L</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已使用</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-10 14:00</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-16 14:30</td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
+        </tbody>
+      </table>
+      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
+        <span>共 2,340 条码记录</span>
+        <div class="flex items-center gap-2">
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button>
+          <span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span>
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">2</button>
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">3</button>
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ========== MODAL: 权益配置表单 ========== -->
+<div class="modal-overlay" id="modal-prize-form" onclick="if(event.target===this)closePrizeForm()">
+  <div class="bg-white rounded-2xl w-full max-w-3xl p-6 shadow-xl relative max-h-[92vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="text-lg font-bold text-gray-900" id="prize-form-title">新增权益</h3>
+      <button onclick="closePrizeForm()" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="space-y-4">
+      <div>
+        <label class="text-xs text-gray-500 font-bold mb-1 block">权益名称 <span class="text-red-500">*</span></label>
+        <div class="relative">
+          <input type="text" id="prize-name-input" placeholder="请输入权益名称" maxlength="20" oninput="updateNameCounter()" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 pr-12 text-sm transition-colors">
+          <span id="name-char-count" class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">0/20</span>
+        </div>
+        <p id="name-limit-warn" class="hidden text-[10px] text-red-500 mt-1">权益名称已达到20字上限</p>
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 font-bold mb-1 block">权益类型 <span class="text-red-500">*</span></label>
+        <select class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white" onchange="switchPrizeType(this.value)">
+          <option value="">请选择权益类型</option>
+          <option value="virtual">软件码</option>
+          <option value="coupon">优惠券</option>
+          <option value="physical">实物商品</option>
+        </select>
+      </div>
+
+      <!-- 软件码专属：导入软件码 -->
+      <div id="prize-section-virtual">
+        <label class="text-xs text-gray-500 font-bold mb-1 block">导入软件码 <span class="text-red-500">*</span></label>
+        <div class="bg-gray-50 rounded-xl p-4 border border-gray-100 space-y-3">
+          <div class="flex items-center justify-between">
+            <p class="text-xs text-gray-400">请下载模板，按格式填写软件码后上传</p>
+            <button onclick="downloadCodeTemplate()" class="text-primary hover:text-blue-700 font-bold text-xs flex items-center gap-1 transition-colors whitespace-nowrap">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              下载导入模板
+            </button>
+          </div>
+
+          <!-- 上传区 -->
+          <div id="code-upload-zone">
+            <div class="border-2 border-dashed border-gray-200 rounded-xl p-4 text-center hover:border-primary transition-colors cursor-pointer bg-white"
+                 onclick="document.getElementById('code-file-input').click()"
+                 ondragover="event.preventDefault(); this.classList.add('border-primary','bg-blue-50/30')"
+                 ondragleave="this.classList.remove('border-primary','bg-blue-50/30')"
+                 ondrop="event.preventDefault(); this.classList.remove('border-primary','bg-blue-50/30'); handleCodeFileDrop(event)">
+              <svg class="w-8 h-8 text-gray-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+              <p class="text-xs text-gray-400">拖拽文件到此处，或<span class="text-primary font-bold"> 点击上传</span></p>
+              <p class="text-[10px] text-gray-300 mt-1">支持 .csv / .xlsx 格式，大小不超过5MB</p>
+              <input type="file" id="code-file-input" accept=".csv,.xlsx" onchange="handleCodeFileSelect(event)" class="hidden">
+            </div>
+          </div>
+
+          <!-- 文件已选择状态 -->
+          <div id="code-file-selected" class="hidden bg-white rounded-lg border border-gray-100 p-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <span id="code-file-name" class="text-sm font-bold text-gray-900"></span>
+                <span id="code-file-size" class="text-xs text-gray-400"></span>
+              </div>
+              <button onclick="resetCodeUpload()" class="text-primary hover:text-blue-700 font-bold text-xs">更换文件</button>
+            </div>
+          </div>
+
+          <!-- 开始导入按钮 -->
+          <button id="code-start-import-btn" onclick="startCodeImport()" class="hidden w-full bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">
+            开始导入
+          </button>
+
+          <!-- 导入结果 -->
+          <div id="code-import-result" class="hidden bg-white rounded-lg border border-gray-100 p-4 space-y-3">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span class="text-sm font-bold text-gray-900">导入完成</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="bg-green-50 rounded-lg p-3 text-center">
+                <div class="text-xs text-gray-400">成功</div>
+                <div class="text-xl font-bold text-green-500" id="code-success-count">0</div>
+              </div>
+              <div class="bg-red-50 rounded-lg p-3 text-center">
+                <div class="text-xs text-gray-400">失败</div>
+                <div class="text-xl font-bold text-red-500" id="code-fail-count">0</div>
+              </div>
+            </div>
+            <button id="code-export-fail-btn" onclick="exportFailedCodes()" class="hidden w-full bg-white text-red-500 border border-red-200 px-4 py-2 rounded-xl text-sm font-bold hover:bg-red-50 transition-colors">
+              导出失败数据
+            </button>
+          </div>
+
+          <p id="code-import-empty" class="text-[10px] text-gray-400">未导入软件码，请下载模板填写软件码后上传</p>
+        </div>
+      </div>
+
+      <!-- 优惠券专属：输入券模板ID + 同步 -->
+      <div id="prize-section-coupon" class="bg-gray-50 rounded-xl p-4 border border-gray-100 space-y-3 hidden">
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">优惠券模板ID <span class="text-red-500">*</span></label>
+          <div class="flex items-center gap-2">
+            <input type="text" placeholder="输入券模板ID" class="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white" id="coupon-template-id">
+            <button onclick="syncCouponTemplate()" class="bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors whitespace-nowrap">同步券信息</button>
+          </div>
+          <p class="text-[10px] text-gray-400 mt-1">输入券模板ID后点击同步，自动拉取券名称、面额、有效期、适用范围和库存</p>
+        </div>
+        <div id="coupon-sync-result" class="hidden bg-white rounded-lg p-4 border border-gray-100 space-y-2">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span class="text-xs text-green-500 font-bold">券信息已同步</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div><span class="text-gray-400">券名称</span><div class="font-bold text-gray-900 mt-0.5" id="synced-coupon-name">满100减20优惠券</div></div>
+            <div><span class="text-gray-400">面额</span><div class="font-bold text-gray-900 mt-0.5" id="synced-coupon-amount">¥20</div></div>
+            <div><span class="text-gray-400">有效期</span><div class="font-bold text-gray-900 mt-0.5" id="synced-coupon-period">2026-06-01 ~ 2026-12-31</div></div>
+            <div><span class="text-gray-400">适用范围</span><div class="font-bold text-gray-900 mt-0.5" id="synced-coupon-scope">全场通用</div></div>
+            <div class="col-span-2"><span class="text-gray-400">券库存</span><div class="font-bold text-gray-900 mt-0.5" id="synced-coupon-stock">10,000</div></div>
+          </div>
+        </div>
+        <div id="coupon-sync-empty" class="bg-white rounded-lg p-3 text-xs text-gray-400 text-center">尚未同步，请输入券模板ID后点击"同步券信息"</div>
+      </div>
+
+      <!-- 实物商品专属：搜索商城商品 -->
+      <div id="prize-section-physical" class="hidden space-y-3">
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">商品来源</label>
+          <div class="bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm text-gray-700">商城系统</div>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">商品搜索</label>
+          <div class="flex items-start gap-2">
+            <textarea id="physical-search-input" rows="1" placeholder="输入商品名称 / ID / SKU，多个商品按回车换行" onkeydown="if(event.key==='Enter'){var t=this;var s=t.scrollTop;t.rows=t.rows+1;setTimeout(function(){t.scrollTop=s},0)}" class="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
+            <button onclick="searchPhysicalProducts()" class="bg-primary text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm shrink-0">
+              <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              查询
+            </button>
+          </div>
+          <p class="text-[10px] text-gray-400 mt-1">支持多个商品搜索，按回车键换行分隔，例如：SKU001、保温杯</p>
+        </div>
+        <div id="physical-search-result" class="hidden bg-white rounded-xl border border-gray-100 overflow-hidden">
+          <table class="w-full text-xs">
+            <thead>
+              <tr class="bg-gray-50/50 text-left">
+                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase">商品图</th>
+                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase">商品名称</th>
+                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase">SKU</th>
+                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase">售价</th>
+                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase">可用库存</th>
+                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase">状态</th>
+                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase w-16">选择</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50" id="physical-product-list">
+              <tr class="hover:bg-gray-50/30 transition-colors">
+                <td class="px-4 py-3"><div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-300 text-[10px]">图</div></td>
+                <td class="px-4 py-3"><span class="font-bold text-gray-900">社区定制保温杯</span><div class="text-[10px] text-gray-400">500ml 白色</div></td>
+                <td class="px-4 py-3 font-mono text-gray-600">SKU001</td>
+                <td class="px-4 py-3 text-gray-900 font-bold">¥99</td>
+                <td class="px-4 py-3 text-gray-900 font-bold">800</td>
+                <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">上架</span></td>
+                <td class="px-4 py-3"><input type="checkbox" class="physical-checkbox rounded accent-primary" data-name="社区定制保温杯" data-spec="500ml 白色" onchange="updateBatchSelect()"></td>
+              </tr>
+              <tr class="hover:bg-gray-50/30 transition-colors">
+                <td class="px-4 py-3"><div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-300 text-[10px]">图</div></td>
+                <td class="px-4 py-3"><span class="font-bold text-gray-900">品牌蓝牙耳机</span><div class="text-[10px] text-gray-400">黑色 标准版</div></td>
+                <td class="px-4 py-3 font-mono text-gray-600">SKU002</td>
+                <td class="px-4 py-3 text-gray-900 font-bold">¥299</td>
+                <td class="px-4 py-3 text-gray-900 font-bold">350</td>
+                <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">上架</span></td>
+                <td class="px-4 py-3"><input type="checkbox" class="physical-checkbox rounded accent-primary" data-name="品牌蓝牙耳机" data-spec="黑色 标准版" onchange="updateBatchSelect()"></td>
+              </tr>
+              <tr class="hover:bg-gray-50/30 transition-colors">
+                <td class="px-4 py-3"><div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-300 text-[10px]">图</div></td>
+                <td class="px-4 py-3"><span class="font-bold text-gray-900">精美书籍套装</span><div class="text-[10px] text-gray-400">3册装</div></td>
+                <td class="px-4 py-3 font-mono text-gray-600">SKU003</td>
+                <td class="px-4 py-3 text-gray-900 font-bold">¥128</td>
+                <td class="px-4 py-3 text-gray-900 font-bold">500</td>
+                <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">上架</span></td>
+                <td class="px-4 py-3"><input type="checkbox" class="physical-checkbox rounded accent-primary" data-name="精美书籍套装" data-spec="3册装" onchange="updateBatchSelect()"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="physical-batch-bar" class="hidden mt-2 flex items-center justify-between">
+          <span class="text-xs text-gray-500">已勾选 <span id="physical-batch-count" class="font-bold text-primary">0</span> 个商品</span>
+          <button onclick="batchSelectPhysical()" class="bg-primary text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-700 transition-colors">批量选择</button>
+        </div>
+        <div id="physical-selected" class="hidden bg-green-50 rounded-xl p-3 border border-green-100 space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-sm font-bold text-gray-900">已选择 <span id="physical-selected-count" class="text-primary">0</span> 个商品</span>
+            </div>
+            <button onclick="clearPhysicalSelection()" class="text-gray-400 hover:text-red-500 text-xs font-bold">取消选择</button>
+          </div>
+          <div class="flex flex-wrap gap-1" id="physical-selected-tags"></div>
+        </div>
+        <p id="physical-search-empty" class="text-xs text-gray-400">请搜索并选择商城商品</p>
+      </div>
+
+      <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+        <input type="checkbox" checked class="rounded accent-primary"> 启用
+      </label>
+    </div>
+    <div class="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-gray-100">
+      <button onclick="closePrizeForm()" class="bg-white text-gray-700 border border-gray-200 px-6 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors shadow-sm">取消</button>
+      <button onclick="savePrizeForm()" class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MODAL: 奖励详情 ========== -->
+<div class="modal-overlay" id="modal-reward-detail" onclick="if(event.target===this)hideModal('modal-reward-detail')">
+  <div class="bg-white rounded-2xl w-full max-w-lg p-6 shadow-xl relative max-h-[85vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="text-lg font-bold text-gray-900">奖励详情</h3>
+      <button onclick="hideModal('modal-reward-detail')" class="text-gray-400 hover:text-gray-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="space-y-4">
+      <div class="grid grid-cols-2 gap-3">
+        <div><span class="text-xs text-gray-400">奖励编号</span><div class="text-sm font-bold text-gray-900 mt-0.5">#RW20260616001</div></div>
+        <div><span class="text-xs text-gray-400">活动名称</span><div class="text-sm font-bold text-gray-900 mt-0.5">618大促抽奖</div></div>
+        <div><span class="text-xs text-gray-400">用户信息</span><div class="text-sm font-bold text-gray-900 mt-0.5">user_123456</div></div>
+        <div><span class="text-xs text-gray-400">权益名称</span><div class="text-sm font-bold text-gray-900 mt-0.5">星巴克50元礼品卡</div></div>
+        <div><span class="text-xs text-gray-400">权益类型</span><div class="mt-0.5"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-purple-50 text-purple-500">软件码</span></div></div>
+        <div><span class="text-xs text-gray-400">发放状态</span><div class="mt-0.5"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">发放成功</span></div></div>
+      </div>
+
+      <div class="border-t border-gray-100 pt-4">
+        <div class="text-sm font-bold text-gray-900 mb-3">状态时间轴</div>
+        <div class="space-y-3">
+          <div class="flex items-start space-x-3">
+            <div class="w-2 h-2 rounded-full bg-green-500 mt-2 shrink-0"></div>
+            <div>
+              <div class="text-sm font-bold text-gray-900">发放成功</div>
+              <div class="text-xs text-gray-400">2026-06-15 14:30:25 · 系统自动</div>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <div class="w-2 h-2 rounded-full bg-green-500 mt-2 shrink-0"></div>
+            <div>
+              <div class="text-sm font-bold text-gray-900">软件码已分配</div>
+              <div class="text-xs text-gray-400">2026-06-15 14:30:24 · 码池：星巴克礼品卡码池</div>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <div class="w-2 h-2 rounded-full bg-green-500 mt-2 shrink-0"></div>
+            <div>
+              <div class="text-sm font-bold text-gray-900">审核通过</div>
+              <div class="text-xs text-gray-400">2026-06-15 14:28:10 · 活动层风控自动通过</div>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <div class="w-2 h-2 rounded-full bg-blue-500 mt-2 shrink-0"></div>
+            <div>
+              <div class="text-sm font-bold text-gray-900">已占用库存</div>
+              <div class="text-xs text-gray-400">2026-06-15 14:25:00 · 来源库存 2,340 → 可用 2,339</div>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <div class="w-2 h-2 rounded-full bg-gray-300 mt-2 shrink-0"></div>
+            <div>
+              <div class="text-sm font-bold text-gray-900">发奖触发</div>
+              <div class="text-xs text-gray-400">2026-06-15 14:25:00 · 活动层触发 · 幂等ID: idem_618_001</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-100 pt-4">
+        <div class="text-sm font-bold text-gray-900 mb-2">库存信息</div>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div class="bg-gray-50 rounded-lg p-2"><span class="text-gray-400">来源库存</span><div class="font-bold text-gray-900">2,340</div></div>
+          <div class="bg-gray-50 rounded-lg p-2"><span class="text-gray-400">活动发放上限</span><div class="font-bold text-gray-900">500</div></div>
+          <div class="bg-gray-50 rounded-lg p-2"><span class="text-gray-400">已占用</span><div class="font-bold text-blue-500">89</div></div>
+          <div class="bg-gray-50 rounded-lg p-2"><span class="text-gray-400">已发放</span><div class="font-bold text-green-500">128</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MODAL: 人工补发 ========== -->
+<div class="modal-overlay" id="modal-manual-reissue" onclick="if(event.target===this)hideModal('modal-manual-reissue')">
+  <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-xl relative">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="text-lg font-bold text-gray-900">人工补发</h3>
+      <button onclick="hideModal('modal-manual-reissue')" class="text-gray-400 hover:text-gray-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="space-y-4">
+      <div class="bg-red-50 border border-red-100 rounded-xl p-4 text-sm text-red-600">
+        <span class="font-bold">注意：</span>补发操作将重新发放该奖励，请确认信息无误后再提交。
+      </div>
+      <div class="text-sm text-gray-600 space-y-2">
+        <div class="flex justify-between"><span class="text-gray-400">奖励编号</span><span class="font-bold">#RW20260616003</span></div>
+        <div class="flex justify-between"><span class="text-gray-400">权益</span><span class="font-bold">社区定制保温杯</span></div>
+        <div class="flex justify-between"><span class="text-gray-400">用户</span><span class="font-bold">user_456789</span></div>
+        <div class="flex justify-between"><span class="text-gray-400">失败原因</span><span class="font-bold text-red-500">商城库存接口超时</span></div>
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 font-bold mb-1 block">处理备注 <span class="text-red-500">*</span></label>
+        <textarea rows="3" placeholder="请填写补发原因和处理说明" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
+      </div>
+    </div>
+    <div class="flex items-center justify-end gap-3 mt-5 pt-4 border-t border-gray-100">
+      <button onclick="hideModal('modal-manual-reissue')" class="bg-white text-gray-700 border border-gray-200 px-6 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors shadow-sm">取消</button>
+      <button onclick="hideModal('modal-manual-reissue'); showToast('人工补发已提交','success')" class="bg-red-500 text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-red-600 transition-colors shadow-sm">确认补发</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MODAL: 标记已发货 ========== -->
+<div class="modal-overlay" id="modal-ship-status" onclick="if(event.target===this)hideModal('modal-ship-status')">
+  <div class="bg-white rounded-2xl w-full max-w-sm p-6 shadow-xl relative text-center">
+    <h3 class="text-lg font-bold text-gray-900 mb-2">确认标记为已发货？</h3>
+    <p class="text-sm text-gray-500 mb-2">奖励编号：#RW20260610001</p>
+    <p class="text-sm text-gray-500 mb-6">商品：社区定制保温杯 · 500ml</p>
+    <p class="text-xs text-gray-400 mb-6">V1 暂不要求填写物流单号</p>
+    <div class="flex justify-center gap-3">
+      <button onclick="hideModal('modal-ship-status')" class="bg-white text-gray-700 border border-gray-200 px-6 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors shadow-sm">取消</button>
+      <button onclick="hideModal('modal-ship-status'); showToast('已标记为已发货','success')" class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">确认</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MODAL: 标记已完成 ========== -->
+<div class="modal-overlay" id="modal-ship-status-complete" onclick="if(event.target===this)hideModal('modal-ship-status-complete')">
+  <div class="bg-white rounded-2xl w-full max-w-sm p-6 shadow-xl relative text-center">
+    <h3 class="text-lg font-bold text-gray-900 mb-2">确认标记为已完成？</h3>
+    <p class="text-sm text-gray-500 mb-2">奖励编号：#RW20260608005</p>
+    <p class="text-sm text-gray-500 mb-6">商品：品牌蓝牙耳机</p>
+    <div class="flex justify-center gap-3">
+      <button onclick="hideModal('modal-ship-status-complete')" class="bg-white text-gray-700 border border-gray-200 px-6 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors shadow-sm">取消</button>
+      <button onclick="hideModal('modal-ship-status-complete'); showToast('已标记为已完成','success')" class="bg-green-500 text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-green-600 transition-colors shadow-sm">确认</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MODAL: 发放详情 ========== -->
+<div class="modal-overlay" id="modal-distribution-detail" onclick="if(event.target===this)hideModal('modal-distribution-detail')">
+  <div class="bg-white rounded-2xl w-full max-w-2xl p-6 shadow-xl relative max-h-[80vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-5">
+      <div>
+        <h3 class="text-lg font-bold text-gray-900">发放详情</h3>
+        <p class="text-xs text-gray-400 mt-0.5">星巴克50元礼品卡 · 总发放 128 人 · 未发放 3 · 已发放 36 · 已使用 89</p>
+      </div>
+      <button onclick="hideModal('modal-distribution-detail')" class="text-gray-400 hover:text-gray-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- 统计概览 -->
+    <div class="grid grid-cols-3 gap-3 mb-5">
+      <div class="bg-gray-50 rounded-xl p-3 text-center">
+        <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">未发放</div>
+        <div class="text-xl font-bold text-gray-500">3</div>
+      </div>
+      <div class="bg-blue-50 rounded-xl p-3 text-center">
+        <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">已发放</div>
+        <div class="text-xl font-bold text-blue-500">36</div>
+      </div>
+      <div class="bg-green-50 rounded-xl p-3 text-center">
+        <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">已使用</div>
+        <div class="text-xl font-bold text-green-500">89</div>
+      </div>
+    </div>
+
+    <!-- 筛选 -->
+    <div class="flex items-center gap-3 mb-4">
+      <input type="text" placeholder="搜索用户ID/手机号" class="border border-gray-200 rounded-xl px-4 py-2 text-sm flex-1">
+      <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
+        <option>全部状态</option><option>未发放</option><option>已发放</option><option>已使用</option>
+      </select>
+      <button class="bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors">查询</button>
+    </div>
+
+    <!-- 发放列表 -->
+    <div class="border border-gray-100 rounded-xl overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50/50 text-left">
+            <th class="px-4 py-2.5 text-xs font-bold text-gray-500 uppercase tracking-wider">用户ID</th>
+            <th class="px-4 py-2.5 text-xs font-bold text-gray-500 uppercase tracking-wider">手机号</th>
+            <th class="px-4 py-2.5 text-xs font-bold text-gray-500 uppercase tracking-wider">触发场景</th>
+            <th class="px-4 py-2.5 text-xs font-bold text-gray-500 uppercase tracking-wider">状态</th>
+            <th class="px-4 py-2.5 text-xs font-bold text-gray-500 uppercase tracking-wider">发放时间</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-4 py-3 font-mono text-xs text-gray-900">user_123456</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">138****8888</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">618大促抽奖</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已使用</span></td>
+            <td class="px-4 py-3 text-gray-500 text-xs">2026-06-15 14:30</td>
+          </tr>
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-4 py-3 font-mono text-xs text-gray-900">user_234567</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">139****6666</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">618大促抽奖</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">已发放</span></td>
+            <td class="px-4 py-3 text-gray-500 text-xs">2026-06-15 14:32</td>
+          </tr>
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-4 py-3 font-mono text-xs text-gray-900">user_345678</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">137****9999</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">新手任务活动</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-500">未发放</span></td>
+            <td class="px-4 py-3 text-gray-500 text-xs">2026-06-15 15:05</td>
+          </tr>
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-4 py-3 font-mono text-xs text-gray-900">user_456789</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">136****5555</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">618大促抽奖</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已使用</span></td>
+            <td class="px-4 py-3 text-gray-500 text-xs">2026-06-15 15:18</td>
+          </tr>
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-4 py-3 font-mono text-xs text-gray-900">user_567890</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">135****2222</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">社区签到活动</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-500">未发放</span></td>
+            <td class="px-4 py-3 text-gray-500 text-xs">2026-06-15 16:10</td>
+          </tr>
+          <tr class="hover:bg-gray-50/30 transition-colors">
+            <td class="px-4 py-3 font-mono text-xs text-gray-900">user_678901</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">133****7777</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">618大促抽奖</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">已发放</span></td>
+            <td class="px-4 py-3 text-gray-500 text-xs">2026-06-15 16:45</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="flex items-center justify-between mt-4 text-sm text-gray-500">
+      <span>共 128 条记录</span>
+      <div class="flex items-center gap-2">
+        <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button>
+        <span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span>
+        <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">2</button>
+        <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">3</button>
+        <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MODAL: 导入软件码 ========== -->
+<div class="modal-overlay" id="modal-page-import" onclick="if(event.target===this)hideModal('modal-page-import')">
+  <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-xl relative">
+    <div class="flex items-center justify-between mb-5">
+      <div>
+        <h3 class="text-lg font-bold text-gray-900">导入软件码</h3>
+        <p class="text-xs text-gray-400 mt-0.5">请下载模板，按格式填写软件码后上传</p>
+      </div>
+      <button onclick="hideModal('modal-page-import')" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="space-y-3">
+      <button onclick="downloadCodeTemplate()" class="w-full bg-white text-primary border border-primary px-4 py-2 rounded-xl text-sm font-bold hover:bg-blue-50 transition-colors flex items-center justify-center shadow-sm">
+        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        下载导入模板
+      </button>
+
+      <div id="modal-upload-zone">
+        <div class="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-primary transition-colors cursor-pointer bg-gray-50/50"
+             onclick="document.getElementById('modal-file-input').click()"
+             ondragover="event.preventDefault(); this.classList.add('border-primary','bg-blue-50/30')"
+             ondragleave="this.classList.remove('border-primary','bg-blue-50/30')"
+             ondrop="event.preventDefault(); this.classList.remove('border-primary','bg-blue-50/30'); handleModalFileDrop(event)">
+          <svg class="w-10 h-10 text-gray-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+          <p class="text-sm text-gray-500 font-bold">拖拽文件到此处，或<span class="text-primary"> 点击上传</span></p>
+          <p class="text-[10px] text-gray-400 mt-1">支持 .csv / .xlsx 格式，大小不超过5MB</p>
+          <input type="file" id="modal-file-input" accept=".csv,.xlsx" onchange="handleModalFileSelect(event)" class="hidden">
+        </div>
+      </div>
+
+      <div id="modal-file-selected" class="hidden bg-gray-50 rounded-lg border border-gray-100 p-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <span id="modal-file-name" class="text-sm font-bold text-gray-900"></span>
+            <span id="modal-file-size" class="text-xs text-gray-400"></span>
+          </div>
+          <button onclick="resetModalUpload()" class="text-primary hover:text-blue-700 font-bold text-xs">更换文件</button>
+        </div>
+      </div>
+
+      <button id="modal-start-import-btn" onclick="startModalImport()" class="hidden w-full bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">
+        开始导入
+      </button>
+
+      <div id="modal-import-result" class="hidden bg-gray-50 rounded-lg border border-gray-100 p-4 space-y-3">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span class="text-sm font-bold text-gray-900">导入完成</span>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-green-50 rounded-lg p-3 text-center">
+            <div class="text-xs text-gray-400">成功</div>
+            <div class="text-xl font-bold text-green-500" id="modal-success-count">0</div>
+          </div>
+          <div class="bg-red-50 rounded-lg p-3 text-center">
+            <div class="text-xs text-gray-400">失败</div>
+            <div class="text-xl font-bold text-red-500" id="modal-fail-count">0</div>
+          </div>
+        </div>
+        <button id="modal-export-fail-btn" onclick="exportModalFailedCodes()" class="hidden w-full bg-white text-red-500 border border-red-200 px-4 py-2 rounded-xl text-sm font-bold hover:bg-red-50 transition-colors">
+          导出失败数据
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TOAST ========== -->
+<div class="toast" id="toast"></div>
+
+<script>
+function switchPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + pageId).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelector('[data-page="' + pageId + '"]').classList.add('active');
+}
+
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', function(e) {
+    e.preventDefault();
+    switchPage(this.dataset.page);
+  });
+});
+
+function showModal(id) { document.getElementById(id).classList.add('show'); }
+
+function updateNameCounter() {
+  var input = document.getElementById('prize-name-input');
+  var count = document.getElementById('name-char-count');
+  var warn = document.getElementById('name-limit-warn');
+  var len = input.value.length;
+  count.textContent = len + '/20';
+  if (len >= 20) {
+    input.classList.add('border-red-500', 'bg-red-50');
+    count.classList.add('text-red-500');
+    count.classList.remove('text-gray-400');
+    warn.classList.remove('hidden');
+  } else {
+    input.classList.remove('border-red-500', 'bg-red-50');
+    count.classList.remove('text-red-500');
+    count.classList.add('text-gray-400');
+    warn.classList.add('hidden');
+  }
+}
+
+function openPrizeForm(mode, rowData) {
+  resetPrizeForm();
+  document.getElementById('prize-form-title').textContent = mode === 'edit' ? '编辑权益' : '新增权益';
+  if (mode === 'edit' && rowData) {
+    document.getElementById('prize-name-input').value = rowData.name || '';
+    updateNameCounter();
+    var typeSelect = document.querySelector('#modal-prize-form select');
+    typeSelect.value = rowData.type || '';
+    switchPrizeType(rowData.type || '');
+  }
+  showModal('modal-prize-form');
+}
+
+function resetPrizeForm() {
+  var modal = document.getElementById('modal-prize-form');
+  var nameInput = document.getElementById('prize-name-input');
+  var typeSelect = document.querySelector('#modal-prize-form select');
+  var count = document.getElementById('name-char-count');
+  var warn = document.getElementById('name-limit-warn');
+  var summary = document.getElementById('code-import-summary');
+  importedCodes = [];
+  modal.querySelectorAll('.field-error').forEach(function(el){ el.remove(); });
+  modal.querySelectorAll('.border-red-500').forEach(function(el){ el.classList.remove('border-red-500'); });
+  document.getElementById('prize-section-virtual').classList.remove('border-2');
+  document.getElementById('prize-section-physical').classList.remove('border-2');
+  if (nameInput) {
+    nameInput.value = '';
+    nameInput.classList.remove('bg-red-50');
+  }
+  if (typeSelect) typeSelect.value = '';
+  if (count) {
+    count.textContent = '0/20';
+    count.classList.remove('text-red-500');
+    count.classList.add('text-gray-400');
+  }
+  if (warn) warn.classList.add('hidden');
+  if (summary) {
+    summary.textContent = '未导入软件码';
+    summary.className = 'text-xs text-gray-400';
+  }
+  switchPrizeType('');
+  clearCodeImport();
+  selectedPhysicalProducts = [];
+  clearPhysicalSelection();
+  document.getElementById('physical-search-result').classList.add('hidden');
+  document.getElementById('physical-search-empty').classList.remove('hidden');
+}
+
+function deleteCodeRow(btn) {
+  var row = btn.closest('tr');
+  row.remove();
+  showToast('已删除该软件码','success');
+}
+
+function toggleStatus(btn) {
+  var row = btn.closest('tr');
+  var badge = row.querySelector('td:nth-child(5) span');
+  var isEnabled = badge.textContent === '已启用';
+  if (isEnabled) {
+    badge.textContent = '已停用';
+    badge.className = 'px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-400';
+    btn.textContent = '启用';
+    btn.className = 'text-green-500 hover:text-green-600 font-bold transition-colors text-xs';
+    showToast('已停用该权益','success');
+  } else {
+    badge.textContent = '已启用';
+    badge.className = 'px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500';
+    btn.textContent = '停用';
+    btn.className = 'text-red-500 hover:text-red-600 font-bold transition-colors text-xs';
+    showToast('已启用该权益','success');
+  }
+}
+
+function editRow(btn) {
+  var row = btn.closest('tr');
+  var name = row.querySelector('td:first-child span').textContent;
+  var badge = row.querySelector('td:nth-child(2) span');
+  var typeMap = { '软件码': 'virtual', '优惠券': 'coupon', '实物商品': 'physical' };
+  var type = typeMap[badge.textContent] || '';
+  openPrizeForm('edit', { name: name, type: type });
+}
+
+function closePrizeForm() {
+  resetPrizeForm();
+  hideModal('modal-prize-form');
+}
+
+function savePrizeForm() {
+  var nameInput = document.getElementById('prize-name-input');
+  var typeSelect = document.querySelector('#modal-prize-form select');
+  var name = nameInput.value.trim();
+  var type = typeSelect.value;
+  var valid = true;
+
+  // 清除旧错误
+  clearFieldError(nameInput);
+  clearFieldError(typeSelect);
+  clearFieldError(document.getElementById('prize-section-virtual'));
+
+  if (!name) {
+    setFieldError(nameInput, '请输入权益名称');
+    valid = false;
+  }
+  if (!type) {
+    setFieldError(typeSelect, '请选择权益类型');
+    valid = false;
+  }
+  if (type === 'virtual' && document.getElementById('code-import-result').classList.contains('hidden')) {
+    setFieldError(document.getElementById('prize-section-virtual'), '请导入软件码');
+    valid = false;
+  }
+  if (type === 'physical' && selectedPhysicalProducts.length === 0) {
+    setFieldError(document.getElementById('prize-section-physical'), '请选择商品');
+    valid = false;
+  }
+  if (!valid) return;
+
+  var typeNames = { virtual: '软件码', coupon: '优惠券', physical: '实物商品' };
+  var typeColors = { virtual: 'bg-purple-50 text-purple-500', coupon: 'bg-blue-50 text-blue-500', physical: 'bg-orange-50 text-orange-500' };
+  var codeCount = importedCodes.length || 0;
+  var tbody = document.querySelector('#page-prize-config tbody');
+  var badgeClass = 'px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider ' + typeColors[type];
+
+  var tr = document.createElement('tr');
+  tr.className = 'hover:bg-gray-50/30 transition-colors';
+  tr.innerHTML =
+    '<td class="px-6 py-4"><span class="font-bold text-gray-900">' + name + '</span></td>' +
+    '<td class="px-6 py-4"><span class="' + badgeClass + '">' + typeNames[type] + '</span></td>' +
+    '<td class="px-6 py-4 text-gray-900 font-bold">' + (codeCount || '—') + '</td>' +
+    '<td class="px-6 py-4"><span class="text-gray-400 text-sm">—</span></td>' +
+    '<td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已启用</span></td>' +
+    '<td class="px-6 py-4"><div class="flex items-center gap-2">' +
+      (type === 'virtual' ? '<button onclick="switchPage(\'code-detail\')" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">软件码明细</button><span class="text-gray-200">|</span>' : '') +
+      '<button onclick="editRow(this)" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">编辑</button>' +
+      '<button onclick="toggleStatus(this)" class="text-red-500 hover:text-red-600 font-bold transition-colors text-xs">停用</button>' +
+    '</div></td>';
+  tbody.appendChild(tr);
+
+  closePrizeForm();
+  showToast('权益配置已保存','success');
+}
+
+function setFieldError(el, msg) {
+  if (el.tagName === 'INPUT' || el.tagName === 'SELECT') {
+    el.classList.add('border-red-500');
+    var errEl = el.parentNode.querySelector('.field-error');
+    if (!errEl) {
+      errEl = document.createElement('p');
+      errEl.className = 'field-error text-[10px] text-red-500 mt-1';
+      el.parentNode.appendChild(errEl);
+    }
+    errEl.textContent = msg;
+  } else {
+    // For container elements like the import section
+    el.classList.add('border-2', 'border-red-500', 'rounded-xl');
+    var errEl = el.querySelector('.field-error');
+    if (!errEl) {
+      errEl = document.createElement('p');
+      errEl.className = 'field-error text-[10px] text-red-500 mt-1';
+      el.appendChild(errEl);
+    }
+    errEl.textContent = msg;
+  }
+}
+
+function clearFieldError(el) {
+  if (el.tagName === 'INPUT' || el.tagName === 'SELECT') {
+    el.classList.remove('border-red-500');
+    var errEl = el.parentNode.querySelector('.field-error');
+    if (errEl) errEl.remove();
+  } else {
+    el.classList.remove('border-2', 'border-red-500');
+    var errEl = el.querySelector('.field-error');
+    if (errEl) errEl.remove();
+  }
+}
+function hideModal(id) { document.getElementById(id).classList.remove('show'); }
+
+function switchPrizeType(type) {
+  document.getElementById('prize-section-virtual').classList.toggle('hidden', type !== 'virtual');
+  document.getElementById('prize-section-coupon').classList.toggle('hidden', type !== 'coupon');
+  document.getElementById('prize-section-physical').classList.toggle('hidden', type !== 'physical');
+}
+
+function syncCouponTemplate() {
+  var input = document.getElementById('coupon-template-id');
+  if (!input.value.trim()) { showToast('请先输入券模板ID','error'); return; }
+  document.getElementById('coupon-sync-empty').classList.add('hidden');
+  document.getElementById('coupon-sync-result').classList.remove('hidden');
+  showToast('券信息同步成功','success');
+}
+
+var selectedPhysicalProducts = [];
+
+function searchPhysicalProducts() {
+  document.getElementById('physical-search-result').classList.remove('hidden');
+  document.getElementById('physical-search-empty').classList.add('hidden');
+}
+
+function updateBatchSelect() {
+  var boxes = document.querySelectorAll('.physical-checkbox:checked');
+  document.getElementById('physical-batch-count').textContent = boxes.length;
+  document.getElementById('physical-batch-bar').classList.toggle('hidden', boxes.length === 0);
+}
+
+function batchSelectPhysical() {
+  var boxes = document.querySelectorAll('.physical-checkbox:checked');
+  boxes.forEach(function(cb) {
+    var item = { name: cb.dataset.name, spec: cb.dataset.spec };
+    if (!selectedPhysicalProducts.find(function(p){ return p.name === item.name && p.spec === item.spec; })) {
+      selectedPhysicalProducts.push(item);
+    }
+  });
+  renderPhysicalSelection();
+  boxes.forEach(function(cb){ cb.checked = false; });
+  document.getElementById('physical-batch-bar').classList.add('hidden');
+  showToast('已选择 ' + selectedPhysicalProducts.length + ' 个商品','success');
+}
+
+function renderPhysicalSelection() {
+  var sel = document.getElementById('physical-selected');
+  var count = document.getElementById('physical-selected-count');
+  var tags = document.getElementById('physical-selected-tags');
+  sel.classList.toggle('hidden', selectedPhysicalProducts.length === 0);
+  document.getElementById('physical-search-empty').classList.toggle('hidden', selectedPhysicalProducts.length > 0);
+  count.textContent = selectedPhysicalProducts.length;
+  tags.innerHTML = selectedPhysicalProducts.map(function(p, i) {
+    return '<span class="inline-flex items-center gap-1 bg-white rounded-lg px-2 py-1 text-xs font-bold text-gray-700 border border-gray-200">' + p.name + ' · ' + p.spec + '<button onclick="removePhysicalSelection(' + i + ')" class="text-gray-400 hover:text-red-500">&times;</button></span>';
+  }).join('');
+}
+
+function removePhysicalSelection(idx) {
+  selectedPhysicalProducts.splice(idx, 1);
+  renderPhysicalSelection();
+}
+
+function clearPhysicalSelection() {
+  selectedPhysicalProducts = [];
+  renderPhysicalSelection();
+}
+
+function downloadCodeTemplate() {
+  var a = document.createElement('a');
+  var content = '<table><tr><th>软件码</th></tr><tr><td>CODE-EXAMPLE-0001</td></tr></table>';
+  a.href = 'data:application/vnd.ms-excel;charset=utf-8,' + encodeURIComponent(content);
+  a.download = '软件码导入模板.xls';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  showToast('模板已下载，请填写软件码后上传','success');
+}
+
+var importedCodes = [];
+var failedCodes = [];
+var pendingCodeFile = null;
+
+function formatFileSize(bytes) {
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+  return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+}
+
+function showCodeFileSelected(file) {
+  document.getElementById("code-file-name").textContent = file.name;
+  document.getElementById("code-file-size").textContent = formatFileSize(file.size);
+  document.getElementById("code-upload-zone").classList.add("hidden");
+  document.getElementById("code-file-selected").classList.remove("hidden");
+  document.getElementById("code-start-import-btn").classList.remove("hidden");
+  document.getElementById("code-import-result").classList.add("hidden");
+  document.getElementById("code-import-empty").classList.add("hidden");
+}
+
+function clearCodeImport() {
+  resetCodeUpload();
+}
+
+function resetCodeUpload() {
+  pendingCodeFile = null;
+  document.getElementById("code-upload-zone").classList.remove("hidden");
+  document.getElementById("code-file-selected").classList.add("hidden");
+  document.getElementById("code-start-import-btn").classList.add("hidden");
+  document.getElementById("code-import-result").classList.add("hidden");
+  document.getElementById("code-import-empty").classList.remove("hidden");
+  document.getElementById("code-file-input").value = "";
+}
+
+function handleCodeFileSelect(event) {
+  var file = event.target.files[0];
+  if (!file) return;
+  if (!file.name.endsWith(".csv") && !file.name.endsWith(".xlsx")) {
+    showToast("请上传 .csv 或 .xlsx 格式文件","error");
+    return;
+  }
+  if (file.size > 5 * 1024 * 1024) {
+    showToast("文件大小不能超过5MB","error");
+    return;
+  }
+  pendingCodeFile = file;
+  showCodeFileSelected(file);
+  event.target.value = "";
+}
+
+function handleCodeFileDrop(event) {
+  var file = event.dataTransfer.files[0];
+  if (!file) return;
+  if (!file.name.endsWith(".csv") && !file.name.endsWith(".xlsx")) {
+    showToast("请上传 .csv 或 .xlsx 格式文件","error");
+    return;
+  }
+  if (file.size > 5 * 1024 * 1024) {
+    showToast("文件大小不能超过5MB","error");
+    return;
+  }
+  pendingCodeFile = file;
+  showCodeFileSelected(file);
+}
+
+function startCodeImport() {
+  if (!pendingCodeFile) return;
+  document.getElementById("code-start-import-btn").classList.add("hidden");
+  document.getElementById("code-file-selected").classList.add("hidden");
+
+  var totalCodes = pendingCodeFile.name.endsWith(".xlsx") ? 120 : 100;
+  var successCount = Math.floor(totalCodes * 0.9);
+  var failCount = totalCodes - successCount;
+
+  importedCodes = [];
+  failedCodes = [];
+  for (var i = 0; i < successCount; i++) {
+    importedCodes.push("CODE-" + (20260001 + i));
+  }
+  for (var j = 0; j < failCount; j++) {
+    failedCodes.push({ row: successCount + j + 1, code: "CODE-" + (20260001 + successCount + j), reason: "格式错误" });
+  }
+
+  document.getElementById("code-success-count").textContent = successCount;
+  document.getElementById("code-fail-count").textContent = failCount;
+  document.getElementById("code-import-result").classList.remove("hidden");
+
+  var exportBtn = document.getElementById("code-export-fail-btn");
+  if (failCount > 0) {
+    exportBtn.classList.remove("hidden");
+  } else {
+    exportBtn.classList.add("hidden");
+  }
+  showToast("导入完成：成功 " + successCount + " 条，失败 " + failCount + " 条","success");
+}
+
+var modalPendingFile = null;
+var modalFailedCodes = [];
+
+function showModalFileSelected(file) {
+  document.getElementById('modal-file-name').textContent = file.name;
+  document.getElementById('modal-file-size').textContent = formatFileSize(file.size);
+  document.getElementById('modal-upload-zone').classList.add('hidden');
+  document.getElementById('modal-file-selected').classList.remove('hidden');
+  document.getElementById('modal-start-import-btn').classList.remove('hidden');
+  document.getElementById('modal-import-result').classList.add('hidden');
+}
+
+function resetModalUpload() {
+  modalPendingFile = null;
+  document.getElementById('modal-upload-zone').classList.remove('hidden');
+  document.getElementById('modal-file-selected').classList.add('hidden');
+  document.getElementById('modal-start-import-btn').classList.add('hidden');
+  document.getElementById('modal-import-result').classList.add('hidden');
+  document.getElementById('modal-file-input').value = '';
+}
+
+function handleModalFileSelect(event) {
+  var file = event.target.files[0];
+  if (!file) return;
+  if (!file.name.endsWith('.csv') && !file.name.endsWith('.xlsx')) {
+    showToast('请上传 .csv 或 .xlsx 格式文件','error'); return;
+  }
+  if (file.size > 5 * 1024 * 1024) {
+    showToast('文件大小不能超过5MB','error'); return;
+  }
+  modalPendingFile = file;
+  showModalFileSelected(file);
+  event.target.value = '';
+}
+
+function handleModalFileDrop(event) {
+  var file = event.dataTransfer.files[0];
+  if (!file) return;
+  if (!file.name.endsWith('.csv') && !file.name.endsWith('.xlsx')) {
+    showToast('请上传 .csv 或 .xlsx 格式文件','error'); return;
+  }
+  if (file.size > 5 * 1024 * 1024) {
+    showToast('文件大小不能超过5MB','error'); return;
+  }
+  modalPendingFile = file;
+  showModalFileSelected(file);
+}
+
+function startModalImport() {
+  if (!modalPendingFile) return;
+  document.getElementById('modal-start-import-btn').classList.add('hidden');
+  document.getElementById('modal-file-selected').classList.add('hidden');
+
+  var total = modalPendingFile.name.endsWith('.xlsx') ? 120 : 100;
+  var successCount = Math.floor(total * 0.9);
+  var failCount = total - successCount;
+
+  modalFailedCodes = [];
+  for (var j = 0; j < failCount; j++) {
+    modalFailedCodes.push({ row: successCount + j + 1, code: 'CODE-' + (20260001 + successCount + j), reason: '格式错误' });
+  }
+
+  document.getElementById('modal-success-count').textContent = successCount;
+  document.getElementById('modal-fail-count').textContent = failCount;
+  document.getElementById('modal-import-result').classList.remove('hidden');
+
+  var exportBtn = document.getElementById('modal-export-fail-btn');
+  if (failCount > 0) { exportBtn.classList.remove('hidden'); }
+  else { exportBtn.classList.add('hidden'); }
+  showToast('导入完成：成功 ' + successCount + ' 条，失败 ' + failCount + ' 条','success');
+}
+
+function exportModalFailedCodes() {
+  if (modalFailedCodes.length === 0) return;
+  var csv = '行号,软件码,失败原因\n';
+  for (var i = 0; i < modalFailedCodes.length; i++) {
+    csv += modalFailedCodes[i].row + ',' + modalFailedCodes[i].code + ',' + modalFailedCodes[i].reason + '\n';
+  }
+  var blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = '导入失败数据.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('失败数据已导出','success');
+}
+
+function exportFailedCodes() {
+  if (failedCodes.length === 0) return;
+  var csv = "行号,软件码,失败原因\n";
+  for (var i = 0; i < failedCodes.length; i++) {
+    csv += failedCodes[i].row + "," + failedCodes[i].code + "," + failedCodes[i].reason + "\n";
+  }
+  var blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = "导入失败数据.csv";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast("失败数据已导出","success");
+}
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type + ' show';
+  setTimeout(function(){ t.classList.remove('show'); }, 2500);
+}
+</script>
+
+</body>
+</html>
