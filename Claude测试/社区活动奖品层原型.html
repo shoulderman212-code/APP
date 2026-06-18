@@ -49,27 +49,23 @@ tailwind.config = {
       <div class="w-1 h-4 bg-primary rounded-full"></div>
       <span class="text-sm font-bold text-gray-900">权益中心</span>
     </div>
-    <a href="#" class="nav-item active flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="prize-config">
+    <a href="#prize-config" class="nav-item active flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="prize-config">
       <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
       权益管理
     </a>
-    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="product-manage">
+    <a href="#product-manage" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="product-manage">
       <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
       兑换商品管理
     </a>
-    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="order-all">
+    <a href="#order-all" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="order-all">
       <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
       积分订单管理
-    </a>
-    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="exception-handling">
-      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
-      异常处理
     </a>
   </nav>
 </aside>
 
 <!-- ========== MAIN CONTENT ========== -->
-<main class="flex-1 p-8 max-w-[1600px] mx-auto w-full space-y-8 overflow-y-auto">
+<main class="flex-1 p-8 max-w-[1600px] mx-auto w-full overflow-y-auto">
 
   <!-- ========== PAGE: 活动权益配置 ========== -->
   <div class="page active" id="page-prize-config">
@@ -162,14 +158,7 @@ tailwind.config = {
           </tr>
         </tbody>
       </table>
-      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
-        <span>共 3 条记录</span>
-        <div class="flex items-center gap-2">
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50 transition-colors">上一页</button>
-          <span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span>
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50 transition-colors">下一页</button>
-        </div>
-      </div>
+      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500"><div class="flex items-center gap-3"><span>共 3 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white" onchange="changePageSize(this)"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div><div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 1 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div></div>
     </div>
   </div>
 
@@ -233,7 +222,7 @@ tailwind.config = {
             <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td>
             <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">审核通过</span></td>
             <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">发放成功</span></td>
-            <td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 14:30</td>
+            <td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 14:30</td>
             <td class="px-6 py-4"><button onclick="showModal('modal-reward-detail')" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">详情</button></td>
           </tr>
           <tr class="hover:bg-gray-50/30 transition-colors">
@@ -244,7 +233,7 @@ tailwind.config = {
             <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td>
             <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">待审核</span></td>
             <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-500">待发放</span></td>
-            <td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 15:10</td>
+            <td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 15:10</td>
             <td class="px-6 py-4"><button onclick="showModal('modal-reward-detail')" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">详情</button></td>
           </tr>
           <tr class="hover:bg-gray-50/30 transition-colors bg-red-50/20">
@@ -255,20 +244,14 @@ tailwind.config = {
             <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td>
             <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">审核通过</span></td>
             <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">发放失败</span></td>
-            <td class="px-6 py-4 text-gray-500 text-xs">2026-06-14 09:45</td>
+            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">异常</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-14 09:45</td>
             <td class="px-6 py-4"><button onclick="showModal('modal-reward-detail')" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">详情</button></td>
           </tr>
         </tbody>
       </table>
       <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
-        <span>共 156 条记录</span>
-        <div class="flex items-center gap-2">
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button>
-          <span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span>
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">2</button>
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">3</button>
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button>
-        </div>
+        <div class="flex items-center gap-3"><span>共 5 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white" onchange="changePageSize(this)"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div>
+        <div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 1 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div>
       </div>
     </div>
   </div>
@@ -284,19 +267,19 @@ tailwind.config = {
     <div class="grid grid-cols-4 gap-4 mb-6">
       <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
         <div class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">待处理异常</div>
-        <div class="text-3xl font-bold text-red-500">23</div>
+        <div class="text-3xl font-bold text-red-500">3</div>
       </div>
       <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
         <div class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">自动重试中</div>
-        <div class="text-3xl font-bold text-blue-500">8</div>
+        <div class="text-3xl font-bold text-blue-500">1</div>
       </div>
       <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
         <div class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">今日已处理</div>
-        <div class="text-3xl font-bold text-green-500">15</div>
+        <div class="text-3xl font-bold text-green-500">0</div>
       </div>
       <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
         <div class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">累计重试成功</div>
-        <div class="text-3xl font-bold text-gray-900">342</div>
+        <div class="text-3xl font-bold text-gray-900">0</div>
       </div>
     </div>
 
@@ -324,7 +307,7 @@ tailwind.config = {
             <td class="px-6 py-4 text-gray-600 text-xs">库存占用</td>
             <td class="px-6 py-4 text-xs text-red-500">商城库存接口超时</td>
             <td class="px-6 py-4 text-gray-900 font-bold">3</td>
-            <td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 16:20</td>
+            <td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 16:20</td>
             <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">待人工处理</span></td>
             <td class="px-6 py-4">
               <div class="flex items-center gap-2">
@@ -340,7 +323,7 @@ tailwind.config = {
             <td class="px-6 py-4 text-gray-600 text-xs">发券</td>
             <td class="px-6 py-4 text-xs text-red-500">券模板已失效</td>
             <td class="px-6 py-4 text-gray-900 font-bold">1</td>
-            <td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 11:05</td>
+            <td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 11:05</td>
             <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">自动重试中</span></td>
             <td class="px-6 py-4">
               <button onclick="showModal('modal-reward-detail')" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">详情</button>
@@ -353,7 +336,7 @@ tailwind.config = {
             <td class="px-6 py-4 text-gray-600 text-xs">软件码分配</td>
             <td class="px-6 py-4 text-xs text-red-500">码池可用码不足</td>
             <td class="px-6 py-4 text-gray-900 font-bold">5</td>
-            <td class="px-6 py-4 text-gray-500 text-xs">2026-06-14 18:45</td>
+            <td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-14 18:45</td>
             <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">待人工处理</span></td>
             <td class="px-6 py-4">
               <div class="flex items-center gap-2">
@@ -365,12 +348,8 @@ tailwind.config = {
         </tbody>
       </table>
       <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
-        <span>共 23 条待处理异常</span>
-        <div class="flex items-center gap-2">
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button>
-          <span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span>
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button>
-        </div>
+        <div class="flex items-center gap-3"><span>共 0 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white" onchange="changePageSize(this)"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div>
+        <div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 1 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div>
       </div>
     </div>
   </div>
@@ -446,7 +425,7 @@ tailwind.config = {
       <h2 class="text-2xl font-bold text-gray-900">我的奖励</h2>
       <p class="text-sm text-gray-500 mt-1">查看在社区活动中获得的所有奖励</p>
     </div>
-    <div class="grid grid-cols-1 gap-4 max-w-2xl">
+    <div class="grid grid-cols-1 gap-4 ">
       <!-- 软件码奖励卡片 -->
       <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex items-start space-x-4">
         <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center shrink-0">
@@ -534,7 +513,7 @@ tailwind.config = {
 
   <!-- ========== PAGE: 软件码详情 (用户端) ========== -->
   <div class="page" id="page-user-code-detail">
-    <div class="max-w-lg">
+    <div class="">
       <button onclick="switchPage('user-rewards')" class="text-gray-500 hover:text-gray-700 font-bold text-sm transition-colors flex items-center mb-6">
         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
         返回我的奖励
@@ -564,7 +543,7 @@ tailwind.config = {
 
   <!-- ========== PAGE: 优惠券详情 (用户端) ========== -->
   <div class="page" id="page-user-coupon-detail">
-    <div class="max-w-lg">
+    <div class="">
       <button onclick="switchPage('user-rewards')" class="text-gray-500 hover:text-gray-700 font-bold text-sm transition-colors flex items-center mb-6">
         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
         返回我的奖励
@@ -602,7 +581,7 @@ tailwind.config = {
 
   <!-- ========== PAGE: 实物领取 (用户端) ========== -->
   <div class="page" id="page-user-physical-detail">
-    <div class="max-w-lg">
+    <div class="">
       <button onclick="switchPage('user-rewards')" class="text-gray-500 hover:text-gray-700 font-bold text-sm transition-colors flex items-center mb-6">
         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
         返回我的奖励
@@ -695,23 +674,17 @@ tailwind.config = {
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-50">
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0001-8F3A</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已使用</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-01 10:00</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 18:20</td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0002-2A7B</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">已发放</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-01 10:00</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0003-9C4D</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已使用</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-01 10:00</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-16 10:15</td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0200-5K8P</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-500">未发放</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-10 14:00</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0201-7M2Q</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">已发放</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-10 14:00</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0202-3R6L</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已使用</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-10 14:00</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-16 14:30</td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0001-8F3A</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已使用</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-01 10:00</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 18:20</td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0002-2A7B</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">已发放</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-01 10:00</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0003-9C4D</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已使用</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-01 10:00</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-16 10:15</td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0200-5K8P</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-500">未发放</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-10 14:00</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0201-7M2Q</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">已发放</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-10 14:00</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-gray-900 font-bold">SBK-2026-0202-3R6L</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已使用</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-10 14:00</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-16 14:30</td><td class="px-6 py-4"><button onclick="deleteCodeRow(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">删除</button></td></tr>
         </tbody>
       </table>
       <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
-        <span>共 2,340 条码记录</span>
-        <div class="flex items-center gap-2">
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button>
-          <span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span>
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">2</button>
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">3</button>
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button>
-        </div>
+        <div class="flex items-center gap-3"><span>共 0 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white" onchange="changePageSize(this)"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div>
+        <div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 1 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div>
       </div>
     </div>
   </div>
@@ -758,19 +731,30 @@ tailwind.config = {
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-50">
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">星巴克50元礼品卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">500 积分</td><td class="px-6 py-4 text-gray-900 font-bold">2,340</td><td class="px-6 py-4 text-gray-600">1,892</td><td class="px-6 py-4 text-gray-900 font-bold">448</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 10:30</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已上架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">满100减20优惠券</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td><td class="px-6 py-4 text-gray-900 font-bold">200 积分</td><td class="px-6 py-4 text-gray-900 font-bold">10,000</td><td class="px-6 py-4 text-gray-600">3,421</td><td class="px-6 py-4 text-gray-900 font-bold">6,579</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 11:15</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已上架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">社区定制保温杯</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">800 积分</td><td class="px-6 py-4 text-gray-900 font-bold">800</td><td class="px-6 py-4 text-gray-600">256</td><td class="px-6 py-4 text-gray-900 font-bold">544</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-17 16:45</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已上架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">视频会员月卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">300 积分</td><td class="px-6 py-4 text-gray-900 font-bold">5,000</td><td class="px-6 py-4 text-gray-600">2,100</td><td class="px-6 py-4 text-gray-900 font-bold">2,900</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-17 14:20</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已上架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">品牌蓝牙耳机</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">1,500 积分</td><td class="px-6 py-4 text-gray-900 font-bold">350</td><td class="px-6 py-4 text-gray-600">128</td><td class="px-6 py-4 text-gray-900 font-bold">222</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-16 09:00</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-400">已下架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-green-500 hover:text-green-600 font-bold text-xs">上架</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">星巴克50元礼品卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">500 积分</td><td class="px-6 py-4 text-gray-900 font-bold">2,340</td><td class="px-6 py-4 text-gray-600">1,892</td><td class="px-6 py-4 text-gray-900 font-bold">448</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 10:30</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已上架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">满100减20优惠券</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td><td class="px-6 py-4 text-gray-900 font-bold">200 积分</td><td class="px-6 py-4 text-gray-900 font-bold">10,000</td><td class="px-6 py-4 text-gray-600">3,421</td><td class="px-6 py-4 text-gray-900 font-bold">6,579</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 11:15</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已上架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">社区定制保温杯</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">800 积分</td><td class="px-6 py-4 text-gray-900 font-bold">800</td><td class="px-6 py-4 text-gray-600">256</td><td class="px-6 py-4 text-gray-900 font-bold">544</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-17 16:45</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已上架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">视频会员月卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">300 积分</td><td class="px-6 py-4 text-gray-900 font-bold">5,000</td><td class="px-6 py-4 text-gray-600">2,100</td><td class="px-6 py-4 text-gray-900 font-bold">2,900</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-17 14:20</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已上架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">品牌蓝牙耳机</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">1,500 积分</td><td class="px-6 py-4 text-gray-900 font-bold">350</td><td class="px-6 py-4 text-gray-600">128</td><td class="px-6 py-4 text-gray-900 font-bold">222</td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-16 09:00</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-400">已下架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-green-500 hover:text-green-600 font-bold text-xs">上架</button></div></td></tr>
         </tbody>
       </table>
       <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
-        <span>共 5 条记录</span>
+        <div class="flex items-center gap-3">
+          <span>共 5 条记录</span>
+          <select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white" onchange="changePageSize(this)">
+            <option value="50">50 条/页</option>
+            <option value="100">100 条/页</option>
+            <option value="200">200 条/页</option>
+          </select>
+        </div>
         <div class="flex items-center gap-2">
           <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button>
           <span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span>
           <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button>
+          <span class="text-xs text-gray-400">共 1 页</span>
+          <span class="text-xs text-gray-400">跳至</span>
+          <input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center">
+          <span class="text-xs text-gray-400">页</span>
         </div>
       </div>
     </div>
@@ -782,106 +766,37 @@ tailwind.config = {
       <h2 class="text-2xl font-bold text-gray-900">积分兑换订单</h2>
       <p class="text-sm text-gray-500 mt-1">全部积分兑换订单记录</p>
     </div>
-    <div class="flex items-center gap-2 mb-6">
-      <button onclick="switchOrderTab('all')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-primary text-white shadow-sm transition-colors">全部订单</button>
-      <button onclick="switchOrderTab('virtual')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors">虚拟订单</button>
-      <button onclick="switchOrderTab('physical')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors">实物订单</button>
-    </div>
     <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
-      <div class="flex items-center gap-4 flex-wrap">
-        <input type="text" placeholder="订单编号 / 用户ID" class="border border-gray-200 rounded-xl px-4 py-2 text-sm flex-1 min-w-[200px]">
-        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
-          <option>全部类型</option><option>软件码</option><option>优惠券</option><option>会员权益</option><option>实物商品</option>
-        </select>
-        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
-          <option>全部状态</option><option>待发货</option><option>已发货</option><option>已完成</option><option>已取消</option>
-        </select>
-        <input type="date" class="border border-gray-200 rounded-xl px-4 py-2 text-sm">
-        <button class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm">
-          <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-          查询
-        </button>
+      <div class="grid grid-cols-3 gap-4">
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">订单编号 / 用户ID</label><input type="text" placeholder="请输入" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm"></div>
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">商品名称</label><input type="text" placeholder="请输入" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm"></div>
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">商品类型</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部类型</option><option>软件码</option><option>优惠券</option><option>实物商品</option></select></div>
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">订单状态</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部订单状态</option><option>处理中</option><option>已完成</option><option>失败</option></select></div>
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">发放状态</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部发放状态</option><option>待处理</option><option>发放中</option><option>待填写地址</option><option>待发货</option><option>已发货</option><option>已完成</option><option>发放失败</option></select></div>
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">兑换时间</label><input type="date" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm"></div>
+      </div>
+      <div class="flex justify-end mt-4">
+        <button onclick="filterOrderList()" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm"><svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>查询</button>
       </div>
     </div>
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="bg-gray-50/50 text-left">
-            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">订单编号</th>
-            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">用户</th>
-            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商品名称</th>
-            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">类型</th>
-            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">消耗积分</th>
-            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">兑换时间</th>
-            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">状态</th>
-            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-50">
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618001</td><td class="px-6 py-4 text-gray-600 text-xs">user_123456</td><td class="px-6 py-4 font-bold text-gray-900">星巴克50元礼品卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">500</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 10:30</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618002</td><td class="px-6 py-4 text-gray-600 text-xs">user_234567</td><td class="px-6 py-4 font-bold text-gray-900">满100减20优惠券</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td><td class="px-6 py-4 text-gray-900 font-bold">200</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 11:15</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618003</td><td class="px-6 py-4 text-gray-600 text-xs">user_345678</td><td class="px-6 py-4 font-bold text-gray-900">社区定制保温杯</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">800</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 09:45</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">待发货</span></td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button></td></tr>
-        </tbody>
-      </table>
+      <table class="w-full text-sm"><thead><tr class="bg-gray-50/50 text-left">
+        <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">订单编号</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">用户</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商品名称</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商品类型</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">消耗积分</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">订单状态</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">发放状态</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">异常原因</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">兑换时间</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
+      </tr></thead><tbody class="divide-y divide-gray-50">
+        <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618001</td><td class="px-6 py-4 text-gray-600 text-xs">user_123456</td><td class="px-6 py-4 font-bold text-gray-900">星巴克50元礼品卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">500</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 10:30</td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button></td></tr><tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618002</td><td class="px-6 py-4 text-gray-600 text-xs">user_234567</td><td class="px-6 py-4 font-bold text-gray-900">满100减20优惠券</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td><td class="px-6 py-4 text-gray-900 font-bold">200</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">处理中</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">发放中</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 11:15</td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button></td></tr><tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618003</td><td class="px-6 py-4 text-gray-600 text-xs">user_345678</td><td class="px-6 py-4 font-bold text-gray-900">社区定制保温杯</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">800</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">处理中</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">待填写地址</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 09:45</td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button></td></tr><tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618004</td><td class="px-6 py-4 text-gray-600 text-xs">user_456789</td><td class="px-6 py-4 font-bold text-gray-900">品牌蓝牙耳机</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">1500</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-17 14:20</td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button></td></tr><tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618005</td><td class="px-6 py-4 text-gray-600 text-xs">user_567890</td><td class="px-6 py-4 font-bold text-gray-900">视频会员月卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">300</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">失败</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">发放失败</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">异常</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-17 10:00</td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button></td></tr>
+        <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618006</td><td class="px-6 py-4 text-gray-600 text-xs">user_678901</td><td class="px-6 py-4 font-bold text-gray-900">音乐会员季卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">600</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">处理中</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-500">待处理</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 08:00</td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button></td></tr>
+        <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618007</td><td class="px-6 py-4 text-gray-600 text-xs">user_789012</td><td class="px-6 py-4 font-bold text-gray-900">精美书籍套装</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">1000</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">已发货</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-16 15:30</td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button></td></tr>
+        <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618008</td><td class="px-6 py-4 text-gray-600 text-xs">user_890123</td><td class="px-6 py-4 font-bold text-gray-900">满50减10优惠券</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td><td class="px-6 py-4 text-gray-900 font-bold">150</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">失败</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">异常</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-15 12:00</td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button></td></tr>
+        <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618009</td><td class="px-6 py-4 text-gray-600 text-xs">user_901234</td><td class="px-6 py-4 font-bold text-gray-900">社区定制保温杯</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">800</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">处理中</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">待发货</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-17 09:30</td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button></td></tr>
+        <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618010</td><td class="px-6 py-4 text-gray-600 text-xs">user_012345</td><td class="px-6 py-4 font-bold text-gray-900">满100减20优惠券</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td><td class="px-6 py-4 text-gray-900 font-bold">200</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">失败</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">异常</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-14 16:00</td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button></td></tr>
+        <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618011</td><td class="px-6 py-4 text-gray-600 text-xs">user_111222</td><td class="px-6 py-4 font-bold text-gray-900">精美书籍套装</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">1000</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><span class="text-gray-300 text-xs">—</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-13 11:00</td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button></td></tr>
+        <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618012</td><td class="px-6 py-4 text-gray-600 text-xs">user_222333</td><td class="px-6 py-4 font-bold text-gray-900">星巴克50元礼品卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">500</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">失败</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">异常</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-12 10:30</td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button></td></tr>
+        <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618013</td><td class="px-6 py-4 text-gray-600 text-xs">user_333444</td><td class="px-6 py-4 font-bold text-gray-900">品牌蓝牙耳机</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">1500</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">失败</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">发放失败</span></td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-red-50 text-red-500">异常</span></td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-11 14:00</td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal('modal-order-handle')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button></td></tr>
+      </tbody></table>
       <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
-        <span>共 156 条记录</span>
-        <div class="flex items-center gap-2">
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button>
-          <span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span>
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">2</button>
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">3</button>
-          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button>
-        </div>
+        <div class="flex items-center gap-3"><span>共 13 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white" onchange="changePageSize(this)"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div>
+        <div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 1 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div>
       </div>
-    </div>
-  </div>
-
-  <div class="page" id="page-order-virtual">
-    <div class="mb-6">
-      <h2 class="text-2xl font-bold text-gray-900">积分兑换订单 - 虚拟订单</h2>
-      <p class="text-sm text-gray-500 mt-1">软件码、优惠券等虚拟商品订单</p>
-    </div>
-    <div class="flex items-center gap-2 mb-6">
-      <button onclick="switchOrderTab('all')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors">全部订单</button>
-      <button onclick="switchOrderTab('virtual')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-primary text-white shadow-sm transition-colors">虚拟订单</button>
-      <button onclick="switchOrderTab('physical')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors">实物订单</button>
-    </div>
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="bg-gray-50/50 text-left">
-            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">订单编号</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">用户</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商品名称</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">类型</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">消耗积分</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">兑换时间</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">状态</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-50">
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618001</td><td class="px-6 py-4 text-gray-600 text-xs">user_123456</td><td class="px-6 py-4 font-bold text-gray-900">星巴克50元礼品卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">500</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 10:30</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618002</td><td class="px-6 py-4 text-gray-600 text-xs">user_234567</td><td class="px-6 py-4 font-bold text-gray-900">满100减20优惠券</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td><td class="px-6 py-4 text-gray-900 font-bold">200</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 11:15</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="page" id="page-order-physical">
-    <div class="mb-6">
-      <h2 class="text-2xl font-bold text-gray-900">积分兑换订单 - 实物订单</h2>
-      <p class="text-sm text-gray-500 mt-1">实物商品订单，含收货与发货状态</p>
-    </div>
-    <div class="flex items-center gap-2 mb-6">
-      <button onclick="switchOrderTab('all')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors">全部订单</button>
-      <button onclick="switchOrderTab('virtual')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors">虚拟订单</button>
-      <button onclick="switchOrderTab('physical')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-primary text-white shadow-sm transition-colors">实物订单</button>
-    </div>
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="bg-gray-50/50 text-left">
-            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">订单编号</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">用户</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商品名称</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">收货人</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">消耗积分</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">兑换时间</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">状态</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-50">
-          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618003</td><td class="px-6 py-4 text-gray-600 text-xs">user_345678</td><td class="px-6 py-4 font-bold text-gray-900">社区定制保温杯</td><td class="px-6 py-4 text-gray-600 text-xs">张小明 138****8888</td><td class="px-6 py-4 text-gray-900 font-bold">800</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 09:45</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">待发货</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button class="text-green-500 hover:text-green-600 font-bold text-xs">标记发货</button></div></td></tr>
-        </tbody>
-      </table>
     </div>
   </div>
 
@@ -894,7 +809,7 @@ tailwind.config = {
         返回兑换商品管理
       </button>
     </div>
-    <div class="max-w-2xl mx-auto">
+    <div>
       <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
         <h2 class="text-lg font-bold text-gray-900 mb-5" id="product-form-title">新增商品</h2>
         <!-- 基础信息 -->
@@ -971,39 +886,37 @@ tailwind.config = {
         返回兑换商品管理
       </button>
     </div>
-    <div class="max-w-2xl mx-auto">
-      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-        <h2 class="text-lg font-bold text-gray-900 mb-5">商品详情</h2>
-        <!-- 基础信息 -->
-        <div class="mb-5">
-          <div class="flex items-center gap-2 mb-3">
-            <div class="w-1 h-4 bg-primary rounded-full"></div>
-            <h4 class="text-sm font-bold text-gray-900">基础信息</h4>
-          </div>
-          <div class="space-y-3">
-            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">商品名称</span><span class="text-sm font-bold text-gray-900" id="detail-name">—</span></div>
-            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">商品类型</span><span id="detail-type">—</span></div>
-            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">关联权益</span><span class="text-sm font-bold text-gray-900" id="detail-link">—</span></div>
-            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">商品说明</span><span class="text-sm text-gray-600" id="detail-desc">—</span></div>
-          </div>
+    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+      <h2 class="text-lg font-bold text-gray-900 mb-5">商品详情</h2>
+      <!-- 基础信息 -->
+      <div class="mb-5">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-1 h-4 bg-primary rounded-full"></div>
+          <h4 class="text-sm font-bold text-gray-900">基础信息</h4>
         </div>
-        <!-- 兑换规则 -->
-        <div class="mb-5">
-          <div class="flex items-center gap-2 mb-3">
-            <div class="w-1 h-4 bg-primary rounded-full"></div>
-            <h4 class="text-sm font-bold text-gray-900">兑换规则</h4>
-          </div>
-          <div class="space-y-3">
-            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">积分价格</span><span class="text-sm font-bold text-gray-900" id="detail-price">—</span></div>
-            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">总库存</span><span class="text-sm font-bold text-gray-900" id="detail-stock">—</span></div>
-            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">剩余数量</span><span class="text-sm font-bold text-gray-900" id="detail-remain">—</span></div>
-            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">已兑换数量</span><span class="text-sm text-gray-600" id="detail-exchanged">—</span></div>
-            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">每人兑换限制</span><span class="text-sm text-gray-600" id="detail-limit">—</span></div>
-            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">上架状态</span><span id="detail-status">—</span></div>
-            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">上架时间</span><span class="text-sm text-gray-600" id="detail-online">—</span></div>
-            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">下架时间</span><span class="text-sm text-gray-600" id="detail-offline">—</span></div>
-            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">更新时间</span><span class="text-sm text-gray-600" id="detail-updated">—</span></div>
-          </div>
+        <div class="space-y-3">
+          <div><span class="text-xs text-gray-400">商品名称</span><div class="text-sm font-bold text-gray-900 mt-0.5" id="detail-name">—</div></div>
+          <div><span class="text-xs text-gray-400">商品类型</span><div class="mt-0.5" id="detail-type">—</div></div>
+          <div><span class="text-xs text-gray-400">关联权益</span><div class="text-sm font-bold text-gray-900 mt-0.5" id="detail-link">—</div></div>
+          <div><span class="text-xs text-gray-400">商品说明</span><div class="text-sm text-gray-600 mt-0.5" id="detail-desc">—</div></div>
+        </div>
+      </div>
+      <!-- 兑换规则 -->
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-1 h-4 bg-primary rounded-full"></div>
+          <h4 class="text-sm font-bold text-gray-900">兑换规则</h4>
+        </div>
+        <div class="space-y-3">
+          <div><span class="text-xs text-gray-400">积分价格</span><div class="text-sm font-bold text-gray-900 mt-0.5" id="detail-price">—</div></div>
+          <div><span class="text-xs text-gray-400">总库存</span><div class="text-sm font-bold text-gray-900 mt-0.5" id="detail-stock">—</div></div>
+          <div><span class="text-xs text-gray-400">剩余数量</span><div class="text-sm font-bold text-gray-900 mt-0.5" id="detail-remain">—</div></div>
+          <div><span class="text-xs text-gray-400">已兑换数量</span><div class="text-sm text-gray-600 mt-0.5" id="detail-exchanged">—</div></div>
+          <div><span class="text-xs text-gray-400">每人兑换限制</span><div class="text-sm text-gray-600 mt-0.5" id="detail-limit">—</div></div>
+          <div><span class="text-xs text-gray-400">上架状态</span><div class="mt-0.5" id="detail-status">—</div></div>
+          <div><span class="text-xs text-gray-400">上架时间</span><div class="text-sm text-gray-600 mt-0.5" id="detail-online">—</div></div>
+          <div><span class="text-xs text-gray-400">下架时间</span><div class="text-sm text-gray-600 mt-0.5" id="detail-offline">—</div></div>
+          <div><span class="text-xs text-gray-400">更新时间</span><div class="text-sm text-gray-600 mt-0.5" id="detail-updated">—</div></div>
         </div>
       </div>
     </div>
@@ -1233,7 +1146,7 @@ tailwind.config = {
 
 <!-- ========== MODAL: 奖励详情 ========== -->
 <div class="modal-overlay" id="modal-reward-detail" onclick="if(event.target===this)hideModal('modal-reward-detail')">
-  <div class="bg-white rounded-2xl w-full max-w-lg p-6 shadow-xl relative max-h-[85vh] overflow-y-auto">
+  <div class="bg-white rounded-2xl w-full  p-6 shadow-xl relative max-h-[85vh] overflow-y-auto">
     <div class="flex items-center justify-between mb-5">
       <h3 class="text-lg font-bold text-gray-900">奖励详情</h3>
       <button onclick="hideModal('modal-reward-detail')" class="text-gray-400 hover:text-gray-600">
@@ -1364,7 +1277,7 @@ tailwind.config = {
 
 <!-- ========== MODAL: 发放详情 ========== -->
 <div class="modal-overlay" id="modal-distribution-detail" onclick="if(event.target===this)hideModal('modal-distribution-detail')">
-  <div class="bg-white rounded-2xl w-full max-w-2xl p-6 shadow-xl relative max-h-[80vh] overflow-y-auto">
+  <div class="bg-white rounded-2xl w-full  p-6 shadow-xl relative max-h-[80vh] overflow-y-auto">
     <div class="flex items-center justify-between mb-5">
       <div>
         <h3 class="text-lg font-bold text-gray-900">发放详情</h3>
@@ -1541,13 +1454,41 @@ tailwind.config = {
 </div>
 
 
+
+<!-- ========== MODAL: 订单处理 ========== -->
+<div class="modal-overlay" id="modal-order-handle" onclick="if(event.target===this)hideModal('modal-order-handle')">
+  <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-xl relative">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="text-lg font-bold text-gray-900">订单处理</h3>
+      <button onclick="hideModal('modal-order-handle')" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="text-sm text-gray-600 mb-4 space-y-2">
+      <div class="flex justify-between"><span class="text-gray-400">订单编号</span><span class="font-bold">#EX20260618005</span></div>
+      <div class="flex justify-between"><span class="text-gray-400">商品</span><span class="font-bold">视频会员月卡</span></div>
+      <div class="flex justify-between"><span class="text-gray-400">订单状态</span><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-red-50 text-red-500">失败</span></div>
+      <div class="flex justify-between"><span class="text-gray-400">发放状态</span><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-red-50 text-red-500">发放失败</span></div>
+      <div class="flex justify-between"><span class="text-gray-400">异常原因</span><span class="font-bold text-red-500">码池可用码不足</span></div>
+    </div>
+    <div class="border-t border-gray-100 pt-4 space-y-2">
+      <p class="text-xs text-gray-400 font-bold mb-2">可执行操作</p>
+      <button onclick="hideModal('modal-order-handle'); showToast('重试已触发','success')" class="w-full bg-primary text-white px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors">自动重试</button>
+      <button onclick="hideModal('modal-order-handle'); showToast('人工补发已提交','success')" class="w-full bg-white text-red-500 border border-red-200 px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-red-50 transition-colors">人工补发</button>
+      <button onclick="hideModal('modal-order-handle'); showToast('已标记为已处理','success')" class="w-full bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors">标记已处理</button>
+    </div>
+  </div>
+</div>
+
 <!-- ========== TOAST ========== -->
 <div class="toast" id="toast"></div>
 
 <script>
 function switchPage(pageId) {
+  var target = document.getElementById('page-' + pageId);
+  if (!target) return;
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + pageId).classList.add('active');
+  target.classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   var navItem = document.querySelector('[data-page="' + pageId + '"]');
   if (navItem) navItem.classList.add('active');
@@ -1556,9 +1497,22 @@ function switchPage(pageId) {
 document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('click', function(e) {
     e.preventDefault();
-    switchPage(this.dataset.page);
+    var pageId = this.dataset.page;
+    if (pageId) {
+      history.replaceState(null, '', '#' + pageId);
+      switchPage(pageId);
+    }
   });
 });
+
+window.addEventListener('hashchange', function() {
+  var pageId = location.hash.replace('#', '');
+  if (pageId) switchPage(pageId);
+});
+
+if (location.hash) {
+  switchPage(location.hash.replace('#', ''));
+}
 
 function showModal(id) { document.getElementById(id).classList.add('show'); }
 
@@ -2179,7 +2133,7 @@ function saveProductForm() {
     '<td class="px-6 py-4 text-gray-900 font-bold">' + stock + '</td>' +
     '<td class="px-6 py-4 text-gray-500 text-xs">' + new Date().toLocaleString('zh-CN') + '</td>' +
     '<td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider ' + statusBadge + '">' + statusText + '</span></td>' +
-    '<td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button>' + toggleBtn + '</div></td>';
+    '<td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="showModal(\'modal-order-handle\')" class="text-primary hover:text-blue-700 font-bold text-xs">处理</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button>' + toggleBtn + '</div></td>';
   tbody.appendChild(tr);
 
   switchPage('product-manage');
@@ -2270,9 +2224,36 @@ function clearLinkSelection() {
   document.getElementById('link-selected').classList.add('hidden');
 }
 
-function switchOrderTab(type) {
-  var pages = { 'all': 'order-all', 'virtual': 'order-virtual', 'physical': 'order-physical' };
-  switchPage(pages[type]);
+function filterOrderList() {
+  var page = document.getElementById('page-order-all');
+  var selects = page.querySelectorAll('.grid select');
+  var typeVal = selects[0].value;
+  var orderStatusVal = selects[1].value;
+  var distStatusVal = selects[2].value;
+  var rows = page.querySelectorAll('tbody tr');
+  var visible = 0;
+  rows.forEach(function(tr) {
+    var cells = tr.querySelectorAll('td');
+    var type = cells[3].textContent.trim();
+    var orderStatus = cells[5].textContent.trim();
+    var distStatus = cells[6].textContent.trim();
+    var match = true;
+    if (typeVal !== '全部类型' && type !== typeVal) match = false;
+    if (orderStatusVal !== '全部订单状态' && orderStatus !== orderStatusVal) match = false;
+    if (distStatusVal !== '全部发放状态' && distStatus !== distStatusVal) match = false;
+    tr.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+}
+
+function changePageSize(sel) {
+  var size = parseInt(sel.value) || 50;
+  var page = sel.closest('.page');
+  if (!page) page = document;
+  var tbody = page.querySelector('tbody');
+  if (!tbody) return;
+  var rows = tbody.querySelectorAll('tr');
+  rows.forEach(function(tr, i) { tr.style.display = i < size ? '' : 'none'; });
 }
 
 function showToast(msg, type) {
