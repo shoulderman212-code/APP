@@ -33,6 +33,7 @@ tailwind.config = {
   .toast.error { background: #fff2f0; border: 1px solid #ffccc7; color: #ff4d4f; }
   input, select, textarea { outline: none; }
   input:focus, select:focus, textarea:focus { border-color: #1677ff; box-shadow: 0 0 0 2px rgba(22,119,255,0.1); }
+  select:disabled, input:disabled { background: #f5f5f5; color: #9ca3af; cursor: not-allowed; border-color: #e5e7eb; }
 </style>
 </head>
 <body class="bg-bg-main min-h-screen flex">
@@ -40,43 +41,29 @@ tailwind.config = {
 <!-- ========== SIDEBAR ========== -->
 <aside class="w-60 bg-white border-r border-gray-100 flex flex-col shrink-0 h-screen sticky top-0">
   <div class="px-5 py-6 border-b border-gray-100">
-    <h1 class="text-lg font-bold text-gray-900">社区活动权益层</h1>
+    <h1 class="text-lg font-bold text-gray-900">积分商城</h1>
     <p class="text-xs text-gray-400 mt-1">V1.0 原型</p>
   </div>
   <nav class="flex-1 overflow-y-auto py-3 space-y-0.5 px-2">
-    <div class="px-3 py-2.5 text-sm font-bold text-gray-700">权益中心</div>
+    <div class="flex items-center gap-2 px-3 py-2.5 mb-1">
+      <div class="w-1 h-4 bg-primary rounded-full"></div>
+      <span class="text-sm font-bold text-gray-900">权益中心</span>
+    </div>
     <a href="#" class="nav-item active flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="prize-config">
       <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
       权益管理
     </a>
-    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="reward-records">
+    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="product-manage">
+      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+      兑换商品管理
+    </a>
+    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="order-all">
       <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
-      发放记录
+      积分订单管理
     </a>
     <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="exception-handling">
       <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
       异常处理
-    </a>
-    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="physical-fulfillment">
-      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
-      实物履约管理
-    </a>
-    <div class="px-3 py-2.5 text-sm font-bold text-gray-700 mt-4">用户端</div>
-    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="user-rewards">
-      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-      我的奖励
-    </a>
-    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="user-code-detail">
-      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-      软件码详情
-    </a>
-    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="user-coupon-detail">
-      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
-      优惠券详情
-    </a>
-    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="user-physical-detail">
-      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-      实物领取
     </a>
   </nav>
 </aside>
@@ -729,6 +716,299 @@ tailwind.config = {
     </div>
   </div>
 
+
+  <!-- ========== PAGE: 兑换商品管理 ========== -->
+  <div class="page" id="page-product-manage">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">兑换商品管理</h2>
+      <p class="text-sm text-gray-500 mt-1">管理积分商城可兑换的商品</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
+      <div class="flex items-center gap-4 flex-wrap">
+        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
+          <option>全部类型</option><option>软件码</option><option>优惠券</option><option>会员权益</option><option>实物商品</option>
+        </select>
+        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
+          <option>全部状态</option><option>已上架</option><option>已下架</option>
+        </select>
+        <input type="text" placeholder="搜索商品名称..." class="border border-gray-200 rounded-xl px-4 py-2 text-sm flex-1 min-w-[200px]">
+        <button class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm">
+          <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          查询
+        </button>
+      </div>
+    </div>
+    <button onclick="currentProductType='';document.getElementById('product-type-display').innerHTML='选择关联权益后自动确定';document.getElementById('product-form-title').textContent='新增商品';document.getElementById('product-name').value='';document.getElementById('product-price').value='';document.getElementById('product-stock').value='';setLinkEditable(true);clearLinkSelection();switchProductType('');switchPage('product-form')" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm mb-4">
+      <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+      新增商品
+    </button>
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50/50 text-left">
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商品名称</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商品类型</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">积分价格</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">总库存</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">已兑换数量</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">剩余数量</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">更新时间</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商品状态</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">星巴克50元礼品卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">500 积分</td><td class="px-6 py-4 text-gray-900 font-bold">2,340</td><td class="px-6 py-4 text-gray-600">1,892</td><td class="px-6 py-4 text-gray-900 font-bold">448</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 10:30</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已上架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">满100减20优惠券</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td><td class="px-6 py-4 text-gray-900 font-bold">200 积分</td><td class="px-6 py-4 text-gray-900 font-bold">10,000</td><td class="px-6 py-4 text-gray-600">3,421</td><td class="px-6 py-4 text-gray-900 font-bold">6,579</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 11:15</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已上架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">社区定制保温杯</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">800 积分</td><td class="px-6 py-4 text-gray-900 font-bold">800</td><td class="px-6 py-4 text-gray-600">256</td><td class="px-6 py-4 text-gray-900 font-bold">544</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-17 16:45</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已上架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">视频会员月卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">300 积分</td><td class="px-6 py-4 text-gray-900 font-bold">5,000</td><td class="px-6 py-4 text-gray-600">2,100</td><td class="px-6 py-4 text-gray-900 font-bold">2,900</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-17 14:20</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已上架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-bold text-gray-900">品牌蓝牙耳机</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">1,500 积分</td><td class="px-6 py-4 text-gray-900 font-bold">350</td><td class="px-6 py-4 text-gray-600">128</td><td class="px-6 py-4 text-gray-900 font-bold">222</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-16 09:00</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-400">已下架</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleProductStatus(this)" class="text-green-500 hover:text-green-600 font-bold text-xs">上架</button></div></td></tr>
+        </tbody>
+      </table>
+      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
+        <span>共 5 条记录</span>
+        <div class="flex items-center gap-2">
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button>
+          <span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span>
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: 积分兑换订单 ========== -->
+  <div class="page" id="page-order-all">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">积分兑换订单</h2>
+      <p class="text-sm text-gray-500 mt-1">全部积分兑换订单记录</p>
+    </div>
+    <div class="flex items-center gap-2 mb-6">
+      <button onclick="switchOrderTab('all')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-primary text-white shadow-sm transition-colors">全部订单</button>
+      <button onclick="switchOrderTab('virtual')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors">虚拟订单</button>
+      <button onclick="switchOrderTab('physical')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors">实物订单</button>
+    </div>
+    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
+      <div class="flex items-center gap-4 flex-wrap">
+        <input type="text" placeholder="订单编号 / 用户ID" class="border border-gray-200 rounded-xl px-4 py-2 text-sm flex-1 min-w-[200px]">
+        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
+          <option>全部类型</option><option>软件码</option><option>优惠券</option><option>会员权益</option><option>实物商品</option>
+        </select>
+        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
+          <option>全部状态</option><option>待发货</option><option>已发货</option><option>已完成</option><option>已取消</option>
+        </select>
+        <input type="date" class="border border-gray-200 rounded-xl px-4 py-2 text-sm">
+        <button class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm">
+          <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          查询
+        </button>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50/50 text-left">
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">订单编号</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">用户</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商品名称</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">类型</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">消耗积分</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">兑换时间</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">状态</th>
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618001</td><td class="px-6 py-4 text-gray-600 text-xs">user_123456</td><td class="px-6 py-4 font-bold text-gray-900">星巴克50元礼品卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">500</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 10:30</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618002</td><td class="px-6 py-4 text-gray-600 text-xs">user_234567</td><td class="px-6 py-4 font-bold text-gray-900">满100减20优惠券</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td><td class="px-6 py-4 text-gray-900 font-bold">200</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 11:15</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618003</td><td class="px-6 py-4 text-gray-600 text-xs">user_345678</td><td class="px-6 py-4 font-bold text-gray-900">社区定制保温杯</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td><td class="px-6 py-4 text-gray-900 font-bold">800</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 09:45</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">待发货</span></td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button></td></tr>
+        </tbody>
+      </table>
+      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
+        <span>共 156 条记录</span>
+        <div class="flex items-center gap-2">
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button>
+          <span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span>
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">2</button>
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">3</button>
+          <button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-order-virtual">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">积分兑换订单 - 虚拟订单</h2>
+      <p class="text-sm text-gray-500 mt-1">软件码、优惠券等虚拟商品订单</p>
+    </div>
+    <div class="flex items-center gap-2 mb-6">
+      <button onclick="switchOrderTab('all')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors">全部订单</button>
+      <button onclick="switchOrderTab('virtual')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-primary text-white shadow-sm transition-colors">虚拟订单</button>
+      <button onclick="switchOrderTab('physical')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors">实物订单</button>
+    </div>
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50/50 text-left">
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">订单编号</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">用户</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商品名称</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">类型</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">消耗积分</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">兑换时间</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">状态</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618001</td><td class="px-6 py-4 text-gray-600 text-xs">user_123456</td><td class="px-6 py-4 font-bold text-gray-900">星巴克50元礼品卡</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-purple-50 text-purple-500">软件码</span></td><td class="px-6 py-4 text-gray-900 font-bold">500</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 10:30</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618002</td><td class="px-6 py-4 text-gray-600 text-xs">user_234567</td><td class="px-6 py-4 font-bold text-gray-900">满100减20优惠券</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">优惠券</span></td><td class="px-6 py-4 text-gray-900 font-bold">200</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 11:15</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500">已完成</span></td><td class="px-6 py-4"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="page" id="page-order-physical">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">积分兑换订单 - 实物订单</h2>
+      <p class="text-sm text-gray-500 mt-1">实物商品订单，含收货与发货状态</p>
+    </div>
+    <div class="flex items-center gap-2 mb-6">
+      <button onclick="switchOrderTab('all')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors">全部订单</button>
+      <button onclick="switchOrderTab('virtual')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors">虚拟订单</button>
+      <button onclick="switchOrderTab('physical')" class="order-tab px-4 py-2 rounded-xl text-sm font-bold bg-primary text-white shadow-sm transition-colors">实物订单</button>
+    </div>
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50/50 text-left">
+            <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">订单编号</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">用户</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商品名称</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">收货人</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">消耗积分</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">兑换时间</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">状态</th><th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          <tr class="hover:bg-gray-50/30"><td class="px-6 py-4 font-mono text-xs text-primary font-bold">#EX20260618003</td><td class="px-6 py-4 text-gray-600 text-xs">user_345678</td><td class="px-6 py-4 font-bold text-gray-900">社区定制保温杯</td><td class="px-6 py-4 text-gray-600 text-xs">张小明 138****8888</td><td class="px-6 py-4 text-gray-900 font-bold">800</td><td class="px-6 py-4 text-gray-500 text-xs">2026-06-18 09:45</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-blue-50 text-blue-500">待发货</span></td><td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button class="text-green-500 hover:text-green-600 font-bold text-xs">标记发货</button></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- ========== PAGE: 新增/编辑兑换商品 ========== -->
+  <div class="page" id="page-product-form">
+    <div class="flex items-center gap-3 mb-6">
+      <button onclick="switchPage('product-manage')" class="text-gray-500 hover:text-gray-700 font-bold text-sm flex items-center transition-colors">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        返回兑换商品管理
+      </button>
+    </div>
+    <div class="max-w-2xl mx-auto">
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-lg font-bold text-gray-900 mb-5" id="product-form-title">新增商品</h2>
+        <!-- 基础信息 -->
+        <div class="mb-5">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-1 h-4 bg-primary rounded-full"></div>
+            <h4 class="text-sm font-bold text-gray-900">基础信息</h4>
+          </div>
+          <div class="space-y-3">
+            <div>
+              <label class="text-xs text-gray-500 font-bold mb-1 block">商品名称 <span class="text-red-500">*</span></label>
+              <input type="text" id="product-name" placeholder="请输入商品名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+            </div>
+            <div id="section-link-rule">
+              <label class="text-xs text-gray-500 font-bold mb-1 block">关联权益 <span class="text-red-500">*</span></label>
+              <div id="link-input-area" class="relative">
+                <input type="text" id="link-rule-search" placeholder="输入权益名称搜索，或从下拉列表中选择" oninput="filterLinkOptions(this.value)" onfocus="document.getElementById('link-dropdown').classList.remove('hidden')" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+                <div id="link-dropdown" class="hidden absolute z-10 w-full mt-1 bg-white border border-gray-100 rounded-xl shadow-lg max-h-48 overflow-y-auto"></div>
+              </div>
+              <div id="link-selected" class="hidden mt-2 bg-green-50 rounded-lg p-3 border border-green-100 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <span class="text-sm font-bold text-gray-900" id="link-selected-name"></span>
+                </div>
+                <button onclick="clearLinkSelection()" class="text-gray-400 hover:text-red-500 text-xs font-bold">取消关联</button>
+              </div>
+            </div>
+            <div>
+              <label class="text-xs text-gray-500 font-bold mb-1 block">商品类型</label>
+              <div id="product-type-display" class="bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm text-gray-400">选择关联权益后自动确定</div>
+            </div>
+            <div>
+              <label class="text-xs text-gray-500 font-bold mb-1 block">商品图片</label>
+              <div class="border-2 border-dashed border-gray-200 rounded-xl p-4 text-center hover:border-primary transition-colors cursor-pointer bg-gray-50/50">
+                <svg class="w-8 h-8 text-gray-300 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <p class="text-xs text-gray-400">点击上传商品图片</p>
+              </div>
+            </div>
+            <div>
+              <label class="text-xs text-gray-500 font-bold mb-1 block">商品说明</label>
+              <textarea rows="2" placeholder="请输入商品说明" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
+            </div>
+          </div>
+        </div>
+        <!-- 兑换规则 -->
+        <div class="mb-5">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-1 h-4 bg-primary rounded-full"></div>
+            <h4 class="text-sm font-bold text-gray-900">兑换规则</h4>
+          </div>
+          <div class="space-y-3">
+            <div><label class="text-xs text-gray-500 font-bold mb-1 block">积分价格 <span class="text-red-500">*</span></label><input type="number" id="product-price" min="0" placeholder="请输入积分价格，必须大于0" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"></div>
+            <div><label class="text-xs text-gray-500 font-bold mb-1 block">总库存 <span class="text-red-500">*</span></label><input type="number" id="product-stock" min="0" placeholder="请输入总库存，必须大于0" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"></div>
+            <div><label class="text-xs text-gray-500 font-bold mb-1 block">每人兑换限制</label><input type="number" id="product-limit" min="1" placeholder="不填表示不限次数" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"></div>
+            <div><label class="text-xs text-gray-500 font-bold mb-1 block">上架状态</label><select id="product-status" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white"><option value="up">上架</option><option value="down">下架</option></select></div>
+            <div><label class="text-xs text-gray-500 font-bold mb-1 block">上架时间</label><input type="datetime-local" id="product-online-time" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"><p class="text-[10px] text-gray-400 mt-1">不填表示立即生效</p></div>
+            <div><label class="text-xs text-gray-500 font-bold mb-1 block">下架时间</label><input type="datetime-local" id="product-offline-time" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"><p class="text-[10px] text-gray-400 mt-1">不填表示长期有效</p></div>
+          </div>
+        </div>
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">
+          <button onclick="switchPage('product-manage')" class="bg-white text-gray-700 border border-gray-200 px-6 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors shadow-sm">取消</button>
+          <button onclick="saveProductForm()" class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========== PAGE: 商品详情 ========== -->
+  <div class="page" id="page-product-detail">
+    <div class="flex items-center gap-3 mb-6">
+      <button onclick="switchPage('product-manage')" class="text-gray-500 hover:text-gray-700 font-bold text-sm flex items-center transition-colors">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        返回兑换商品管理
+      </button>
+    </div>
+    <div class="max-w-2xl mx-auto">
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+        <h2 class="text-lg font-bold text-gray-900 mb-5">商品详情</h2>
+        <!-- 基础信息 -->
+        <div class="mb-5">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-1 h-4 bg-primary rounded-full"></div>
+            <h4 class="text-sm font-bold text-gray-900">基础信息</h4>
+          </div>
+          <div class="space-y-3">
+            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">商品名称</span><span class="text-sm font-bold text-gray-900" id="detail-name">—</span></div>
+            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">商品类型</span><span id="detail-type">—</span></div>
+            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">关联权益</span><span class="text-sm font-bold text-gray-900" id="detail-link">—</span></div>
+            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">商品说明</span><span class="text-sm text-gray-600" id="detail-desc">—</span></div>
+          </div>
+        </div>
+        <!-- 兑换规则 -->
+        <div class="mb-5">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-1 h-4 bg-primary rounded-full"></div>
+            <h4 class="text-sm font-bold text-gray-900">兑换规则</h4>
+          </div>
+          <div class="space-y-3">
+            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">积分价格</span><span class="text-sm font-bold text-gray-900" id="detail-price">—</span></div>
+            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">总库存</span><span class="text-sm font-bold text-gray-900" id="detail-stock">—</span></div>
+            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">剩余数量</span><span class="text-sm font-bold text-gray-900" id="detail-remain">—</span></div>
+            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">已兑换数量</span><span class="text-sm text-gray-600" id="detail-exchanged">—</span></div>
+            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">每人兑换限制</span><span class="text-sm text-gray-600" id="detail-limit">—</span></div>
+            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">上架状态</span><span id="detail-status">—</span></div>
+            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">上架时间</span><span class="text-sm text-gray-600" id="detail-online">—</span></div>
+            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">下架时间</span><span class="text-sm text-gray-600" id="detail-offline">—</span></div>
+            <div class="flex"><span class="text-xs text-gray-400 w-24 shrink-0">更新时间</span><span class="text-sm text-gray-600" id="detail-updated">—</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <!-- ========== MODAL: 权益配置表单 ========== -->
@@ -856,8 +1136,17 @@ tailwind.config = {
       <!-- 实物商品专属：搜索商城商品 -->
       <div id="prize-section-physical" class="hidden space-y-3">
         <div>
-          <label class="text-xs text-gray-500 font-bold mb-1 block">商品来源</label>
-          <div class="bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm text-gray-700">商城系统</div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">商品来源 <span class="text-red-500">*</span></label>
+          <select class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
+            <option value="">请选择商品来源</option>
+            <option>美国</option><option>加拿大</option><option>墨西哥</option><option>巴西</option>
+            <option>英国</option><option>德国</option><option>法国</option><option>意大利</option>
+            <option>西班牙</option><option>葡萄牙</option><option>波兰</option><option>南欧</option>
+            <option>土耳其</option><option>中东</option><option>俄罗斯</option>
+            <option>日本</option><option>韩国</option><option>澳大利亚</option>
+            <option>菲律宾</option><option>马来西亚</option><option>新加坡</option>
+            <option>越南</option><option>印度尼西亚</option><option>智利</option><option>爱尔兰</option>
+          </select>
         </div>
         <div>
           <label class="text-xs text-gray-500 font-bold mb-1 block">商品搜索</label>
@@ -1251,6 +1540,7 @@ tailwind.config = {
   </div>
 </div>
 
+
 <!-- ========== TOAST ========== -->
 <div class="toast" id="toast"></div>
 
@@ -1259,7 +1549,8 @@ function switchPage(pageId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + pageId).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.querySelector('[data-page="' + pageId + '"]').classList.add('active');
+  var navItem = document.querySelector('[data-page="' + pageId + '"]');
+  if (navItem) navItem.classList.add('active');
 }
 
 document.querySelectorAll('.nav-item').forEach(item => {
@@ -1745,6 +2036,245 @@ function exportFailedCodes() {
   URL.revokeObjectURL(url);
   showToast("失败数据已导出","success");
 }
+function editProductRow(btn) {
+  var row = btn.closest('tr');
+  var name = row.querySelector('td:first-child span, td:first-child').textContent.trim();
+  var typeText = row.querySelector('td:nth-child(2) span').textContent.trim();
+  var priceText = row.querySelector('td:nth-child(3)').textContent.trim();
+  var stockText = row.querySelector('td:nth-child(4)').textContent.trim();
+
+  var typeMap = { '软件码': 'virtual', '优惠券': 'coupon', '会员权益': 'member', '实物商品': 'physical' };
+  var type = typeMap[typeText] || '';
+  var price = parseInt(priceText) || 0;
+  var stock = parseInt(stockText) || 0;
+
+  currentProductType = type;
+  var typeColors = { virtual: 'text-purple-600 bg-purple-50', coupon: 'text-blue-600 bg-blue-50', member: 'text-amber-600 bg-amber-50', physical: 'text-orange-600 bg-orange-50' };
+  document.getElementById('product-type-display').innerHTML = '<span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider ' + (typeColors[type] || 'text-gray-600 bg-gray-50') + '">' + typeText + '</span>';
+  document.getElementById('product-name').value = name;
+  document.getElementById('product-price').value = price;
+  document.getElementById('product-stock').value = stock;
+  switchProductType(type);
+  document.getElementById('product-form-title').textContent = '编辑商品';
+  setLinkEditable(false);
+  switchPage('product-form');
+}
+
+function viewProductDetail(btn) {
+  var row = btn.closest('tr');
+  var cells = row.querySelectorAll('td');
+  var name = cells[0].textContent.trim();
+  var typeHtml = cells[1].innerHTML;
+  var price = cells[2].textContent.trim();
+  var stock = cells[3].textContent.trim();
+  var exchanged = cells[4].textContent.trim();
+  var remain = cells[5].textContent.trim();
+  var updated = cells[6].textContent.trim();
+  var statusHtml = cells[7].innerHTML;
+
+  document.getElementById('detail-name').textContent = name;
+  document.getElementById('detail-type').innerHTML = typeHtml;
+  document.getElementById('detail-link').textContent = name;
+  document.getElementById('detail-price').textContent = price;
+  document.getElementById('detail-stock').textContent = stock;
+  document.getElementById('detail-remain').textContent = remain;
+  document.getElementById('detail-exchanged').textContent = exchanged;
+  document.getElementById('detail-limit').textContent = '不限次数';
+  document.getElementById('detail-status').innerHTML = statusHtml;
+  document.getElementById('detail-online').textContent = '立即生效';
+  document.getElementById('detail-offline').textContent = '长期有效';
+  document.getElementById('detail-updated').textContent = updated;
+  document.getElementById('detail-desc').textContent = '—';
+  switchPage('product-detail');
+}
+
+function toggleProductStatus(btn) {
+  var row = btn.closest('tr');
+  var badge = row.querySelector('td:nth-child(6) span');
+  var isUp = badge.textContent === '已上架';
+  if (isUp) {
+    badge.textContent = '已下架';
+    badge.className = 'px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-400';
+    btn.textContent = '上架';
+    btn.className = 'text-green-500 hover:text-green-600 font-bold text-xs';
+    showToast('已下架','success');
+  } else {
+    badge.textContent = '已上架';
+    badge.className = 'px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-green-50 text-green-500';
+    btn.textContent = '下架';
+    btn.className = 'text-red-500 hover:text-red-600 font-bold text-xs';
+    showToast('已上架','success');
+  }
+}
+
+function filterBenefitList(query) {
+  var opts = document.querySelectorAll('.benefit-option');
+  var q = query.toLowerCase();
+  opts.forEach(function(opt) {
+    var text = opt.textContent.toLowerCase();
+    opt.classList.toggle('hidden', q && !text.includes(q));
+  });
+}
+
+function selectBenefit(name, type) {
+  document.getElementById('link-benefit-search').value = name;
+  document.getElementById('benefit-selected-name').textContent = name;
+  document.getElementById('benefit-selected-type').textContent = type;
+  document.getElementById('benefit-selected').classList.remove('hidden');
+  document.getElementById('benefit-dropdown').classList.add('hidden');
+}
+
+function clearSelectedBenefit() {
+  document.getElementById('link-benefit-search').value = '';
+  document.getElementById('benefit-selected').classList.add('hidden');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  var dd = document.getElementById('benefit-dropdown');
+  var input = document.getElementById('link-benefit-search');
+  if (dd && input && !input.contains(e.target) && !dd.contains(e.target)) {
+    dd.classList.add('hidden');
+  }
+});
+
+function saveProductForm() {
+  var name = document.getElementById('product-name').value.trim();
+  var type = currentProductType;
+  var price = parseInt(document.getElementById('product-price').value) || 0;
+  var stock = parseInt(document.getElementById('product-stock').value) || 0;
+  var limit = parseInt(document.getElementById('product-limit').value) || 0;
+  var onlineTime = document.getElementById('product-online-time').value;
+  var offlineTime = document.getElementById('product-offline-time').value;
+  var status = document.getElementById('product-status').value;
+  var valid = true;
+
+  if (!name) { showToast('商品名称不能为空','error'); valid = false; }
+  if (!type) { showToast('请先关联权益以确定商品类型','error'); valid = false; }
+  if (!price || price <= 0) { showToast('积分价格必须大于0','error'); valid = false; }
+  if (!stock || stock <= 0) { showToast('总库存必须大于0','error'); valid = false; }
+  if (limit < 0) { showToast('每人兑换限制不能小于0','error'); valid = false; }
+  if (offlineTime && onlineTime && offlineTime <= onlineTime) { showToast('下架时间不能早于上架时间','error'); valid = false; }
+  if (status === 'up' && stock <= 0) { showToast('上架商品必须有可用库存','error'); valid = false; }
+  if (!valid) return;
+
+  var typeNames = { virtual: '软件码', coupon: '优惠券', member: '会员权益', physical: '实物商品' };
+  var typeColors = { virtual: 'bg-purple-50 text-purple-500', coupon: 'bg-blue-50 text-blue-500', member: 'bg-amber-50 text-amber-600', physical: 'bg-orange-50 text-orange-500' };
+  var isUp = status === 'up';
+  var statusBadge = isUp ? 'bg-green-50 text-green-500' : 'bg-gray-100 text-gray-400';
+  var statusText = isUp ? '已上架' : '已下架';
+  var toggleBtn = isUp
+    ? '<button onclick="toggleProductStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button>'
+    : '<button onclick="toggleProductStatus(this)" class="text-green-500 hover:text-green-600 font-bold text-xs">上架</button>';
+
+  var tbody = document.querySelector('#page-product-manage tbody');
+  var tr = document.createElement('tr');
+  tr.className = 'hover:bg-gray-50/30';
+  tr.innerHTML =
+    '<td class="px-6 py-4 font-bold text-gray-900">' + name + '</td>' +
+    '<td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider ' + typeColors[type] + '">' + typeNames[type] + '</span></td>' +
+    '<td class="px-6 py-4 text-gray-900 font-bold">' + price + ' 积分</td>' +
+    '<td class="px-6 py-4 text-gray-900 font-bold">' + stock + '</td>' +
+    '<td class="px-6 py-4 text-gray-600">0</td>' +
+    '<td class="px-6 py-4 text-gray-900 font-bold">' + stock + '</td>' +
+    '<td class="px-6 py-4 text-gray-500 text-xs">' + new Date().toLocaleString('zh-CN') + '</td>' +
+    '<td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider ' + statusBadge + '">' + statusText + '</span></td>' +
+    '<td class="px-6 py-4"><div class="flex items-center gap-2"><button onclick="viewProductDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">详情</button><button onclick="editProductRow(this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button>' + toggleBtn + '</div></td>';
+  tbody.appendChild(tr);
+
+  switchPage('product-manage');
+  showToast('商品保存成功，操作日志已记录','success');
+}
+
+var linkOptions = {
+  virtual: [
+    { name: '星巴克礼品卡码池', desc: '可用 2,340', type: 'virtual', typeName: '软件码' },
+    { name: '视频会员月卡码池', desc: '可用 5,000', type: 'virtual', typeName: '软件码' },
+    { name: '音乐会员季卡码池', desc: '可用 3,200', type: 'virtual', typeName: '软件码' }
+  ],
+  coupon: [
+    { name: '满100减20优惠券', desc: '库存 10,000', type: 'coupon', typeName: '优惠券' },
+    { name: '满50减10优惠券', desc: '库存 20,000', type: 'coupon', typeName: '优惠券' },
+    { name: '8折优惠券', desc: '库存 5,000', type: 'coupon', typeName: '优惠券' }
+  ],
+  member: [
+    { name: '黄金会员月卡', desc: '价值 ¥30', type: 'member', typeName: '会员权益' },
+    { name: '铂金会员季卡', desc: '价值 ¥80', type: 'member', typeName: '会员权益' },
+    { name: '钻石会员年卡', desc: '价值 ¥300', type: 'member', typeName: '会员权益' }
+  ],
+  physical: [
+    { name: '社区定制保温杯', desc: '500ml · 库存 800', type: 'physical', typeName: '实物商品' },
+    { name: '品牌蓝牙耳机', desc: '黑色 · 库存 350', type: 'physical', typeName: '实物商品' },
+    { name: '精美书籍套装', desc: '3册装 · 库存 500', type: 'physical', typeName: '实物商品' }
+  ]
+};
+var currentProductType = '';
+
+function switchProductType(type) {
+  var dd = document.getElementById('link-dropdown');
+  var allOpts = [];
+  if (type) {
+    allOpts = linkOptions[type] || [];
+  } else {
+    Object.keys(linkOptions).forEach(function(k) {
+      allOpts = allOpts.concat(linkOptions[k]);
+    });
+  }
+  dd.innerHTML = allOpts.map(function(o, i) {
+    return '<div class="link-option px-4 py-2.5 text-sm hover:bg-gray-50 cursor-pointer flex items-center justify-between border-b border-gray-50" onclick="selectLinkOption(\'' + o.name + '\',\'' + o.desc + '\',\'' + (o.type||'') + '\',\'' + (o.typeName||'') + '\')"><span class="font-bold text-gray-900">' + o.name + '</span><span class="text-xs text-gray-400">' + o.desc + '</span><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold ' + (({virtual:'bg-purple-50 text-purple-500',coupon:'bg-blue-50 text-blue-500',member:'bg-amber-50 text-amber-600',physical:'bg-orange-50 text-orange-500'})[o.type]||'bg-gray-50 text-gray-400') + ' ml-2">' + (o.typeName||'') + '</span></div>';
+  }).join('');
+  clearLinkSelection();
+}
+
+function filterLinkOptions(query) {
+  var opts = document.querySelectorAll('.link-option');
+  var q = query.toLowerCase();
+  opts.forEach(function(opt) {
+    opt.classList.toggle('hidden', q && !opt.textContent.toLowerCase().includes(q));
+  });
+}
+
+function selectLinkOption(name, desc, type, typeName) {
+  var input = document.getElementById('link-rule-search');
+  input.value = name;
+  document.getElementById('link-selected-name').textContent = name + ' · ' + desc;
+  document.getElementById('link-selected').classList.remove('hidden');
+  document.getElementById('link-dropdown').classList.add('hidden');
+  if (type) {
+    currentProductType = type;
+    var display = document.getElementById('product-type-display');
+    var typeColors = { virtual: 'text-purple-600 bg-purple-50', coupon: 'text-blue-600 bg-blue-50', member: 'text-amber-600 bg-amber-50', physical: 'text-orange-600 bg-orange-50' };
+    display.innerHTML = '<span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider ' + (typeColors[type] || 'text-gray-600 bg-gray-50') + '">' + typeName + '</span>';
+  }
+}
+
+function setLinkEditable(editable) {
+  var input = document.getElementById('link-rule-search');
+  var selected = document.getElementById('link-selected');
+  var cancelBtn = selected.querySelector('button');
+  if (editable) {
+    input.disabled = false;
+    input.classList.remove('bg-gray-100', 'text-gray-400', 'cursor-not-allowed');
+    input.placeholder = '输入权益名称搜索，或从下拉列表中选择';
+    if (cancelBtn) cancelBtn.classList.remove('hidden');
+  } else {
+    input.disabled = true;
+    input.classList.add('bg-gray-100', 'text-gray-400', 'cursor-not-allowed');
+    input.placeholder = '';
+    if (cancelBtn) cancelBtn.classList.add('hidden');
+  }
+}
+
+function clearLinkSelection() {
+  document.getElementById('link-rule-search').value = '';
+  document.getElementById('link-selected').classList.add('hidden');
+}
+
+function switchOrderTab(type) {
+  var pages = { 'all': 'order-all', 'virtual': 'order-virtual', 'physical': 'order-physical' };
+  switchPage(pages[type]);
+}
+
 function showToast(msg, type) {
   var t = document.getElementById('toast');
   t.textContent = msg;
