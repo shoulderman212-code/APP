@@ -34,6 +34,9 @@ tailwind.config = {
   input, select, textarea { outline: none; }
   input:focus, select:focus, textarea:focus { border-color: #1677ff; box-shadow: 0 0 0 2px rgba(22,119,255,0.1); }
   select:disabled, input:disabled { background: #f5f5f5; color: #9ca3af; cursor: not-allowed; border-color: #e5e7eb; }
+  .points-tab-content { display: none; }
+  .points-tab-content:not(.hidden) { display: block; }
+  .points-tab-content.hidden { display: none; }
 </style>
 </head>
 <body class="bg-bg-main min-h-screen flex">
@@ -57,9 +60,25 @@ tailwind.config = {
       <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
       兑换商品管理
     </a>
+    <a href="#store-coupons" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="store-coupons">
+      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5h14a2 2 0 012 2v3a2 2 0 010 4v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 010-4V7a2 2 0 012-2z"/></svg>
+      商城优惠券
+    </a>
     <a href="#order-all" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="order-all">
       <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
       积分订单管理
+    </a>
+    <div class="flex items-center gap-2 px-3 py-2.5 mb-1 mt-4">
+      <div class="w-1 h-4 bg-primary rounded-full"></div>
+      <span class="text-sm font-bold text-gray-900">规则中心</span>
+    </div>
+    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="global-rules">
+      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      全局规则设置
+    </a>
+    <a href="#" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-sm text-gray-700" data-page="points-rules">
+      <svg class="w-4 h-4 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      积分规则设置
     </a>
   </nav>
 </aside>
@@ -81,7 +100,6 @@ tailwind.config = {
           <option>全部权益类型</option>
           <option>软件码</option>
           <option>优惠券</option>
-          <option>实物商品</option>
         </select>
         <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm text-gray-700 bg-white">
           <option>全部状态</option>
@@ -95,7 +113,6 @@ tailwind.config = {
         </button>
       </div>
     </div>
-
     <button onclick="openPrizeForm('add')" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm mb-4">
       <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
       新增权益
@@ -143,22 +160,9 @@ tailwind.config = {
               </div>
             </td>
           </tr>
-          <tr class="hover:bg-gray-50/30 transition-colors">
-            <td class="px-6 py-4"><span class="font-bold text-gray-900">社区定制保温杯</span></td>
-            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-orange-50 text-orange-500">实物商品</span></td>
-            <td class="px-6 py-4 text-gray-900 font-bold">200</td>
-            <td class="px-6 py-4"><button onclick="showModal('modal-distribution-detail')" class="text-primary hover:text-blue-700 font-bold transition-colors text-sm underline decoration-dotted underline-offset-2">45</button></td>
-            <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider bg-gray-100 text-gray-400">已停用</span></td>
-            <td class="px-6 py-4">
-              <div class="flex items-center gap-2">
-                <button onclick="editRow(this)" class="text-primary hover:text-blue-700 font-bold transition-colors text-xs">编辑</button>
-                <button onclick="toggleStatus(this)" class="text-green-500 hover:text-green-600 font-bold transition-colors text-xs">启用</button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
+</tbody>
       </table>
-      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500"><div class="flex items-center gap-3"><span>共 3 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white" onchange="changePageSize(this)"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div><div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 1 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div></div>
+      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500"><div class="flex items-center gap-3"><span>共 2 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white" onchange="changePageSize(this)"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div><div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 1 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div></div>
     </div>
   </div>
 
@@ -690,6 +694,43 @@ tailwind.config = {
   </div>
 
 
+  <!-- ========== PAGE: 商城优惠券 ========== -->
+  <div class="page" id="page-store-coupons">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">商城优惠券</h2>
+      <p class="text-sm text-gray-500 mt-1">从商城系统同步的优惠券数据</p>
+    </div>
+    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-4">
+      <div class="grid grid-cols-4 gap-4">
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">优惠券名称</label><input type="text" placeholder="模糊搜索" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm"></div>
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">商城券ID</label><input type="text" placeholder="精确搜索" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm"></div>
+        
+        
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">发放类型</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部</option><option>线下发放</option><option>公用优惠码</option><option>社区专用</option></select></div>
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">活动状态</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部</option><option>未开始</option><option>活动中</option><option>已过期</option></select></div>
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">启用状态</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部</option><option>启用</option><option>停用</option></select></div>
+        
+        
+        
+        <div class="col-span-2 grid grid-cols-2 gap-4">
+          <div><label class="text-xs text-gray-500 font-bold mb-1 block">使用截止日期</label><div class="flex items-center gap-2"><input type="date" class="flex-1 border border-gray-200 rounded-xl px-4 py-2 text-sm"><span class="text-xs text-gray-400">至</span><input type="date" class="flex-1 border border-gray-200 rounded-xl px-4 py-2 text-sm"></div></div>
+          <div><label class="text-xs text-gray-500 font-bold mb-1 block">最近同步时间</label><div class="flex items-center gap-2"><input type="date" class="flex-1 border border-gray-200 rounded-xl px-4 py-2 text-sm"><span class="text-xs text-gray-400">至</span><input type="date" class="flex-1 border border-gray-200 rounded-xl px-4 py-2 text-sm"></div></div>
+        </div>
+      </div>
+      <div class="flex justify-end mt-4 gap-2">
+        <button class="bg-white text-gray-700 border border-gray-200 px-5 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors shadow-sm">重置</button>
+        <button class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm"><svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>查询</button>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-x-auto">
+      <table class="w-full text-sm whitespace-nowrap"><thead><tr class="bg-gray-50/50 text-left"><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商城券ID</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">优惠券名称</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">发放类型</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">优惠券金额</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">积分价格</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">发放总量</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">活动状态</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">已领取</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">已使用</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">同步时间</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">启用状态</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th></tr></thead><tbody class="divide-y divide-gray-50">
+<tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">MALL001</td><td class="px-4 py-3 font-bold text-gray-900">满100减20</td><td class="px-4 py-3 text-gray-600 text-xs">社区专用</td><td class="px-4 py-3 text-gray-900 font-bold">¥20</td><td class="px-4 py-3 text-gray-900 font-bold">200</td><td class="px-4 py-3 text-gray-900 font-bold">10,000</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">活动中</span></td><td class="px-4 py-3 text-gray-600">3,421</td><td class="px-4 py-3 text-gray-600">1,892</td><td class="px-4 py-3 text-gray-500 text-xs">2026-12-31 10:30:25</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">启用</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="toggleCouponStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button></div></td></tr>
+<tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">MALL002</td><td class="px-4 py-3 font-bold text-gray-900">满200减50</td><td class="px-4 py-3 text-gray-600 text-xs">公用优惠码</td><td class="px-4 py-3 text-gray-900 font-bold">¥50</td><td class="px-4 py-3 text-gray-900 font-bold">500</td><td class="px-4 py-3 text-gray-900 font-bold">8,000</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-blue-50 text-blue-500">未开始</span></td><td class="px-4 py-3 text-gray-600">0</td><td class="px-4 py-3 text-gray-600">0</td><td class="px-4 py-3 text-gray-500 text-xs">2026-09-30 16:00:00</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">启用</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="toggleCouponStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button></div></td></tr>
+<tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">MALL003</td><td class="px-4 py-3 font-bold text-gray-900">满50减10</td><td class="px-4 py-3 text-gray-600 text-xs">线下发放</td><td class="px-4 py-3 text-gray-900 font-bold">¥10</td><td class="px-4 py-3 text-gray-900 font-bold">100</td><td class="px-4 py-3 text-gray-900 font-bold">20,000</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-500">已过期</span></td><td class="px-4 py-3 text-gray-600">8,500</td><td class="px-4 py-3 text-gray-600">4,200</td><td class="px-4 py-3 text-gray-500 text-xs">2026-03-31 10:00:00</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-400">停用</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="toggleCouponStatus(this)" class="text-green-500 hover:text-green-600 font-bold text-xs">启用</button></div></td></tr>
+</tbody></table>
+      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500"><div class="flex items-center gap-3"><span>共 3 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white" onchange="changePageSize(this)"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div><div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 1 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div></div>
+    </div>
+  </div>
   <!-- ========== PAGE: 兑换商品管理 ========== -->
   <div class="page" id="page-product-manage">
     <div class="mb-6">
@@ -699,7 +740,7 @@ tailwind.config = {
     <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
       <div class="flex items-center gap-4 flex-wrap">
         <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
-          <option>全部类型</option><option>软件码</option><option>优惠券</option><option>会员权益</option><option>实物商品</option>
+          <option>全部类型</option><option>软件码</option><option>优惠券</option><option>实物商品</option>
         </select>
         <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
           <option>全部状态</option><option>已上架</option><option>已下架</option>
@@ -711,7 +752,7 @@ tailwind.config = {
         </button>
       </div>
     </div>
-    <button onclick="currentProductType='';document.getElementById('product-type-display').innerHTML='选择关联权益后自动确定';document.getElementById('product-form-title').textContent='新增商品';document.getElementById('product-name').value='';document.getElementById('product-price').value='';document.getElementById('product-stock').value='';setLinkEditable(true);clearLinkSelection();switchProductType('');switchPage('product-form')" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm mb-4">
+    <button onclick="openProductFormAdd()" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm mb-4">
       <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
       新增商品
     </button>
@@ -767,12 +808,13 @@ tailwind.config = {
       <p class="text-sm text-gray-500 mt-1">全部积分兑换订单记录</p>
     </div>
     <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
-      <div class="grid grid-cols-3 gap-4">
+      <div class="grid grid-cols-4 gap-4">
         <div><label class="text-xs text-gray-500 font-bold mb-1 block">订单编号 / 用户ID</label><input type="text" placeholder="请输入" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm"></div>
         <div><label class="text-xs text-gray-500 font-bold mb-1 block">商品名称</label><input type="text" placeholder="请输入" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm"></div>
         <div><label class="text-xs text-gray-500 font-bold mb-1 block">商品类型</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部类型</option><option>软件码</option><option>优惠券</option><option>实物商品</option></select></div>
-        <div><label class="text-xs text-gray-500 font-bold mb-1 block">订单状态</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部订单状态</option><option>处理中</option><option>已完成</option><option>已关闭</option></select></div>
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">订单状态</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部订单状态</option><option>处理中</option><option>已完成</option><option>失败</option></select></div>
         <div><label class="text-xs text-gray-500 font-bold mb-1 block">发放状态</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部发放状态</option><option>待处理</option><option>发放中</option><option>待填写地址</option><option>待发货</option><option>已发货</option><option>已完成</option><option>发放失败</option></select></div>
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">是否异常</label><select id="filter-abnormal" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部</option><option>是</option><option>否</option></select></div>
         <div><label class="text-xs text-gray-500 font-bold mb-1 block">兑换时间</label><input type="date" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm"></div>
       </div>
       <div class="flex justify-end mt-4">
@@ -925,6 +967,16 @@ tailwind.config = {
               <label class="text-xs text-gray-500 font-bold mb-1 block">商品名称 <span class="text-red-500">*</span></label>
               <input type="text" id="product-name" placeholder="请输入商品名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
             </div>
+            <div>
+              <label class="text-xs text-gray-500 font-bold mb-1 block">商品类型 <span class="text-red-500">*</span></label>
+              <select id="product-type-select" onchange="handleProductTypeChange(this.value)" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
+                <option value="">请选择商品类型</option>
+                <option value="virtual">软件码</option>
+                <option value="coupon">优惠券</option>
+                <option value="physical">实物商品</option>
+              </select>
+              <p class="text-[10px] text-gray-400 mt-1">软件码、优惠券需关联权益；实物商品直接填写商品信息。</p>
+            </div>
             <div id="section-link-rule">
               <label class="text-xs text-gray-500 font-bold mb-1 block">关联权益 <span class="text-red-500">*</span></label>
               <div id="link-input-area" class="relative">
@@ -940,10 +992,6 @@ tailwind.config = {
               </div>
             </div>
             <div>
-              <label class="text-xs text-gray-500 font-bold mb-1 block">商品类型</label>
-              <div id="product-type-display" class="bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm text-gray-400">选择关联权益后自动确定</div>
-            </div>
-            <div>
               <label class="text-xs text-gray-500 font-bold mb-1 block">商品图片</label>
               <div class="border-2 border-dashed border-gray-200 rounded-xl p-4 text-center hover:border-primary transition-colors cursor-pointer bg-gray-50/50">
                 <svg class="w-8 h-8 text-gray-300 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -953,6 +1001,28 @@ tailwind.config = {
             <div>
               <label class="text-xs text-gray-500 font-bold mb-1 block">商品说明</label>
               <textarea rows="2" placeholder="请输入商品说明" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
+            </div>
+            <div id="physical-product-fields" class="hidden bg-gray-50 rounded-xl p-4 border border-gray-100 space-y-3">
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="text-xs text-gray-500 font-bold mb-1 block">商品规格</label>
+                  <input type="text" id="product-spec" placeholder="如 500ml 白色、黑色标准版" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
+                </div>
+                <div>
+                  <label class="text-xs text-gray-500 font-bold mb-1 block">发货方式</label>
+                  <select id="product-delivery-type" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
+                    <option>后台发货</option>
+                    <option>线下自提</option>
+                  </select>
+                </div>
+              </div>
+              <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                <input type="checkbox" id="product-need-address" checked class="rounded accent-primary"> 兑换时需要填写收货地址
+              </label>
+              <div>
+                <label class="text-xs text-gray-500 font-bold mb-1 block">发货说明</label>
+                <textarea id="product-delivery-note" rows="2" placeholder="填写发货时效、物流说明或领取说明" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none bg-white"></textarea>
+              </div>
             </div>
           </div>
         </div>
@@ -1021,6 +1091,321 @@ tailwind.config = {
           <div><span class="text-xs text-gray-400">更新时间</span><div class="text-sm text-gray-600 mt-0.5" id="detail-updated">—</div></div>
         </div>
       </div>
+      <!-- 操作日志 -->
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-1 h-4 bg-primary rounded-full"></div>
+          <h4 class="text-sm font-bold text-gray-900">操作日志</h4>
+        </div>
+        <div class="space-y-2">
+          <div class="flex items-start gap-3 text-xs"><div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 shrink-0"></div><div><span class="text-gray-500">2026-06-18 14:30</span><span class="text-gray-400 mx-2">|</span><span class="text-gray-700">运营·张三</span><span class="text-gray-400 mx-2">|</span><span class="text-gray-900 font-bold">自动重试</span><span class="text-gray-400 ml-2">重试发放成功</span></div></div>
+          <div class="flex items-start gap-3 text-xs"><div class="w-1.5 h-1.5 rounded-full bg-red-500 mt-1.5 shrink-0"></div><div><span class="text-gray-500">2026-06-18 10:15</span><span class="text-gray-400 mx-2">|</span><span class="text-gray-700">系统</span><span class="text-gray-400 mx-2">|</span><span class="text-red-500 font-bold">发放失败</span><span class="text-red-400 ml-2">码池可用码不足</span></div></div>
+          <div class="flex items-start gap-3 text-xs"><div class="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0"></div><div><span class="text-gray-500">2026-06-18 10:00</span><span class="text-gray-400 mx-2">|</span><span class="text-gray-700">user_567890</span><span class="text-gray-400 mx-2">|</span><span class="text-gray-600">兑换下单</span><span class="text-gray-400 ml-2">消耗 300 积分</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========== PAGE: 全局规则设置 ========== -->
+  <div class="page" id="page-global-rules">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">全局规则设置</h2>
+      <p class="text-sm text-gray-500 mt-1">配置积分商城全局积分规则</p>
+    </div>
+
+    <!-- 积分有效期设置 -->
+    <div class="mb-6">
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-4 max-w-xl">
+        <div class="flex items-center gap-2 mb-1">
+          <div class="w-1 h-4 bg-primary rounded-full"></div>
+          <h4 class="text-sm font-bold text-gray-900">积分有效期设置</h4>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">积分有效期</label>
+          <div class="flex items-center gap-2">
+            <span class="text-sm text-gray-600">获得积分后</span>
+            <input type="number" min="1" value="365" class="w-24 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-center">
+            <select class="border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white"><option>天</option><option>周</option><option>月</option></select>
+            <span class="text-sm text-gray-600">后过期</span>
+          </div>
+        </div>
+        <div class="flex justify-end pt-4 border-t border-gray-100">
+          <button onclick="showToast('积分有效期设置已保存','success')" class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">保存</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 过期提醒设置 -->
+    <div class="mb-6">
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-4 max-w-xl">
+        <div class="flex items-center gap-2 mb-1">
+          <div class="w-1 h-4 bg-primary rounded-full"></div>
+          <h4 class="text-sm font-bold text-gray-900">过期提醒设置</h4>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">是否启用过期提醒</label>
+          <select class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white"><option>启用</option><option>停用</option></select>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">过期前提醒天数</label>
+          <input type="number" value="7" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">提醒方式</label>
+          <div class="space-y-2">
+            <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer"><input type="checkbox" checked class="rounded accent-primary"> 站内消息</label>
+            <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer"><input type="checkbox" class="rounded accent-primary"> 短信通知</label>
+            <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer"><input type="checkbox" class="rounded accent-primary"> App推送</label>
+          </div>
+        </div>
+        <div class="flex justify-end pt-4 border-t border-gray-100">
+          <button onclick="showToast('过期提醒设置已保存','success')" class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">保存</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 积分汇率基准设置 -->
+    <div class="mb-6">
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-4 max-w-xl">
+        <div class="flex items-center gap-2 mb-1">
+          <div class="w-1 h-4 bg-primary rounded-full"></div>
+          <h4 class="text-sm font-bold text-gray-900">积分汇率基准设置</h4>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">基准货币</label>
+          <select class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white"><option>人民币 (CNY)</option><option>美元 (USD)</option></select>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">积分兑换汇率</label>
+          <div class="flex items-center gap-2">
+            <input type="number" placeholder="积分" class="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+            <span class="text-gray-400">=</span>
+            <input type="number" placeholder="金额" class="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+            <span class="text-gray-400">元</span>
+          </div>
+        </div>
+        <div class="flex justify-end pt-4 border-t border-gray-100">
+          <button onclick="showToast('积分汇率基准已保存','success')" class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: 积分规则设置 ========== -->
+  <div class="page" id="page-points-rules">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">积分规则设置</h2>
+      <p class="text-sm text-gray-500 mt-1">配置行为积分与活动积分规则</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex items-center gap-1 mb-4 bg-white rounded-xl p-1 border border-gray-100 shadow-sm w-fit">
+      <button class="px-4 py-1.5 rounded-lg text-sm font-bold transition-colors bg-primary text-white shadow-sm" id="tab-btn-behavior" onclick="switchPointsTab('behavior')">行为积分规则</button>
+      <button class="px-4 py-1.5 rounded-lg text-sm text-gray-500 font-bold transition-colors hover:text-gray-700" id="tab-btn-activity" onclick="switchPointsTab('activity')">活动积分规则</button>
+    </div>
+
+    <!-- Tab: 行为积分规则 -->
+    <div id="tab-behavior" class="points-tab-content">
+
+
+    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-4">
+      <div class="flex items-center gap-4 flex-wrap">
+        <input type="text" placeholder="规则名称" class="border border-gray-200 rounded-xl px-4 py-2 text-sm w-40">
+        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部模块</option><option>会员</option><option>社区</option><option>商城</option></select>
+        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部行为</option><option>注册</option><option>签到</option><option>发帖</option><option>评论</option><option>支付</option><option>评价</option></select>
+        <select class="border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部状态</option><option>开</option><option>关</option></select>
+        <button class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm"><svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>查询</button>
+      </div>
+    </div>
+
+    <button onclick="openBehaviorRuleForm('add')" class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm mb-4"><svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>新增规则</button>
+
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <table class="w-full text-sm">
+        <thead><tr class="bg-gray-50/50 text-left">
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">规则名称</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">业务模块</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">行为类型</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">积分值</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">行为上限</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">统计周期</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">积分上限</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">状态</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
+        </tr></thead>
+        <tbody class="divide-y divide-gray-50">
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">社区发帖奖励积分</td><td class="px-4 py-3 text-gray-600 text-xs">社区</td><td class="px-4 py-3 text-gray-600 text-xs">发帖</td><td class="px-4 py-3 text-green-600 font-bold">+5</td><td class="px-4 py-3 text-gray-600">10次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">50</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="openBehaviorRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">每日签到奖励</td><td class="px-4 py-3 text-gray-600 text-xs">会员</td><td class="px-4 py-3 text-gray-600 text-xs">签到</td><td class="px-4 py-3 text-green-600 font-bold">+3</td><td class="px-4 py-3 text-gray-600">1次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">3</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="openBehaviorRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">订单评价奖励</td><td class="px-4 py-3 text-gray-600 text-xs">商城</td><td class="px-4 py-3 text-gray-600 text-xs">评价</td><td class="px-4 py-3 text-green-600 font-bold">+10</td><td class="px-4 py-3 text-gray-600">5次</td><td class="px-4 py-3 text-gray-600">月</td><td class="px-4 py-3 text-gray-600">50</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-400">关</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="openBehaviorRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-green-500 hover:text-green-600 font-bold text-xs">启用</button><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button></div></td></tr>
+        </tbody>
+      </table>
+      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500"><div class="flex items-center gap-3"><span>共 3 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white" onchange="changePageSize(this)"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div><div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 1 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div></div>
+    </div>
+    </div>
+    <!-- Tab: 活动积分规则 -->
+    <div id="tab-activity" class="points-tab-content hidden">
+
+    <!-- 筛选区 -->
+    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-4">
+      <div class="grid grid-cols-5 gap-4 mb-4">
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">来源系统</label>
+          <select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
+            <option>全部</option><option>抽奖系统</option><option>活动系统</option><option>商城活动</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">活动类型</label>
+          <select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
+            <option>全部</option><option>抽奖</option><option>任务</option><option>营销活动</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">积分动作</label>
+          <select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
+            <option>全部</option><option>新增积分</option><option>扣减积分</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">状态</label>
+          <select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
+            <option>全部</option><option>生效</option><option>停用</option><option>已过期</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">关键词</label>
+          <input type="text" placeholder="活动名称 / 规则名称" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm">
+        </div>
+      </div>
+      <div class="flex justify-end gap-2">
+        <button class="bg-white text-gray-700 border border-gray-200 px-5 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors shadow-sm">重置</button>
+        <button class="bg-primary text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm">
+          <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>查询
+        </button>
+      </div>
+    </div>
+
+    <!-- 列表 -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-x-auto">
+      <table class="w-full text-sm whitespace-nowrap">
+        <thead><tr class="bg-gray-50/50 text-left">
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">规则名称</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">来源系统</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">活动名称</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">活动类型</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">积分动作</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">触发场景</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">积分值</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">用户限制</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">活动预算</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">状态</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">创建来源</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
+        </tr></thead>
+        <tbody class="divide-y divide-gray-50">
+          <tr class="hover:bg-gray-50/30">
+            <td class="px-4 py-3 font-bold text-gray-900">抽奖参与扣积分</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">抽奖系统</td>
+            <td class="px-4 py-3 text-gray-900 text-xs">新春抽奖活动</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-purple-50 text-purple-500">抽奖</span></td>
+            <td class="px-4 py-3 text-red-500 font-bold text-xs">扣减积分</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">参与抽奖</td>
+            <td class="px-4 py-3 text-red-500 font-bold">-10</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">每人每日 5 次</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">最多发放 100,000</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">生效</span></td>
+            <td class="px-4 py-3 text-gray-400 text-xs">活动后台同步</td>
+            <td class="px-4 py-3"><div class="flex items-center gap-2">
+              <button onclick="viewActivityRule(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button>
+              <button onclick="toggleActivityRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button>
+              <button onclick="showActivityRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button>
+              <button class="text-gray-400 hover:text-gray-600 font-bold text-xs">跳转</button>
+            </div></td>
+          </tr>
+          <tr class="hover:bg-gray-50/30">
+            <td class="px-4 py-3 font-bold text-gray-900">中奖奖励积分</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">抽奖系统</td>
+            <td class="px-4 py-3 text-gray-900 text-xs">新春抽奖活动</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-purple-50 text-purple-500">抽奖</span></td>
+            <td class="px-4 py-3 text-green-500 font-bold text-xs">新增积分</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">中奖</td>
+            <td class="px-4 py-3 text-green-500 font-bold">+100</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">不限制</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">最多发放 500,000</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">生效</span></td>
+            <td class="px-4 py-3 text-gray-400 text-xs">活动后台同步</td>
+            <td class="px-4 py-3"><div class="flex items-center gap-2">
+              <button onclick="viewActivityRule(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button>
+              <button onclick="toggleActivityRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button>
+              <button onclick="showActivityRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button>
+              <button class="text-gray-400 hover:text-gray-600 font-bold text-xs">跳转</button>
+            </div></td>
+          </tr>
+          <tr class="hover:bg-gray-50/30">
+            <td class="px-4 py-3 font-bold text-gray-900">完成任务奖励积分</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">活动系统</td>
+            <td class="px-4 py-3 text-gray-900 text-xs">社区打卡挑战</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-blue-50 text-blue-500">任务</span></td>
+            <td class="px-4 py-3 text-green-500 font-bold text-xs">新增积分</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">完成任务</td>
+            <td class="px-4 py-3 text-green-500 font-bold">+50</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">每人每日 1 次</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">最多发放 200,000</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">生效</span></td>
+            <td class="px-4 py-3 text-gray-400 text-xs">活动后台同步</td>
+            <td class="px-4 py-3"><div class="flex items-center gap-2">
+              <button onclick="viewActivityRule(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button>
+              <button onclick="toggleActivityRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button>
+              <button onclick="showActivityRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button>
+              <button class="text-gray-400 hover:text-gray-600 font-bold text-xs">跳转</button>
+            </div></td>
+          </tr>
+          <tr class="hover:bg-gray-50/30">
+            <td class="px-4 py-3 font-bold text-gray-900">限时秒杀扣积分</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">商城活动</td>
+            <td class="px-4 py-3 text-gray-900 text-xs">双11积分秒杀</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-amber-50 text-amber-600">营销活动</span></td>
+            <td class="px-4 py-3 text-red-500 font-bold text-xs">扣减积分</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">参与秒杀</td>
+            <td class="px-4 py-3 text-red-500 font-bold">-200</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">每人每日 1 次</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">最多发放 50,000</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-400">停用</span></td>
+            <td class="px-4 py-3 text-gray-400 text-xs">会员后台创建</td>
+            <td class="px-4 py-3"><div class="flex items-center gap-2">
+              <button onclick="viewActivityRule(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button>
+              <button onclick="toggleActivityRuleStatus(this)" class="text-green-500 hover:text-green-600 font-bold text-xs">启用</button>
+              <button onclick="showActivityRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button>
+              <button class="text-gray-400 hover:text-gray-600 font-bold text-xs">跳转</button>
+            </div></td>
+          </tr>
+          <tr class="hover:bg-gray-50/30">
+            <td class="px-4 py-3 font-bold text-gray-900">节日活动奖励积分</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">活动系统</td>
+            <td class="px-4 py-3 text-gray-900 text-xs">春节红包雨</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-blue-50 text-blue-500">任务</span></td>
+            <td class="px-4 py-3 text-green-500 font-bold text-xs">新增积分</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">参与活动</td>
+            <td class="px-4 py-3 text-green-500 font-bold">+30</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">每人每日 3 次</td>
+            <td class="px-4 py-3 text-gray-600 text-xs">最多发放 300,000</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-500">已过期</span></td>
+            <td class="px-4 py-3 text-gray-400 text-xs">活动后台同步</td>
+            <td class="px-4 py-3"><div class="flex items-center gap-2">
+              <button onclick="viewActivityRule(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button>
+              <button class="text-gray-300 font-bold text-xs cursor-not-allowed" disabled>停用</button>
+              <button onclick="showActivityRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button>
+              <button class="text-gray-400 hover:text-gray-600 font-bold text-xs">跳转</button>
+            </div></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
+        <div class="flex items-center gap-3"><span>共 5 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div>
+        <div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 1 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div>
+      </div>
+    </div>
     </div>
   </div>
 
@@ -1050,7 +1435,6 @@ tailwind.config = {
           <option value="">请选择权益类型</option>
           <option value="virtual">软件码</option>
           <option value="coupon">优惠券</option>
-          <option value="physical">实物商品</option>
         </select>
       </div>
 
@@ -1148,93 +1532,6 @@ tailwind.config = {
         <div id="coupon-sync-empty" class="bg-white rounded-lg p-3 text-xs text-gray-400 text-center">尚未同步，请输入券模板ID后点击"同步券信息"</div>
       </div>
 
-      <!-- 实物商品专属：搜索商城商品 -->
-      <div id="prize-section-physical" class="hidden space-y-3">
-        <div>
-          <label class="text-xs text-gray-500 font-bold mb-1 block">商品来源 <span class="text-red-500">*</span></label>
-          <select class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
-            <option value="">请选择商品来源</option>
-            <option>美国</option><option>加拿大</option><option>墨西哥</option><option>巴西</option>
-            <option>英国</option><option>德国</option><option>法国</option><option>意大利</option>
-            <option>西班牙</option><option>葡萄牙</option><option>波兰</option><option>南欧</option>
-            <option>土耳其</option><option>中东</option><option>俄罗斯</option>
-            <option>日本</option><option>韩国</option><option>澳大利亚</option>
-            <option>菲律宾</option><option>马来西亚</option><option>新加坡</option>
-            <option>越南</option><option>印度尼西亚</option><option>智利</option><option>爱尔兰</option>
-          </select>
-        </div>
-        <div>
-          <label class="text-xs text-gray-500 font-bold mb-1 block">商品搜索</label>
-          <div class="flex items-start gap-2">
-            <textarea id="physical-search-input" rows="1" placeholder="输入商品名称 / ID / SKU，多个商品按回车换行" onkeydown="if(event.key==='Enter'){var t=this;var s=t.scrollTop;t.rows=t.rows+1;setTimeout(function(){t.scrollTop=s},0)}" class="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
-            <button onclick="searchPhysicalProducts()" class="bg-primary text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm shrink-0">
-              <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-              查询
-            </button>
-          </div>
-          <p class="text-[10px] text-gray-400 mt-1">支持多个商品搜索，按回车键换行分隔，例如：SKU001、保温杯</p>
-        </div>
-        <div id="physical-search-result" class="hidden bg-white rounded-xl border border-gray-100 overflow-hidden">
-          <table class="w-full text-xs">
-            <thead>
-              <tr class="bg-gray-50/50 text-left">
-                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase">商品图</th>
-                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase">商品名称</th>
-                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase">SKU</th>
-                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase">售价</th>
-                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase">可用库存</th>
-                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase">状态</th>
-                <th class="px-4 py-2.5 text-[10px] font-bold text-gray-400 uppercase w-16">选择</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-50" id="physical-product-list">
-              <tr class="hover:bg-gray-50/30 transition-colors">
-                <td class="px-4 py-3"><div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-300 text-[10px]">图</div></td>
-                <td class="px-4 py-3"><span class="font-bold text-gray-900">社区定制保温杯</span><div class="text-[10px] text-gray-400">500ml 白色</div></td>
-                <td class="px-4 py-3 font-mono text-gray-600">SKU001</td>
-                <td class="px-4 py-3 text-gray-900 font-bold">¥99</td>
-                <td class="px-4 py-3 text-gray-900 font-bold">800</td>
-                <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">上架</span></td>
-                <td class="px-4 py-3"><input type="checkbox" class="physical-checkbox rounded accent-primary" data-name="社区定制保温杯" data-spec="500ml 白色" onchange="updateBatchSelect()"></td>
-              </tr>
-              <tr class="hover:bg-gray-50/30 transition-colors">
-                <td class="px-4 py-3"><div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-300 text-[10px]">图</div></td>
-                <td class="px-4 py-3"><span class="font-bold text-gray-900">品牌蓝牙耳机</span><div class="text-[10px] text-gray-400">黑色 标准版</div></td>
-                <td class="px-4 py-3 font-mono text-gray-600">SKU002</td>
-                <td class="px-4 py-3 text-gray-900 font-bold">¥299</td>
-                <td class="px-4 py-3 text-gray-900 font-bold">350</td>
-                <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">上架</span></td>
-                <td class="px-4 py-3"><input type="checkbox" class="physical-checkbox rounded accent-primary" data-name="品牌蓝牙耳机" data-spec="黑色 标准版" onchange="updateBatchSelect()"></td>
-              </tr>
-              <tr class="hover:bg-gray-50/30 transition-colors">
-                <td class="px-4 py-3"><div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center text-gray-300 text-[10px]">图</div></td>
-                <td class="px-4 py-3"><span class="font-bold text-gray-900">精美书籍套装</span><div class="text-[10px] text-gray-400">3册装</div></td>
-                <td class="px-4 py-3 font-mono text-gray-600">SKU003</td>
-                <td class="px-4 py-3 text-gray-900 font-bold">¥128</td>
-                <td class="px-4 py-3 text-gray-900 font-bold">500</td>
-                <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">上架</span></td>
-                <td class="px-4 py-3"><input type="checkbox" class="physical-checkbox rounded accent-primary" data-name="精美书籍套装" data-spec="3册装" onchange="updateBatchSelect()"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div id="physical-batch-bar" class="hidden mt-2 flex items-center justify-between">
-          <span class="text-xs text-gray-500">已勾选 <span id="physical-batch-count" class="font-bold text-primary">0</span> 个商品</span>
-          <button onclick="batchSelectPhysical()" class="bg-primary text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-700 transition-colors">批量选择</button>
-        </div>
-        <div id="physical-selected" class="hidden bg-green-50 rounded-xl p-3 border border-green-100 space-y-2">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-              <span class="text-sm font-bold text-gray-900">已选择 <span id="physical-selected-count" class="text-primary">0</span> 个商品</span>
-            </div>
-            <button onclick="clearPhysicalSelection()" class="text-gray-400 hover:text-red-500 text-xs font-bold">取消选择</button>
-          </div>
-          <div class="flex flex-wrap gap-1" id="physical-selected-tags"></div>
-        </div>
-        <p id="physical-search-empty" class="text-xs text-gray-400">请搜索并选择商城商品</p>
-      </div>
-
       <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
         <input type="checkbox" checked class="rounded accent-primary"> 启用
       </label>
@@ -1315,6 +1612,77 @@ tailwind.config = {
           <div class="bg-gray-50 rounded-lg p-2"><span class="text-gray-400">已发放</span><div class="font-bold text-green-500">128</div></div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MODAL: 人工补发 ========== -->
+<div class="modal-overlay" id="modal-store-coupon-form" onclick="if(event.target===this)hideModal('modal-store-coupon-form')">
+  <div class="bg-white rounded-2xl w-full max-w-2xl p-6 shadow-xl relative max-h-[88vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-5">
+      <div>
+        <h3 class="text-lg font-bold text-gray-900">新增优惠券</h3>
+        <p class="text-xs text-gray-400 mt-0.5">创建商城商品优惠券/码，社区专用类型可配置积分价格</p>
+      </div>
+      <button onclick="hideModal('modal-store-coupon-form')" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="text-xs text-gray-500 font-bold mb-1 block">优惠券名称 <span class="text-red-500">*</span></label>
+        <input id="store-coupon-form-name" type="text" placeholder="请输入优惠券名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 font-bold mb-1 block">优惠类型 <span class="text-red-500">*</span></label>
+        <select class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
+          <option>商品优惠码</option>
+          <option>商品优惠券</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 font-bold mb-1 block">发放类型 <span class="text-red-500">*</span></label>
+        <select id="store-coupon-grant-type" onchange="toggleStoreCouponPointsField()" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
+          <option>线下发放</option>
+          <option>公用优惠码</option>
+          <option>社区专用</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 font-bold mb-1 block">优惠码</label>
+        <input type="text" placeholder="公用优惠码可填写" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 font-bold mb-1 block">优惠券金额 <span class="text-red-500">*</span></label>
+        <input type="text" placeholder="如 30% 或 20.00" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 font-bold mb-1 block">满订单金额</label>
+        <input type="number" min="0" placeholder="0.00" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 font-bold mb-1 block">使用截止日期</label>
+        <input type="datetime-local" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 font-bold mb-1 block">商品名称</label>
+        <input type="text" placeholder="请输入关联商品名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+      </div>
+      <div id="store-coupon-points-field" class="hidden">
+        <label class="text-xs text-gray-500 font-bold mb-1 block">积分价格</label>
+        <input id="store-coupon-points-price" type="number" min="0" placeholder="非必填，社区专用时可配置" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <label class="text-xs text-gray-500 font-bold mb-1 block">备注</label>
+      <textarea rows="3" placeholder="填写运营备注，非必填" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
+    </div>
+
+    <div class="flex items-center justify-end gap-3 mt-5 pt-4 border-t border-gray-100">
+      <button onclick="hideModal('modal-store-coupon-form')" class="bg-white text-gray-700 border border-gray-200 px-6 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors shadow-sm">取消</button>
+      <button onclick="submitStoreCouponForm()" class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">保存</button>
     </div>
   </div>
 </div>
@@ -1575,6 +1943,296 @@ tailwind.config = {
     </div>
     <div class="border-t border-gray-100 pt-4 space-y-2" id="order-modal-actions">
       <p class="text-xs text-gray-400 font-bold mb-2">可执行操作</p>
+      <button onclick="hideModal('modal-order-handle'); showToast('重试已触发，系统将重新发放','success')" class="w-full bg-primary text-white px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors">自动重试</button>
+      <button onclick="hideModal('modal-order-handle'); showToast('已退积分，订单关闭','success')" class="w-full bg-white text-orange-500 border border-orange-200 px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-orange-50 transition-colors">退积分</button>
+      <div class="bg-gray-50 rounded-xl p-3 space-y-2">
+        <p class="text-xs text-gray-400 font-bold">人工处理</p>
+        <textarea rows="2" placeholder="请填写处理方式和备注" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs resize-none"></textarea>
+        <button onclick="var ta=this.parentElement.querySelector('textarea'); if(!ta.value.trim()){showToast('请填写处理备注','error');return;} hideModal('modal-order-handle'); showToast('人工处理已记录','success')" class="w-full bg-white text-gray-700 border border-gray-200 px-4 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors">确认处理</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MODAL: 行为积分规则明细 ========== -->
+<div class="modal-overlay" id="modal-behavior-detail" onclick="if(event.target===this)hideModal('modal-behavior-detail')">
+  <div class="bg-white rounded-2xl w-full max-w-5xl p-6 shadow-xl relative max-h-[92vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="text-lg font-bold text-gray-900" id="behavior-detail-title">积分明细</h3>
+      <button onclick="hideModal('modal-behavior-detail')" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- 统计卡片 -->
+    <div class="grid grid-cols-4 gap-3 mb-5">
+      <div class="bg-gray-50 rounded-xl p-3 text-center">
+        <p class="text-xs text-gray-400 mb-0.5">累计获取次数</p>
+        <p class="text-xl font-bold text-gray-900" id="detail-total-count">1,286</p>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-3 text-center">
+        <p class="text-xs text-gray-400 mb-0.5">累计发放积分</p>
+        <p class="text-xl font-bold text-primary">6,430</p>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-3 text-center">
+        <p class="text-xs text-gray-400 mb-0.5">今日获取次数</p>
+        <p class="text-xl font-bold text-gray-900">47</p>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-3 text-center">
+        <p class="text-xs text-gray-400 mb-0.5">今日发放积分</p>
+        <p class="text-xl font-bold text-primary">235</p>
+      </div>
+    </div>
+
+    <!-- 筛选区 -->
+    <div class="bg-gray-50 rounded-xl p-4 mb-4">
+      <div class="grid grid-cols-4 gap-3">
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">用户ID</label>
+          <input type="text" placeholder="请输入用户ID" class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm bg-white">
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">行为时间起</label>
+          <input type="date" class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm bg-white">
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">行为时间止</label>
+          <input type="date" class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm bg-white">
+        </div>
+        <div class="flex items-end gap-2">
+          <button class="bg-primary text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex items-center shadow-sm">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>查询
+          </button>
+          <button class="bg-white text-gray-700 border border-gray-200 px-4 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors shadow-sm">重置</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 明细表格 -->
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <table class="w-full text-sm">
+        <thead><tr class="bg-gray-50/50 text-left">
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">用户ID</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">用户名</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">行为时间</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">行为描述</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">获得积分</th>
+          <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">积分余额</th>
+        </tr></thead>
+        <tbody class="divide-y divide-gray-50">
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">user_123456</td><td class="px-4 py-3 font-bold text-gray-900">张小明</td><td class="px-4 py-3 text-gray-500 text-xs">2026-06-22 14:30:25</td><td class="px-4 py-3 text-gray-600 text-xs">发表帖子《社区活动回顾》</td><td class="px-4 py-3 text-green-600 font-bold">+5</td><td class="px-4 py-3 text-gray-900 font-bold">320</td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">user_234567</td><td class="px-4 py-3 font-bold text-gray-900">李小红</td><td class="px-4 py-3 text-gray-500 text-xs">2026-06-22 13:15:10</td><td class="px-4 py-3 text-gray-600 text-xs">发表帖子《积分兑换心得》</td><td class="px-4 py-3 text-green-600 font-bold">+5</td><td class="px-4 py-3 text-gray-900 font-bold">890</td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">user_345678</td><td class="px-4 py-3 font-bold text-gray-900">王大华</td><td class="px-4 py-3 text-gray-500 text-xs">2026-06-22 11:42:08</td><td class="px-4 py-3 text-gray-600 text-xs">发表帖子《新功能建议》</td><td class="px-4 py-3 text-green-600 font-bold">+5</td><td class="px-4 py-3 text-gray-900 font-bold">156</td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">user_456789</td><td class="px-4 py-3 font-bold text-gray-900">赵丽丽</td><td class="px-4 py-3 text-gray-500 text-xs">2026-06-22 10:08:33</td><td class="px-4 py-3 text-gray-600 text-xs">发表帖子《问答：如何快速升级》</td><td class="px-4 py-3 text-green-600 font-bold">+5</td><td class="px-4 py-3 text-gray-900 font-bold">2,100</td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">user_567890</td><td class="px-4 py-3 font-bold text-gray-900">陈小伟</td><td class="px-4 py-3 text-gray-500 text-xs">2026-06-21 22:55:41</td><td class="px-4 py-3 text-gray-600 text-xs">发表帖子《活动报名指南》</td><td class="px-4 py-3 text-green-600 font-bold">+5</td><td class="px-4 py-3 text-gray-900 font-bold">680</td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">user_678901</td><td class="px-4 py-3 font-bold text-gray-900">刘小芳</td><td class="px-4 py-3 text-gray-500 text-xs">2026-06-21 18:20:12</td><td class="px-4 py-3 text-gray-600 text-xs">发表帖子《积分商城晒单》</td><td class="px-4 py-3 text-green-600 font-bold">+5</td><td class="px-4 py-3 text-gray-900 font-bold">430</td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">user_789012</td><td class="px-4 py-3 font-bold text-gray-900">周大文</td><td class="px-4 py-3 text-gray-500 text-xs">2026-06-21 16:05:59</td><td class="px-4 py-3 text-gray-600 text-xs">发表帖子《每日打卡记录》</td><td class="px-4 py-3 text-green-600 font-bold">+5</td><td class="px-4 py-3 text-gray-900 font-bold">910</td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">user_890123</td><td class="px-4 py-3 font-bold text-gray-900">吴大龙</td><td class="px-4 py-3 text-gray-500 text-xs">2026-06-21 09:30:17</td><td class="px-4 py-3 text-gray-600 text-xs">发表帖子《新手入门教程》</td><td class="px-4 py-3 text-green-600 font-bold">+5</td><td class="px-4 py-3 text-gray-900 font-bold">1,250</td></tr>
+        </tbody>
+      </table>
+      <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
+        <div class="flex items-center gap-3"><span>共 1,286 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div>
+        <div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 26 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MODAL: 行为积分规则表单 ========== -->
+<div class="modal-overlay" id="modal-behavior-rule-form" onclick="if(event.target===this)hideModal('modal-behavior-rule-form')">
+  <div class="bg-white rounded-2xl w-full max-w-2xl p-6 shadow-xl relative max-h-[92vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="text-lg font-bold text-gray-900" id="behavior-rule-form-title">新增规则</h3>
+      <button onclick="hideModal('modal-behavior-rule-form')" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- 基础信息 -->
+    <div class="mb-5">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="w-1 h-4 bg-primary rounded-full"></div>
+        <h4 class="text-sm font-bold text-gray-900">基础信息</h4>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">规则名称 <span class="text-red-500">*</span></label>
+          <input type="text" id="rule-name" placeholder="请输入规则名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">业务模块 <span class="text-red-500">*</span></label>
+          <select id="rule-module" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
+            <option value="">请选择</option><option>会员</option><option>社区</option><option>商城</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">行为类型 <span class="text-red-500">*</span></label>
+          <select id="rule-behavior-type" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
+            <option value="">请选择</option><option>注册</option><option>签到</option><option>发帖</option><option>评论</option><option>支付</option><option>评价</option>
+          </select>
+        </div>
+        <div class="col-span-2">
+          <label class="text-xs text-gray-500 font-bold mb-1 block">规则说明</label>
+          <textarea id="rule-desc" rows="2" placeholder="请输入规则说明" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 积分配置 -->
+    <div class="mb-5">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="w-1 h-4 bg-primary rounded-full"></div>
+        <h4 class="text-sm font-bold text-gray-900">积分配置</h4>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">积分方向 <span class="text-red-500">*</span></label>
+          <select id="rule-direction" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
+            <option value="add">新增</option><option value="deduct">扣减</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">积分值 <span class="text-red-500">*</span></label>
+          <div class="flex items-center gap-2">
+            <span class="text-sm text-gray-400">固定积分</span>
+            <input type="number" id="rule-points" value="5" min="1" class="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+          </div>
+        </div>
+        <div class="col-span-2">
+          <label class="text-xs text-gray-500 font-bold mb-1 block">积分有效期 <span class="text-red-500">*</span></label>
+          <div class="flex items-center gap-4">
+            <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer"><input type="radio" name="rule-expiry" value="global" checked class="accent-primary"> 跟随全局</label>
+            <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer"><input type="radio" name="rule-expiry" value="custom" class="accent-primary"> 自定义</label>
+            <input type="number" id="rule-expiry-days" value="365" min="1" disabled class="w-24 border border-gray-200 rounded-xl px-3 py-2 text-sm text-center disabled:bg-gray-100 disabled:text-gray-400">
+            <select id="rule-expiry-unit" disabled class="border border-gray-200 rounded-xl px-3 py-2 text-sm bg-white disabled:bg-gray-100 disabled:text-gray-400"><option>天</option><option>周</option><option>月</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 限制配置 -->
+    <div class="mb-5">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="w-1 h-4 bg-primary rounded-full"></div>
+        <h4 class="text-sm font-bold text-gray-900">限制配置</h4>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">行为上限 <span class="text-red-500">*</span></label>
+          <div class="flex items-center gap-2">
+            <input type="number" id="rule-behavior-limit" value="10" min="1" class="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+            <span class="text-sm text-gray-400">次</span>
+          </div>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">统计周期 <span class="text-red-500">*</span></label>
+          <select id="rule-period" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
+            <option>日</option><option>周</option><option>月</option><option>年</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">积分上限 <span class="text-red-500">*</span></label>
+          <div class="flex items-center gap-2">
+            <input type="number" id="rule-points-limit" value="50" min="1" class="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+            <span class="text-sm text-gray-400">分</span>
+          </div>
+        </div>
+        <div>
+          <label class="text-xs text-gray-500 font-bold mb-1 block">超限处理</label>
+          <input type="text" value="不发放积分" disabled class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm disabled:bg-gray-100 disabled:text-gray-400">
+        </div>
+      </div>
+    </div>
+
+    <!-- 状态配置 -->
+    <div class="mb-5">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="w-1 h-4 bg-primary rounded-full"></div>
+        <h4 class="text-sm font-bold text-gray-900">状态配置</h4>
+      </div>
+      <div>
+        <label class="text-xs text-gray-500 font-bold mb-1 block">是否启用</label>
+        <select id="rule-status" class="border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
+          <option value="1">启用</option><option value="0">停用</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 操作按钮 -->
+    <div class="flex justify-end gap-3 pt-4 border-t border-gray-100">
+      <button onclick="hideModal('modal-behavior-rule-form')" class="bg-white text-gray-700 border border-gray-200 px-6 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors shadow-sm">取消</button>
+      <button onclick="saveBehaviorRule()" class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MODAL: 活动积分规则详情 ========== -->
+<div class="modal-overlay" id="modal-activity-rule-detail" onclick="if(event.target===this)hideModal('modal-activity-rule-detail')">
+  <div class="bg-white rounded-2xl w-full max-w-2xl p-6 shadow-xl relative max-h-[92vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="text-lg font-bold text-gray-900" id="activity-detail-title">规则详情</h3>
+      <button onclick="hideModal('modal-activity-rule-detail')" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- 基本信息 -->
+    <div class="mb-5">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="w-1 h-4 bg-primary rounded-full"></div>
+        <h4 class="text-sm font-bold text-gray-900">基本信息</h4>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-4 grid grid-cols-2 gap-3">
+        <div><span class="text-xs text-gray-400">规则名称</span><p class="text-sm font-bold text-gray-900 mt-0.5" id="detail-rule-name">—</p></div>
+        <div><span class="text-xs text-gray-400">来源系统</span><p class="text-sm font-bold text-gray-900 mt-0.5" id="detail-source-system">—</p></div>
+        <div><span class="text-xs text-gray-400">活动名称</span><p class="text-sm font-bold text-gray-900 mt-0.5" id="detail-activity-name">—</p></div>
+        <div><span class="text-xs text-gray-400">活动类型</span><p class="text-sm mt-0.5" id="detail-activity-type">—</p></div>
+      </div>
+    </div>
+
+    <!-- 积分规则 -->
+    <div class="mb-5">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="w-1 h-4 bg-primary rounded-full"></div>
+        <h4 class="text-sm font-bold text-gray-900">积分规则</h4>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-4 grid grid-cols-2 gap-3">
+        <div><span class="text-xs text-gray-400">积分动作</span><p class="text-sm font-bold mt-0.5" id="detail-points-action">—</p></div>
+        <div><span class="text-xs text-gray-400">触发场景</span><p class="text-sm font-bold text-gray-900 mt-0.5" id="detail-trigger-scene">—</p></div>
+        <div><span class="text-xs text-gray-400">积分值</span><p class="text-sm font-bold mt-0.5" id="detail-points-value">—</p></div>
+      </div>
+    </div>
+
+    <!-- 限制与预算 -->
+    <div class="mb-5">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="w-1 h-4 bg-primary rounded-full"></div>
+        <h4 class="text-sm font-bold text-gray-900">限制与预算</h4>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-4 grid grid-cols-2 gap-3">
+        <div><span class="text-xs text-gray-400">用户限制</span><p class="text-sm font-bold text-gray-900 mt-0.5" id="detail-user-limit">—</p></div>
+        <div><span class="text-xs text-gray-400">活动预算</span><p class="text-sm font-bold text-gray-900 mt-0.5" id="detail-budget">—</p></div>
+        <div><span class="text-xs text-gray-400">已发放积分</span><p class="text-sm font-bold text-gray-900 mt-0.5" id="detail-issued">—</p></div>
+        <div><span class="text-xs text-gray-400">使用进度</span><p class="text-sm mt-0.5" id="detail-progress">—</p></div>
+      </div>
+    </div>
+
+    <!-- 同步信息 -->
+    <div class="mb-5">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="w-1 h-4 bg-primary rounded-full"></div>
+        <h4 class="text-sm font-bold text-gray-900">同步信息</h4>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-4 grid grid-cols-2 gap-3">
+        <div><span class="text-xs text-gray-400">创建来源</span><p class="text-sm font-bold text-gray-900 mt-0.5" id="detail-create-source">—</p></div>
+        <div><span class="text-xs text-gray-400">状态</span><p class="text-sm mt-0.5" id="detail-status">—</p></div>
+        <div><span class="text-xs text-gray-400">最近同步时间</span><p class="text-sm text-gray-600 mt-0.5" id="detail-sync-time">—</p></div>
+      </div>
+    </div>
+
+    <!-- 底部操作 -->
+    <div class="flex justify-end gap-3 pt-4 border-t border-gray-100">
+      <button onclick="hideModal('modal-activity-rule-detail')" class="bg-white text-gray-700 border border-gray-200 px-6 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors shadow-sm">关闭</button>
     </div>
   </div>
 </div>
@@ -1592,6 +2250,25 @@ function switchPage(pageId) {
   var navItem = document.querySelector('[data-page="' + pageId + '"]');
   if (!navItem && pageId === 'order-detail') navItem = document.querySelector('[data-page="order-all"]');
   if (navItem) navItem.classList.add('active');
+}
+
+function switchPointsTab(tab) {
+  document.querySelectorAll('.points-tab-content').forEach(function(c) { c.classList.add('hidden'); });
+  document.getElementById('tab-' + tab).classList.remove('hidden');
+  var btnBehavior = document.getElementById('tab-btn-behavior');
+  var btnActivity = document.getElementById('tab-btn-activity');
+  if (tab === 'behavior') {
+    btnBehavior.className = 'px-4 py-1.5 rounded-lg text-sm font-bold transition-colors bg-primary text-white shadow-sm';
+    btnActivity.className = 'px-4 py-1.5 rounded-lg text-sm text-gray-500 font-bold transition-colors hover:text-gray-700';
+  } else {
+    btnActivity.className = 'px-4 py-1.5 rounded-lg text-sm font-bold transition-colors bg-primary text-white shadow-sm';
+    btnBehavior.className = 'px-4 py-1.5 rounded-lg text-sm text-gray-500 font-bold transition-colors hover:text-gray-700';
+  }
+}
+
+// 兼容旧 hash 路径，重定向到积分规则设置
+if (location.hash === '#points-behavior-rule' || location.hash === '#points-activity-rule') {
+  history.replaceState(null, '', '#points-rules');
 }
 
 document.querySelectorAll('.nav-item').forEach(item => {
@@ -1686,12 +2363,14 @@ function renderOrderActions() {
 
     if (isException || issueStatus === '发放失败') {
       actions.push(orderActionButton('处理', 'exception', 'text-red-500 hover:text-red-600'));
+    } else if (type === '实物商品' && issueStatus === '待填写地址') {
+      actions.push(orderActionButton('填写地址', 'address', 'text-primary hover:text-blue-700'));
     } else if (type === '实物商品' && issueStatus === '待发货') {
       actions.push(orderActionButton('发货', 'ship', 'text-primary hover:text-blue-700'));
     } else if (type === '实物商品' && issueStatus === '已发货') {
       actions.push(orderActionButton('完成', 'complete', 'text-green-500 hover:text-green-600'));
     } else if (issueStatus === '待处理') {
-      actions.push(orderActionButton('处理', 'process', 'text-primary hover:text-blue-700'));
+      actions.push(orderActionButton('处理', 'exception', 'text-red-500 hover:text-red-600'));
     }
 
     cells[9].innerHTML = '<div class="flex items-center gap-2">' + actions.join('') + '</div>';
@@ -1728,30 +2407,222 @@ function openOrderModal(btn, action) {
       '<div class="flex justify-between"><span>消耗积分</span><span class="font-bold text-gray-900">' + getBadgeText(cells[4]) + '</span></div>' +
       '<div class="flex justify-between"><span>兑换时间</span><span class="font-bold text-gray-900">' + getBadgeText(cells[8]) + '</span></div>' +
       '</div>';
+  } else if (action === 'address') {
+    actions.innerHTML = '<p class=\"text-xs text-gray-400 font-bold mb-2\">填写收货地址</p>' +
+      '<div class=\"space-y-2\">' +
+      '<input type=\"text\" id=\"addr-name\" placeholder=\"收货人姓名\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
+      '<input type=\"tel\" id=\"addr-phone\" placeholder=\"手机号\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
+      '<input type=\"text\" id=\"addr-region\" placeholder=\"省市区\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
+      '<input type=\"text\" id=\"addr-detail\" placeholder=\"详细地址\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
+      '</div>' +
+      '<div class=\"mt-2\">' +
+      modalButton('确认填写', '地址已填写，进入待发货', 'bg-primary text-white hover:bg-blue-700') +
+      '</div>';
   } else if (action === 'ship') {
-    actions.innerHTML = '<p class="text-xs text-gray-400 font-bold mb-2">可执行操作</p>' +
-      modalButton('标记已发货', '已标记为已发货', 'bg-primary text-white hover:bg-blue-700') +
-      modalButton('添加备注', '备注已添加', 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50');
+    actions.innerHTML = '<p class="text-xs text-gray-400 font-bold mb-2">发货信息</p>' +
+      '<div class=\"space-y-2\">' +
+      '<input type=\"text\" id=\"ship-tracking\" placeholder=\"请输入物流单号\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
+      '<input type=\"text\" id=\"ship-company\" placeholder=\"请输入物流公司（选填）\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
+      '</div>' +
+      '<div class=\"mt-2\">' +
+      modalButton('确认发货', '已标记为已发货', 'bg-primary text-white hover:bg-blue-700') +
+      '</div>';
   } else if (action === 'complete') {
     actions.innerHTML = '<p class="text-xs text-gray-400 font-bold mb-2">可执行操作</p>' +
       modalButton('标记已完成', '已标记为已完成', 'bg-green-500 text-white hover:bg-green-600') +
       modalButton('添加备注', '备注已添加', 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50');
-  } else if (action === 'process') {
-    actions.innerHTML = '<p class="text-xs text-gray-400 font-bold mb-2">可执行操作</p>' +
-      modalButton('开始处理', '订单已进入处理中', 'bg-primary text-white hover:bg-blue-700') +
-      modalButton('关闭订单', '订单已关闭', 'bg-white text-red-500 border border-red-200 hover:bg-red-50');
   } else {
-    actions.innerHTML = '<p class="text-xs text-gray-400 font-bold mb-2">可执行操作</p>' +
-      modalButton('自动重试', '重试已触发', 'bg-primary text-white hover:bg-blue-700') +
-      modalButton('人工补发', '人工补发已提交', 'bg-white text-red-500 border border-red-200 hover:bg-red-50') +
-      modalButton('退还积分', '积分退还已提交', 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50') +
-      modalButton('关闭订单', '订单已关闭', 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50');
+    actions.innerHTML = '<p class=\"text-xs text-gray-400 font-bold mb-2\">可执行操作</p>' +
+      modalButton('自动重试', '重试已触发，系统将重新发放', 'bg-primary text-white hover:bg-blue-700') +
+      modalButton('退积分', '已退积分，订单关闭', 'bg-white text-orange-500 border border-orange-200 hover:bg-orange-50') +
+      '<div class=\"bg-gray-50 rounded-xl p-3 space-y-2 mt-2\">' +
+      '<p class=\"text-xs text-gray-400 font-bold\">人工处理</p>' +
+      '<textarea rows=\"2\" placeholder=\"请填写处理方式和备注\" class=\"w-full border border-gray-200 rounded-lg px-3 py-2 text-xs resize-none\" id=\"manual-note\"></textarea>' +
+      modalButton('确认处理', '人工处理已记录', 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50') +
+      '</div>';
   }
 
   showModal('modal-order-handle');
 }
 
+
+function switchRuleTab(tab) {
+  document.querySelectorAll('.rule-tab').forEach(function(b) {
+    b.className = 'rule-tab px-4 py-2 rounded-xl text-sm font-bold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors';
+  });
+  document.querySelector('.rule-tab:nth-child(' + ({expiry:1,remind:2,rate:3}[tab]) + ')').className = 'rule-tab px-4 py-2 rounded-xl text-sm font-bold bg-primary text-white shadow-sm transition-colors';
+  document.querySelectorAll('.rule-content').forEach(function(d) { d.classList.add('hidden'); });
+  document.getElementById('rule-tab-' + tab).classList.remove('hidden');
+}
+
+function toggleCouponStatus(btn) {
+  var row = btn.closest("tr");
+  var badge = row.querySelector("td:nth-child(10) span");
+  var isEnabled = badge.textContent === "启用";
+  if (isEnabled) {
+    badge.textContent = "停用";
+    badge.className = "px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-400";
+    btn.textContent = "启用";
+    btn.className = "text-green-500 hover:text-green-600 font-bold text-xs";
+    showToast("已停用", "success");
+  } else {
+    badge.textContent = "启用";
+    badge.className = "px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500";
+    btn.textContent = "停用";
+    btn.className = "text-red-500 hover:text-red-600 font-bold text-xs";
+    showToast("已启用", "success");
+  }
+}
 function showModal(id) { document.getElementById(id).classList.add('show'); }
+
+function showBehaviorRuleDetail(btn) {
+  var row = btn.closest('tr');
+  var cells = row.querySelectorAll('td');
+  var ruleName = cells[0].textContent.trim();
+  document.getElementById('behavior-detail-title').textContent = ruleName + ' - 积分明细';
+  showModal('modal-behavior-detail');
+}
+
+function openBehaviorRuleForm(mode, btn) {
+  var title = document.getElementById('behavior-rule-form-title');
+  if (mode === 'add') {
+    title.textContent = '新增规则';
+    document.getElementById('rule-name').value = '';
+    document.getElementById('rule-module').value = '';
+    document.getElementById('rule-behavior-type').value = '';
+    document.getElementById('rule-desc').value = '';
+    document.getElementById('rule-direction').value = 'add';
+    document.getElementById('rule-points').value = '5';
+    document.querySelector('input[name="rule-expiry"][value="global"]').checked = true;
+    document.getElementById('rule-expiry-days').disabled = true;
+    document.getElementById('rule-expiry-unit').disabled = true;
+    document.getElementById('rule-behavior-limit').value = '10';
+    document.getElementById('rule-period').value = '日';
+    document.getElementById('rule-points-limit').value = '50';
+    document.getElementById('rule-status').value = '1';
+  } else {
+    title.textContent = '编辑规则';
+    var row = btn.closest('tr');
+    var cells = row.querySelectorAll('td');
+    document.getElementById('rule-name').value = cells[0].textContent.trim();
+    document.getElementById('rule-module').value = cells[1].textContent.trim();
+    document.getElementById('rule-behavior-type').value = cells[2].textContent.trim();
+    var pointsText = cells[3].textContent.trim();
+    var isDeduct = pointsText.startsWith('-');
+    document.getElementById('rule-direction').value = isDeduct ? 'deduct' : 'add';
+    document.getElementById('rule-points').value = parseInt(pointsText.replace(/[^0-9]/g, '')) || 5;
+    document.querySelector('input[name="rule-expiry"][value="global"]').checked = true;
+    document.getElementById('rule-expiry-days').disabled = true;
+    document.getElementById('rule-expiry-unit').disabled = true;
+    var limitText = cells[4].textContent.trim();
+    document.getElementById('rule-behavior-limit').value = parseInt(limitText) || 10;
+    document.getElementById('rule-period').value = cells[5].textContent.trim();
+    document.getElementById('rule-points-limit').value = cells[6].textContent.trim();
+    var statusText = cells[7].textContent.trim();
+    document.getElementById('rule-status').value = statusText === '开' ? '1' : '0';
+  }
+  showModal('modal-behavior-rule-form');
+}
+
+function saveBehaviorRule() {
+  var name = document.getElementById('rule-name').value.trim();
+  if (!name) { showToast('请输入规则名称', 'error'); return; }
+  if (!document.getElementById('rule-module').value) { showToast('请选择业务模块', 'error'); return; }
+  if (!document.getElementById('rule-behavior-type').value) { showToast('请选择行为类型', 'error'); return; }
+  hideModal('modal-behavior-rule-form');
+  showToast('规则保存成功', 'success');
+}
+
+function toggleBehaviorRuleStatus(btn) {
+  var row = btn.closest('tr');
+  var cells = row.querySelectorAll('td');
+  // cells[7] 是状态列（第8列），里面是 span.badge
+  var statusBadge = cells[7].querySelector('span');
+  var currentStatus = statusBadge.textContent.trim();
+  if (currentStatus === '开') {
+    // 切换为停用
+    statusBadge.textContent = '关';
+    statusBadge.className = 'px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-400';
+    btn.textContent = '启用';
+    btn.className = 'text-green-500 hover:text-green-600 font-bold text-xs';
+    showToast('规则已停用', 'success');
+  } else {
+    // 切换为启用
+    statusBadge.textContent = '开';
+    statusBadge.className = 'px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500';
+    btn.textContent = '停用';
+    btn.className = 'text-red-500 hover:text-red-600 font-bold text-xs';
+    showToast('规则已启用', 'success');
+  }
+}
+
+function toggleActivityRuleStatus(btn) {
+  var row = btn.closest('tr');
+  var cells = row.querySelectorAll('td');
+  // cells[9] 是状态列（第10列）
+  var statusBadge = cells[9].querySelector('span');
+  var currentStatus = statusBadge.textContent.trim();
+  if (currentStatus === '生效') {
+    statusBadge.textContent = '停用';
+    statusBadge.className = 'px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-400';
+    btn.textContent = '启用';
+    btn.className = 'text-green-500 hover:text-green-600 font-bold text-xs';
+    showToast('规则已停用', 'success');
+  } else if (currentStatus === '停用') {
+    statusBadge.textContent = '生效';
+    statusBadge.className = 'px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500';
+    btn.textContent = '停用';
+    btn.className = 'text-red-500 hover:text-red-600 font-bold text-xs';
+    showToast('规则已启用', 'success');
+  }
+}
+
+function showActivityRuleDetail(btn) {
+  var row = btn.closest('tr');
+  var cells = row.querySelectorAll('td');
+  var ruleName = cells[0].textContent.trim();
+  document.getElementById('behavior-detail-title').textContent = ruleName + ' - 积分明细';
+  showModal('modal-behavior-detail');
+}
+
+function viewActivityRule(btn) {
+  var row = btn.closest('tr');
+  var cells = row.querySelectorAll('td');
+  // 解析积分值颜色
+  var pointsHtml = cells[6].innerHTML;
+  var pointsColor = pointsHtml.includes('green') ? 'text-green-500' : 'text-red-500';
+
+  document.getElementById('activity-detail-title').textContent = cells[0].textContent.trim();
+  document.getElementById('detail-rule-name').textContent = cells[0].textContent.trim();
+  document.getElementById('detail-source-system').textContent = cells[1].textContent.trim();
+  document.getElementById('detail-activity-name').textContent = cells[2].textContent.trim();
+  document.getElementById('detail-activity-type').innerHTML = cells[3].innerHTML;
+  document.getElementById('detail-points-action').innerHTML = '<span class="' + pointsColor + ' font-bold">' + cells[4].textContent.trim() + '</span>';
+  document.getElementById('detail-trigger-scene').textContent = cells[5].textContent.trim();
+  document.getElementById('detail-points-value').innerHTML = '<span class="' + pointsColor + ' font-bold">' + cells[6].textContent.trim() + '</span>';
+  document.getElementById('detail-user-limit').textContent = cells[7].textContent.trim();
+  document.getElementById('detail-budget').textContent = cells[8].textContent.trim();
+  document.getElementById('detail-issued').textContent = '—';
+  document.getElementById('detail-progress').textContent = '—';
+  document.getElementById('detail-create-source').textContent = cells[10].textContent.trim();
+  document.getElementById('detail-status').innerHTML = cells[9].innerHTML;
+  document.getElementById('detail-sync-time').textContent = '2026-06-22 10:30:00';
+  showModal('modal-activity-rule-detail');
+}
+
+// 积分有效期：跟随全局/自定义 切换
+document.addEventListener('DOMContentLoaded', function() {
+  var expiryRadios = document.querySelectorAll('input[name="rule-expiry"]');
+  if (expiryRadios.length) {
+    expiryRadios.forEach(function(r) {
+      r.addEventListener('change', function() {
+        var isCustom = this.value === 'custom';
+        document.getElementById('rule-expiry-days').disabled = !isCustom;
+        document.getElementById('rule-expiry-unit').disabled = !isCustom;
+      });
+    });
+  }
+});
 
 function updateNameCounter() {
   var input = document.getElementById('prize-name-input');
@@ -1796,7 +2667,8 @@ function resetPrizeForm() {
   modal.querySelectorAll('.field-error').forEach(function(el){ el.remove(); });
   modal.querySelectorAll('.border-red-500').forEach(function(el){ el.classList.remove('border-red-500'); });
   document.getElementById('prize-section-virtual').classList.remove('border-2');
-  document.getElementById('prize-section-physical').classList.remove('border-2');
+  var prizePhysicalSection = document.getElementById('prize-section-physical');
+  if (prizePhysicalSection) prizePhysicalSection.classList.remove('border-2');
   if (nameInput) {
     nameInput.value = '';
     nameInput.classList.remove('bg-red-50');
@@ -1816,8 +2688,10 @@ function resetPrizeForm() {
   clearCodeImport();
   selectedPhysicalProducts = [];
   clearPhysicalSelection();
-  document.getElementById('physical-search-result').classList.add('hidden');
-  document.getElementById('physical-search-empty').classList.remove('hidden');
+  var physicalSearchResult = document.getElementById('physical-search-result');
+  var physicalSearchEmpty = document.getElementById('physical-search-empty');
+  if (physicalSearchResult) physicalSearchResult.classList.add('hidden');
+  if (physicalSearchEmpty) physicalSearchEmpty.classList.remove('hidden');
 }
 
 function deleteCodeRow(btn) {
@@ -1849,7 +2723,7 @@ function editRow(btn) {
   var row = btn.closest('tr');
   var name = row.querySelector('td:first-child span').textContent;
   var badge = row.querySelector('td:nth-child(2) span');
-  var typeMap = { '软件码': 'virtual', '优惠券': 'coupon', '实物商品': 'physical' };
+  var typeMap = { '软件码': 'virtual', '优惠券': 'coupon' };
   var type = typeMap[badge.textContent] || '';
   openPrizeForm('edit', { name: name, type: type });
 }
@@ -1883,14 +2757,10 @@ function savePrizeForm() {
     setFieldError(document.getElementById('prize-section-virtual'), '请导入软件码');
     valid = false;
   }
-  if (type === 'physical' && selectedPhysicalProducts.length === 0) {
-    setFieldError(document.getElementById('prize-section-physical'), '请选择商品');
-    valid = false;
-  }
   if (!valid) return;
 
-  var typeNames = { virtual: '软件码', coupon: '优惠券', physical: '实物商品' };
-  var typeColors = { virtual: 'bg-purple-50 text-purple-500', coupon: 'bg-blue-50 text-blue-500', physical: 'bg-orange-50 text-orange-500' };
+  var typeNames = { virtual: '软件码', coupon: '优惠券' };
+  var typeColors = { virtual: 'bg-purple-50 text-purple-500', coupon: 'bg-blue-50 text-blue-500' };
   var codeCount = importedCodes.length || 0;
   var tbody = document.querySelector('#page-prize-config tbody');
   var badgeClass = 'px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider ' + typeColors[type];
@@ -1953,7 +2823,6 @@ function hideModal(id) { document.getElementById(id).classList.remove('show'); }
 function switchPrizeType(type) {
   document.getElementById('prize-section-virtual').classList.toggle('hidden', type !== 'virtual');
   document.getElementById('prize-section-coupon').classList.toggle('hidden', type !== 'coupon');
-  document.getElementById('prize-section-physical').classList.toggle('hidden', type !== 'physical');
 }
 
 function syncCouponTemplate() {
@@ -2234,20 +3103,26 @@ function editProductRow(btn) {
   var priceText = row.querySelector('td:nth-child(3)').textContent.trim();
   var stockText = row.querySelector('td:nth-child(4)').textContent.trim();
 
-  var typeMap = { '软件码': 'virtual', '优惠券': 'coupon', '会员权益': 'member', '实物商品': 'physical' };
+  var typeMap = { '软件码': 'virtual', '优惠券': 'coupon', '实物商品': 'physical' };
   var type = typeMap[typeText] || '';
   var price = parseInt(priceText) || 0;
   var stock = parseInt(stockText) || 0;
 
   currentProductType = type;
-  var typeColors = { virtual: 'text-purple-600 bg-purple-50', coupon: 'text-blue-600 bg-blue-50', member: 'text-amber-600 bg-amber-50', physical: 'text-orange-600 bg-orange-50' };
-  document.getElementById('product-type-display').innerHTML = '<span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider ' + (typeColors[type] || 'text-gray-600 bg-gray-50') + '">' + typeText + '</span>';
+  document.getElementById('product-type-select').value = type;
   document.getElementById('product-name').value = name;
   document.getElementById('product-price').value = price;
   document.getElementById('product-stock').value = stock;
-  switchProductType(type);
   document.getElementById('product-form-title').textContent = '编辑商品';
-  setLinkEditable(false);
+  handleProductTypeChange(type);
+  if (type === 'physical') {
+    clearLinkSelection();
+  } else {
+    setLinkEditable(false);
+    document.getElementById('link-rule-search').value = name;
+    document.getElementById('link-selected-name').textContent = name;
+    document.getElementById('link-selected').classList.remove('hidden');
+  }
   switchPage('product-form');
 }
 
@@ -2260,12 +3135,13 @@ function viewProductDetail(btn) {
   var stock = cells[3].textContent.trim();
   var exchanged = cells[4].textContent.trim();
   var remain = cells[5].textContent.trim();
-  var updated = cells[6].textContent.trim();
-  var statusHtml = cells[7].innerHTML;
+  var hasLegacyBlankColumn = cells.length > 9;
+  var updated = cells[hasLegacyBlankColumn ? 7 : 6].textContent.trim();
+  var statusHtml = cells[hasLegacyBlankColumn ? 8 : 7].innerHTML;
 
   document.getElementById('detail-name').textContent = name;
   document.getElementById('detail-type').innerHTML = typeHtml;
-  document.getElementById('detail-link').textContent = name;
+  document.getElementById('detail-link').textContent = cells[1].textContent.trim() === '实物商品' ? '不涉及，实物商品直接创建' : name;
   document.getElementById('detail-price').textContent = price;
   document.getElementById('detail-stock').textContent = stock;
   document.getElementById('detail-remain').textContent = remain;
@@ -2281,7 +3157,10 @@ function viewProductDetail(btn) {
 
 function toggleProductStatus(btn) {
   var row = btn.closest('tr');
-  var badge = row.querySelector('td:nth-child(6) span');
+  var badge = Array.from(row.querySelectorAll('td span')).find(function(span) {
+    return span.textContent.trim() === '已上架' || span.textContent.trim() === '已下架';
+  });
+  if (!badge) return;
   var isUp = badge.textContent === '已上架';
   if (isUp) {
     badge.textContent = '已下架';
@@ -2331,7 +3210,7 @@ document.addEventListener('click', function(e) {
 
 function saveProductForm() {
   var name = document.getElementById('product-name').value.trim();
-  var type = currentProductType;
+  var type = document.getElementById('product-type-select').value;
   var price = parseInt(document.getElementById('product-price').value) || 0;
   var stock = parseInt(document.getElementById('product-stock').value) || 0;
   var limit = parseInt(document.getElementById('product-limit').value) || 0;
@@ -2341,7 +3220,11 @@ function saveProductForm() {
   var valid = true;
 
   if (!name) { showToast('商品名称不能为空','error'); valid = false; }
-  if (!type) { showToast('请先关联权益以确定商品类型','error'); valid = false; }
+  if (!type) { showToast('请选择商品类型','error'); valid = false; }
+  if ((type === 'virtual' || type === 'coupon') && !document.getElementById('link-selected-name').textContent.trim()) {
+    showToast('请先关联权益','error');
+    valid = false;
+  }
   if (!price || price <= 0) { showToast('积分价格必须大于0','error'); valid = false; }
   if (!stock || stock <= 0) { showToast('总库存必须大于0','error'); valid = false; }
   if (limit < 0) { showToast('每人兑换限制不能小于0','error'); valid = false; }
@@ -2349,8 +3232,8 @@ function saveProductForm() {
   if (status === 'up' && stock <= 0) { showToast('上架商品必须有可用库存','error'); valid = false; }
   if (!valid) return;
 
-  var typeNames = { virtual: '软件码', coupon: '优惠券', member: '会员权益', physical: '实物商品' };
-  var typeColors = { virtual: 'bg-purple-50 text-purple-500', coupon: 'bg-blue-50 text-blue-500', member: 'bg-amber-50 text-amber-600', physical: 'bg-orange-50 text-orange-500' };
+  var typeNames = { virtual: '软件码', coupon: '优惠券', physical: '实物商品' };
+  var typeColors = { virtual: 'bg-purple-50 text-purple-500', coupon: 'bg-blue-50 text-blue-500', physical: 'bg-orange-50 text-orange-500' };
   var isUp = status === 'up';
   var statusBadge = isUp ? 'bg-green-50 text-green-500' : 'bg-gray-100 text-gray-400';
   var statusText = isUp ? '已上架' : '已下架';
@@ -2377,6 +3260,27 @@ function saveProductForm() {
   showToast('商品保存成功，操作日志已记录','success');
 }
 
+function openProductFormAdd() {
+  currentProductType = '';
+  document.getElementById('product-form-title').textContent = '新增商品';
+  document.getElementById('product-name').value = '';
+  document.getElementById('product-price').value = '';
+  document.getElementById('product-stock').value = '';
+  document.getElementById('product-limit').value = '';
+  document.getElementById('product-online-time').value = '';
+  document.getElementById('product-offline-time').value = '';
+  document.getElementById('product-status').value = 'up';
+  document.getElementById('product-type-select').value = '';
+  var spec = document.getElementById('product-spec');
+  var deliveryNote = document.getElementById('product-delivery-note');
+  if (spec) spec.value = '';
+  if (deliveryNote) deliveryNote.value = '';
+  clearLinkSelection();
+  setLinkEditable(true);
+  handleProductTypeChange('');
+  switchPage('product-form');
+}
+
 var linkOptions = {
   virtual: [
     { name: '星巴克礼品卡码池', desc: '可用 2,340', type: 'virtual', typeName: '软件码' },
@@ -2387,19 +3291,25 @@ var linkOptions = {
     { name: '满100减20优惠券', desc: '库存 10,000', type: 'coupon', typeName: '优惠券' },
     { name: '满50减10优惠券', desc: '库存 20,000', type: 'coupon', typeName: '优惠券' },
     { name: '8折优惠券', desc: '库存 5,000', type: 'coupon', typeName: '优惠券' }
-  ],
-  member: [
-    { name: '黄金会员月卡', desc: '价值 ¥30', type: 'member', typeName: '会员权益' },
-    { name: '铂金会员季卡', desc: '价值 ¥80', type: 'member', typeName: '会员权益' },
-    { name: '钻石会员年卡', desc: '价值 ¥300', type: 'member', typeName: '会员权益' }
-  ],
-  physical: [
-    { name: '社区定制保温杯', desc: '500ml · 库存 800', type: 'physical', typeName: '实物商品' },
-    { name: '品牌蓝牙耳机', desc: '黑色 · 库存 350', type: 'physical', typeName: '实物商品' },
-    { name: '精美书籍套装', desc: '3册装 · 库存 500', type: 'physical', typeName: '实物商品' }
   ]
 };
 var currentProductType = '';
+
+function handleProductTypeChange(type) {
+  currentProductType = type;
+  var linkSection = document.getElementById('section-link-rule');
+  var physicalFields = document.getElementById('physical-product-fields');
+  if (type === 'physical') {
+    linkSection.classList.add('hidden');
+    physicalFields.classList.remove('hidden');
+    clearLinkSelection();
+  } else {
+    linkSection.classList.remove('hidden');
+    physicalFields.classList.add('hidden');
+    switchProductType(type);
+    setLinkEditable(true);
+  }
+}
 
 function switchProductType(type) {
   var dd = document.getElementById('link-dropdown');
@@ -2433,9 +3343,7 @@ function selectLinkOption(name, desc, type, typeName) {
   document.getElementById('link-dropdown').classList.add('hidden');
   if (type) {
     currentProductType = type;
-    var display = document.getElementById('product-type-display');
-    var typeColors = { virtual: 'text-purple-600 bg-purple-50', coupon: 'text-blue-600 bg-blue-50', member: 'text-amber-600 bg-amber-50', physical: 'text-orange-600 bg-orange-50' };
-    display.innerHTML = '<span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider ' + (typeColors[type] || 'text-gray-600 bg-gray-50') + '">' + typeName + '</span>';
+    document.getElementById('product-type-select').value = type;
   }
 }
 
@@ -2458,6 +3366,7 @@ function setLinkEditable(editable) {
 
 function clearLinkSelection() {
   document.getElementById('link-rule-search').value = '';
+  document.getElementById('link-selected-name').textContent = '';
   document.getElementById('link-selected').classList.add('hidden');
 }
 
@@ -2467,6 +3376,7 @@ function filterOrderList() {
   var typeVal = selects[0].value;
   var orderStatusVal = selects[1].value;
   var distStatusVal = selects[2].value;
+  var abnormalVal = selects[3].value;
   var rows = page.querySelectorAll('tbody tr');
   var visible = 0;
   rows.forEach(function(tr) {
@@ -2474,10 +3384,14 @@ function filterOrderList() {
     var type = cells[3].textContent.trim();
     var orderStatus = cells[5].textContent.trim();
     var distStatus = cells[6].textContent.trim();
+    var abnormalCell = cells[7].textContent.trim();
+    var isAbnormal = abnormalCell === '异常';
     var match = true;
     if (typeVal !== '全部类型' && type !== typeVal) match = false;
     if (orderStatusVal !== '全部订单状态' && orderStatus !== orderStatusVal) match = false;
     if (distStatusVal !== '全部发放状态' && distStatus !== distStatusVal) match = false;
+    if (abnormalVal === '是' && !isAbnormal) match = false;
+    if (abnormalVal === '否' && isAbnormal) match = false;
     tr.style.display = match ? '' : 'none';
     if (match) visible++;
   });
@@ -2491,6 +3405,73 @@ function changePageSize(sel) {
   if (!tbody) return;
   var rows = tbody.querySelectorAll('tr');
   rows.forEach(function(tr, i) { tr.style.display = i < size ? '' : 'none'; });
+}
+
+function filterStoreCouponList() {
+  var name = document.getElementById('store-coupon-name-filter').value.trim().toLowerCase();
+  var code = document.getElementById('store-coupon-code-filter').value.trim().toLowerCase();
+  var status = document.getElementById('store-coupon-status-filter').value;
+  var rows = document.querySelectorAll('#store-coupon-table tbody tr');
+  var visible = 0;
+  rows.forEach(function(row) {
+    var rowName = (row.dataset.name || '').toLowerCase();
+    var rowCode = (row.dataset.code || '').toLowerCase();
+    var rowStatus = row.dataset.status || '';
+    var match = true;
+    if (name && rowName.indexOf(name) === -1) match = false;
+    if (code && rowCode.indexOf(code) === -1) match = false;
+    if (status !== '全部状态' && rowStatus !== status) match = false;
+    row.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+  document.getElementById('store-coupon-count').textContent = '共 ' + visible + ' 条记录';
+}
+
+function resetStoreCouponFilters() {
+  document.getElementById('store-coupon-name-filter').value = '';
+  document.getElementById('store-coupon-code-filter').value = '';
+  document.getElementById('store-coupon-status-filter').value = '全部状态';
+  filterStoreCouponList();
+}
+
+function openStoreCouponForm() {
+  document.getElementById('store-coupon-form-name').value = '';
+  document.getElementById('store-coupon-grant-type').value = '线下发放';
+  document.getElementById('store-coupon-points-price').value = '';
+  toggleStoreCouponPointsField();
+  showModal('modal-store-coupon-form');
+}
+
+function toggleStoreCouponPointsField() {
+  var grantType = document.getElementById('store-coupon-grant-type').value;
+  document.getElementById('store-coupon-points-field').classList.toggle('hidden', grantType !== '社区专用');
+}
+
+function submitStoreCouponForm() {
+  var name = document.getElementById('store-coupon-form-name').value.trim();
+  if (!name) {
+    showToast('请填写优惠券名称', 'error');
+    return;
+  }
+  hideModal('modal-store-coupon-form');
+  showToast('优惠券已保存', 'success');
+}
+
+function toggleStoreCouponStatus(btn) {
+  var enabled = btn.textContent.trim() === '启用';
+  btn.textContent = enabled ? '停用' : '启用';
+  btn.className = enabled
+    ? 'px-3 py-1 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-500'
+    : 'px-3 py-1 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500';
+  showToast(enabled ? '优惠券已停用' : '优惠券已启用', 'success');
+}
+
+function removeStoreCouponRow(btn) {
+  var row = btn.closest('tr');
+  if (!row) return;
+  row.remove();
+  filterStoreCouponList();
+  showToast('优惠券已删除', 'success');
 }
 
 function showToast(msg, type) {
