@@ -1114,9 +1114,6 @@ tailwind.config = {
             <span class="text-sm text-gray-600">后过期</span>
           </div>
         </div>
-        <div class="flex justify-end pt-4 border-t border-gray-100">
-          <button onclick="showToast('积分有效期设置已保存','success')" class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">保存</button>
-        </div>
       </div>
     </div>
 
@@ -1143,9 +1140,6 @@ tailwind.config = {
             <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer"><input type="checkbox" class="rounded accent-primary"> App推送</label>
           </div>
         </div>
-        <div class="flex justify-end pt-4 border-t border-gray-100">
-          <button onclick="showToast('过期提醒设置已保存','success')" class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">保存</button>
-        </div>
       </div>
     </div>
 
@@ -1169,10 +1163,10 @@ tailwind.config = {
             <span class="text-gray-400">元</span>
           </div>
         </div>
-        <div class="flex justify-end pt-4 border-t border-gray-100">
-          <button onclick="showToast('积分汇率基准已保存','success')" class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">保存</button>
-        </div>
       </div>
+    </div>
+    <div class="max-w-xl flex justify-end">
+      <button onclick="showToast('全局规则设置已保存','success')" class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">保存</button>
     </div>
   </div>
 
@@ -1237,17 +1231,11 @@ tailwind.config = {
 
     <!-- 筛选区 -->
     <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-4">
-      <div class="grid grid-cols-5 gap-4 mb-4">
+      <div class="grid grid-cols-4 gap-4 mb-4">
         <div>
           <label class="text-xs text-gray-500 font-bold mb-1 block">来源系统</label>
           <select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
-            <option>全部</option><option>抽奖系统</option><option>活动系统</option><option>商城活动</option>
-          </select>
-        </div>
-        <div>
-          <label class="text-xs text-gray-500 font-bold mb-1 block">活动类型</label>
-          <select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white">
-            <option>全部</option><option>竞赛</option><option>抽奖</option><option>任务</option><option>营销活动</option>
+            <option>全部</option><option>会员后台</option><option>商城</option><option>官网</option>
           </select>
         </div>
         <div>
@@ -1325,7 +1313,7 @@ tailwind.config = {
           </tr>
           <tr class="hover:bg-gray-50/30">
             <td class="px-4 py-3 font-bold text-gray-900">抽奖参与扣积分</td>
-            <td class="px-4 py-3 text-gray-500 text-xs">抽奖系统</td>
+            <td class="px-4 py-3 text-gray-500 text-xs">官网</td>
             <td class="px-4 py-3 text-gray-900 text-xs">新春抽奖活动</td>
             <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-500">1 档</span></td>
             <td class="px-4 py-3 text-red-500 font-bold text-xs">-10</td>
@@ -1338,7 +1326,7 @@ tailwind.config = {
           </tr>
           <tr class="hover:bg-gray-50/30">
             <td class="px-4 py-3 font-bold text-gray-900">中奖奖励积分</td>
-            <td class="px-4 py-3 text-gray-500 text-xs">抽奖系统</td>
+            <td class="px-4 py-3 text-gray-500 text-xs">官网</td>
             <td class="px-4 py-3 text-gray-900 text-xs">新春抽奖活动</td>
             <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-500">1 档</span></td>
             <td class="px-4 py-3 text-green-500 font-bold text-xs">+100</td>
@@ -1351,7 +1339,7 @@ tailwind.config = {
           </tr>
           <tr class="hover:bg-gray-50/30">
             <td class="px-4 py-3 font-bold text-gray-900">完成任务奖励积分</td>
-            <td class="px-4 py-3 text-gray-500 text-xs">活动系统</td>
+            <td class="px-4 py-3 text-gray-500 text-xs">官网</td>
             <td class="px-4 py-3 text-gray-900 text-xs">社区打卡挑战</td>
             <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-500">1 档</span></td>
             <td class="px-4 py-3 text-green-500 font-bold text-xs">+50</td>
@@ -1364,7 +1352,7 @@ tailwind.config = {
           </tr>
           <tr class="hover:bg-gray-50/30">
             <td class="px-4 py-3 font-bold text-gray-900">限时秒杀扣积分</td>
-            <td class="px-4 py-3 text-gray-500 text-xs">商城活动</td>
+            <td class="px-4 py-3 text-gray-500 text-xs">商城</td>
             <td class="px-4 py-3 text-gray-900 text-xs">双11积分秒杀</td>
             <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-500">1 档</span></td>
             <td class="px-4 py-3 text-red-500 font-bold text-xs">-200</td>
@@ -1377,7 +1365,7 @@ tailwind.config = {
           </tr>
           <tr class="hover:bg-gray-50/30">
             <td class="px-4 py-3 font-bold text-gray-900">节日活动奖励积分</td>
-            <td class="px-4 py-3 text-gray-500 text-xs">活动系统</td>
+            <td class="px-4 py-3 text-gray-500 text-xs">官网</td>
             <td class="px-4 py-3 text-gray-900 text-xs">春节红包雨</td>
             <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-500">1 档</span></td>
             <td class="px-4 py-3 text-green-500 font-bold text-xs">+30</td>
@@ -2070,16 +2058,16 @@ tailwind.config = {
       </div>
     </div>
 
-    <!-- 奖励项配置 -->
+    <!-- 规则项配置 -->
     <div class="mb-5" id="section-rule-tiers">
       <div class="flex items-center justify-between mb-3">
         <div class="flex items-center gap-2">
           <div class="w-1 h-4 bg-primary rounded-full"></div>
-          <h4 class="text-sm font-bold text-gray-900">奖励项配置 <span class="text-red-500">*</span></h4>
+          <h4 class="text-sm font-bold text-gray-900">规则项配置 <span class="text-red-500">*</span></h4>
         </div>
         <button type="button" onclick="addActivityTier()" class="text-primary hover:text-blue-700 text-xs font-bold flex items-center gap-1">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-          添加奖励项
+          添加规则项
         </button>
       </div>
       <div class="border border-gray-100 rounded-xl overflow-hidden">
@@ -2094,7 +2082,7 @@ tailwind.config = {
           <tbody id="activity-tiers-tbody" class="divide-y divide-gray-50"></tbody>
         </table>
       </div>
-      <p class="text-[10px] text-gray-400 mt-1">每条规则至少填一行奖励项。正数为新增积分,负数为扣减积分。</p>
+      <p class="text-[10px] text-gray-400 mt-1">每条规则至少填一行规则项。正数为新增积分,负数为扣减积分。</p>
     </div>
 
     <!-- 限制 -->
@@ -2142,7 +2130,7 @@ tailwind.config = {
         <div><span class="text-xs text-gray-400">规则名称</span><p class="text-sm font-bold text-gray-900 mt-0.5" id="detail-rule-name">—</p></div>
         <div><span class="text-xs text-gray-400">来源系统</span><p class="text-sm font-bold text-gray-900 mt-0.5" id="detail-source-system">—</p></div>
         <div><span class="text-xs text-gray-400">活动名称</span><p class="text-sm font-bold text-gray-900 mt-0.5" id="detail-activity-name">—</p></div>
-        <div><span class="text-xs text-gray-400">活动类型</span><p class="text-sm mt-0.5" id="detail-activity-type">—</p></div>
+        <div><span class="text-xs text-gray-400">规则项数量</span><p class="text-sm mt-0.5" id="detail-activity-type">—</p></div>
       </div>
     </div>
 
@@ -2612,8 +2600,8 @@ function toggleBehaviorRuleStatus(btn) {
   }
 }
 
-// ========== 活动积分规则:奖励项配置数据 ==========
-var activityTiers = []; // 当前编辑中的奖励项配置
+// ========== 活动积分规则:规则项配置数据 ==========
+var activityTiers = []; // 当前编辑中的规则项配置
 
 function renderActivityTiers() {
   var tbody = document.getElementById('activity-tiers-tbody');
@@ -2662,7 +2650,7 @@ function openActivityRuleForm(mode, btn) {
     document.getElementById('activity-rule-activity-name').value = cells[2].textContent.trim();
     document.getElementById('activity-rule-limit').value = '';
     document.getElementById('activity-rule-budget').value = '';
-    // 从行数据推断奖励项配置(多档用积分范围,单档直接填)
+    // 从行数据推断规则项配置(多档用积分范围,单档直接填)
     var tierText = cells[3].textContent.trim();
     var rangeText = cells[4].textContent.trim();
     if (tierText.indexOf('5') !== -1) {
@@ -2686,9 +2674,9 @@ function saveActivityRule() {
   var name = document.getElementById('activity-rule-name').value.trim();
   if (!name) { showToast('请输入规则名称', 'error'); return; }
   if (!document.getElementById('activity-rule-activity-name').value.trim()) { showToast('请输入活动名称', 'error'); return; }
-  // 校验奖励项配置
+  // 校验规则项配置
   var validTiers = activityTiers.filter(function(t) { return t.scene && t.scene.trim() && t.points && !isNaN(parseInt(t.points)); });
-  if (validTiers.length === 0) { showToast('请至少填写一行有效的奖项(触发场景+积分值)', 'error'); return; }
+  if (validTiers.length === 0) { showToast('请至少填写一行有效的规则项(触发场景+积分值)', 'error'); return; }
 
   var tbody = document.querySelector('#tab-activity tbody');
   var tierCount = validTiers.length;
@@ -2765,8 +2753,8 @@ function viewActivityRule(btn) {
   document.getElementById('detail-rule-name').textContent = ruleName;
   document.getElementById('detail-source-system').textContent = source;
   document.getElementById('detail-activity-name').textContent = activityName;
-  document.getElementById('detail-activity-type').innerHTML = '';
-  document.getElementById('detail-points-action').innerHTML = '';
+  document.getElementById('detail-activity-type').textContent = tierText;
+  document.getElementById('detail-points-action').textContent = rangeText.includes('-') ? '扣减积分' : '新增积分';
   document.getElementById('detail-trigger-scene').textContent = tierText + ' · ' + rangeText;
   document.getElementById('detail-points-value').textContent = rangeText;
   document.getElementById('detail-user-limit').textContent = '—';
