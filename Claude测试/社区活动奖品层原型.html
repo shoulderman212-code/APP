@@ -587,24 +587,24 @@ tailwind.config = {
           <div class="space-y-3">
             <div>
               <label class="text-xs text-gray-500 font-bold mb-1 block">收货人 <span class="text-red-500">*</span></label>
-              <input type="text" placeholder="请输入收货人姓名" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+              <input type="text" id="user-address-name" maxlength="20" placeholder="请输入收货人姓名" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
             </div>
             <div>
               <label class="text-xs text-gray-500 font-bold mb-1 block">手机号 <span class="text-red-500">*</span></label>
-              <input type="tel" placeholder="请输入手机号" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+              <input type="tel" id="user-address-phone" maxlength="11" placeholder="请输入手机号" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
             </div>
             <div>
               <label class="text-xs text-gray-500 font-bold mb-1 block">地区 <span class="text-red-500">*</span></label>
-              <select class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-700 bg-white">
+              <select id="user-address-region" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-700 bg-white">
                 <option>请选择省市区</option><option>北京市 朝阳区</option><option>上海市 浦东新区</option><option>广东省 广州市 天河区</option><option>广东省 深圳市 南山区</option>
               </select>
             </div>
             <div>
               <label class="text-xs text-gray-500 font-bold mb-1 block">详细地址 <span class="text-red-500">*</span></label>
-              <input type="text" placeholder="街道、门牌号等" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+              <input type="text" id="user-address-detail" maxlength="120" placeholder="街道、门牌号等" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
             </div>
           </div>
-          <button onclick="showToast('收货信息提交成功！','success')" class="w-full bg-primary text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">提交</button>
+          <button onclick="submitUserAddress()" class="w-full bg-primary text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">提交</button>
         </div>
       </div>
     </div>
@@ -950,7 +950,7 @@ tailwind.config = {
           <div class="space-y-3">
             <div>
               <label class="text-xs text-gray-500 font-bold mb-1 block">商品名称 <span class="text-red-500">*</span></label>
-              <input type="text" id="product-name" placeholder="请输入商品名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+              <input type="text" id="product-name" maxlength="30" placeholder="请输入商品名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
             </div>
             <div>
               <label class="text-xs text-gray-500 font-bold mb-1 block">商品类型 <span class="text-red-500">*</span></label>
@@ -964,7 +964,7 @@ tailwind.config = {
             <div id="section-link-rule">
               <label class="text-xs text-gray-500 font-bold mb-1 block">关联权益 <span class="text-red-500">*</span></label>
               <div id="link-input-area" class="relative">
-                <input type="text" id="link-rule-search" placeholder="输入权益名称搜索，或从下拉列表中选择" oninput="filterLinkOptions(this.value)" onfocus="document.getElementById('link-dropdown').classList.remove('hidden')" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+                <input type="text" id="link-rule-search" maxlength="50" placeholder="输入权益名称搜索，或从下拉列表中选择" oninput="filterLinkOptions(this.value)" onfocus="document.getElementById('link-dropdown').classList.remove('hidden')" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
                 <div id="link-dropdown" class="hidden absolute z-10 w-full mt-1 bg-white border border-gray-100 rounded-xl shadow-lg max-h-48 overflow-y-auto"></div>
               </div>
               <div id="link-selected" class="hidden mt-2 bg-green-50 rounded-lg p-3 border border-green-100 flex items-center justify-between">
@@ -984,28 +984,21 @@ tailwind.config = {
             </div>
             <div>
               <label class="text-xs text-gray-500 font-bold mb-1 block">商品说明</label>
-              <textarea rows="2" placeholder="请输入商品说明" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
+              <textarea id="product-desc" rows="2" maxlength="200" placeholder="请输入商品说明" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
             </div>
             <div id="physical-product-fields" class="hidden bg-gray-50 rounded-xl p-4 border border-gray-100 space-y-3">
-              <div class="grid grid-cols-2 gap-3">
-                <div>
-                  <label class="text-xs text-gray-500 font-bold mb-1 block">商品规格</label>
-                  <input type="text" id="product-spec" placeholder="如 500ml 白色、黑色标准版" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
-                </div>
-                <div>
-                  <label class="text-xs text-gray-500 font-bold mb-1 block">发货方式</label>
-                  <select id="product-delivery-type" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
-                    <option>后台发货</option>
-                    <option>线下自提</option>
-                  </select>
-                </div>
+              <div>
+                <label class="text-xs text-gray-500 font-bold mb-1 block">商品编码 <span class="text-red-500">*</span></label>
+                <input type="text" id="product-code" maxlength="32" placeholder="请输入商城商品编码，如 10002345" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
+                <p class="text-[10px] text-gray-400 mt-1">需填写商城中已存在且可用的实物商品编码。</p>
               </div>
-              <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                <input type="checkbox" id="product-need-address" checked class="rounded accent-primary"> 兑换时需要填写收货地址
-              </label>
+              <div>
+                <label class="text-xs text-gray-500 font-bold mb-1 block">商品规格</label>
+                <input type="text" id="product-spec" maxlength="40" placeholder="如 500ml 白色、黑色标准版" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
+              </div>
               <div>
                 <label class="text-xs text-gray-500 font-bold mb-1 block">发货说明</label>
-                <textarea id="product-delivery-note" rows="2" placeholder="填写发货时效、物流说明或领取说明" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none bg-white"></textarea>
+                <textarea id="product-delivery-note" rows="2" maxlength="200" placeholder="填写发货时效、物流说明或领取说明" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none bg-white"></textarea>
               </div>
             </div>
           </div>
@@ -1021,8 +1014,10 @@ tailwind.config = {
             <div><label class="text-xs text-gray-500 font-bold mb-1 block">总库存 <span class="text-red-500">*</span></label><input type="number" id="product-stock" min="0" placeholder="请输入总库存，必须大于0" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"></div>
             <div><label class="text-xs text-gray-500 font-bold mb-1 block">每人兑换限制</label><input type="number" id="product-limit" min="1" placeholder="不填表示不限次数" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"></div>
             <div><label class="text-xs text-gray-500 font-bold mb-1 block">上架状态</label><select id="product-status" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white"><option value="up">上架</option><option value="down">下架</option></select></div>
-            <div><label class="text-xs text-gray-500 font-bold mb-1 block">上架时间</label><input type="datetime-local" id="product-online-time" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"><p class="text-[10px] text-gray-400 mt-1">不填表示立即生效</p></div>
-            <div><label class="text-xs text-gray-500 font-bold mb-1 block">下架时间</label><input type="datetime-local" id="product-offline-time" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"><p class="text-[10px] text-gray-400 mt-1">不填表示长期有效</p></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div><label class="text-xs text-gray-500 font-bold mb-1 block">上架时间</label><input type="datetime-local" id="product-online-time" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"><p class="text-[10px] text-gray-400 mt-1">不填表示立即生效</p></div>
+              <div><label class="text-xs text-gray-500 font-bold mb-1 block">下架时间</label><input type="datetime-local" id="product-offline-time" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"><p class="text-[10px] text-gray-400 mt-1">不填表示长期有效</p></div>
+            </div>
           </div>
         </div>
         <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">
@@ -1587,12 +1582,12 @@ tailwind.config = {
       </div>
       <div>
         <label class="text-xs text-gray-500 font-bold mb-1 block">处理备注 <span class="text-red-500">*</span></label>
-        <textarea rows="3" placeholder="请填写补发原因和处理说明" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
+        <textarea id="manual-reissue-note" rows="3" maxlength="200" placeholder="请填写补发原因和处理说明" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
       </div>
     </div>
     <div class="flex items-center justify-end gap-3 mt-5 pt-4 border-t border-gray-100">
       <button onclick="hideModal('modal-manual-reissue')" class="bg-white text-gray-700 border border-gray-200 px-6 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors shadow-sm">取消</button>
-      <button onclick="hideModal('modal-manual-reissue'); showToast('人工补发已提交','success')" class="bg-red-500 text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-red-600 transition-colors shadow-sm">确认补发</button>
+      <button onclick="submitManualReissue()" class="bg-red-500 text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-red-600 transition-colors shadow-sm">确认补发</button>
     </div>
   </div>
 </div>
@@ -1826,8 +1821,8 @@ tailwind.config = {
       <button onclick="hideModal('modal-order-handle'); showToast('已退积分，订单关闭','success')" class="w-full bg-white text-orange-500 border border-orange-200 px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-orange-50 transition-colors">退积分</button>
       <div class="bg-gray-50 rounded-xl p-3 space-y-2">
         <p class="text-xs text-gray-400 font-bold">人工处理</p>
-        <textarea rows="2" placeholder="请填写处理方式和备注" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs resize-none"></textarea>
-        <button onclick="var ta=this.parentElement.querySelector('textarea'); if(!ta.value.trim()){showToast('请填写处理备注','error');return;} hideModal('modal-order-handle'); showToast('人工处理已记录','success')" class="w-full bg-white text-gray-700 border border-gray-200 px-4 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors">确认处理</button>
+        <textarea rows="2" maxlength="200" placeholder="请填写处理方式和备注" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs resize-none"></textarea>
+        <button onclick="submitOrderManualHandle(this)" class="w-full bg-white text-gray-700 border border-gray-200 px-4 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors">确认处理</button>
       </div>
     </div>
   </div>
@@ -1936,7 +1931,7 @@ tailwind.config = {
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label class="text-xs text-gray-500 font-bold mb-1 block">规则名称 <span class="text-red-500">*</span></label>
-          <input type="text" id="rule-name" placeholder="请输入规则名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+          <input type="text" id="rule-name" maxlength="30" placeholder="请输入规则名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
         </div>
         <div>
           <label class="text-xs text-gray-500 font-bold mb-1 block">业务模块 <span class="text-red-500">*</span></label>
@@ -1952,7 +1947,7 @@ tailwind.config = {
         </div>
         <div class="col-span-2">
           <label class="text-xs text-gray-500 font-bold mb-1 block">规则说明</label>
-          <textarea id="rule-desc" rows="2" placeholder="请输入规则说明" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
+          <textarea id="rule-desc" rows="2" maxlength="200" placeholder="请输入规则说明" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
         </div>
       </div>
     </div>
@@ -2049,11 +2044,11 @@ tailwind.config = {
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label class="text-xs text-gray-500 font-bold mb-1 block">规则名称 <span class="text-red-500">*</span></label>
-          <input type="text" id="activity-rule-name" placeholder="请输入规则名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+          <input type="text" id="activity-rule-name" maxlength="30" placeholder="请输入规则名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
         </div>
         <div>
           <label class="text-xs text-gray-500 font-bold mb-1 block">活动名称 <span class="text-red-500">*</span></label>
-          <input type="text" id="activity-rule-activity-name" placeholder="请输入活动名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+          <input type="text" id="activity-rule-activity-name" maxlength="50" placeholder="请输入活动名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
         </div>
       </div>
     </div>
@@ -2094,11 +2089,11 @@ tailwind.config = {
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label class="text-xs text-gray-500 font-bold mb-1 block">用户限制</label>
-          <input type="text" id="activity-rule-limit" placeholder="如：每人 1 次、不限制" value="每人 1 次" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+          <input type="text" id="activity-rule-limit" maxlength="50" placeholder="如：每人 1 次、不限制" value="每人 1 次" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
         </div>
         <div>
           <label class="text-xs text-gray-500 font-bold mb-1 block">活动总预算</label>
-          <input type="text" id="activity-rule-budget" placeholder="如：最多发放 100,000" value="最多发放 100,000" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+          <input type="text" id="activity-rule-budget" maxlength="50" placeholder="如：最多发放 100,000" value="最多发放 100,000" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
         </div>
       </div>
     </div>
@@ -2358,6 +2353,153 @@ function modalButton(label, toast, style) {
   return "<button onclick=\"hideModal('modal-order-handle'); showToast('" + toast + "','success')\" class=\"w-full " + style + " px-4 py-2.5 rounded-xl text-sm font-bold transition-colors\">" + label + "</button>";
 }
 
+function textLength(value) {
+  return (value || '').trim().length;
+}
+
+function validateTextLimit(value, max, label) {
+  if (textLength(value) > max) {
+    showToast(label + '不能超过' + max + '字', 'error');
+    return false;
+  }
+  return true;
+}
+
+function validateMinText(value, min, label) {
+  if (textLength(value) < min) {
+    showToast(label + '至少填写' + min + '字', 'error');
+    return false;
+  }
+  return true;
+}
+
+function validatePhone(phone) {
+  return /^1[3-9]\d{9}$/.test((phone || '').trim());
+}
+
+function getFieldErrorHost(el) {
+  if (!el || !el.parentNode) return null;
+  var parent = el.parentNode;
+  if (parent.classList && parent.classList.contains('flex')) return parent.parentNode || parent;
+  return parent;
+}
+
+function markFieldError(el, msg) {
+  if (!el) return false;
+  setFieldError(el, msg);
+  return false;
+}
+
+function clearFieldErrorsIn(root) {
+  var scope = root || document;
+  scope.querySelectorAll('.field-error').forEach(function(el) { el.remove(); });
+  scope.querySelectorAll('.border-2.border-red-500').forEach(function(el) { el.classList.remove('border-2', 'border-red-500'); });
+  scope.querySelectorAll('.border-red-500').forEach(function(el) { el.classList.remove('border-red-500'); });
+}
+
+function requireField(el, msg) {
+  if (!el) return false;
+  if (!textLength(el.value)) return markFieldError(el, msg);
+  return true;
+}
+
+function requireSelect(el, msg, invalidValue) {
+  if (!el) return false;
+  var value = el.value || '';
+  if (!value || (invalidValue && value === invalidValue)) return markFieldError(el, msg);
+  return true;
+}
+
+function requirePositiveNumber(el, msg) {
+  if (!el) return false;
+  var value = parseFloat(el.value);
+  if (!el.value || isNaN(value) || value <= 0) return markFieldError(el, msg);
+  return true;
+}
+
+function setupTextLimitCounters(root) {
+  var scope = root || document;
+  scope.querySelectorAll('input[maxlength], textarea[maxlength]').forEach(function(el) {
+    if (el.dataset.limitCounterReady || el.id === 'prize-name-input') return;
+    el.dataset.limitCounterReady = '1';
+    var counter = document.createElement('p');
+    counter.className = 'text-[10px] text-gray-400 mt-1 text-right';
+    var update = function() {
+      var max = parseInt(el.getAttribute('maxlength'), 10);
+      var len = el.value.length;
+      counter.textContent = len + '/' + max;
+      counter.classList.toggle('text-red-500', len >= max);
+      counter.classList.toggle('text-gray-400', len < max);
+    };
+    el.insertAdjacentElement('afterend', counter);
+    el.addEventListener('input', update);
+    update();
+  });
+}
+
+function submitUserAddress() {
+  var panel = document.getElementById('page-user-physical-detail');
+  var nameEl = document.getElementById('user-address-name');
+  var phoneEl = document.getElementById('user-address-phone');
+  var regionEl = document.getElementById('user-address-region');
+  var detailEl = document.getElementById('user-address-detail');
+  var name = nameEl.value;
+  var phone = phoneEl.value;
+  var detail = detailEl.value;
+  var valid = true;
+  clearFieldErrorsIn(panel);
+  if (!requireField(nameEl, '请输入收货人姓名')) valid = false;
+  if (textLength(name) && !validateTextLimit(name, 20, '收货人姓名')) valid = false;
+  if (!requireField(phoneEl, '请输入手机号')) valid = false;
+  else if (!validatePhone(phone)) { setFieldError(phoneEl, '请输入正确的手机号'); valid = false; }
+  if (!requireSelect(regionEl, '请选择省市区', '请选择省市区')) valid = false;
+  if (!requireField(detailEl, '请输入详细地址')) valid = false;
+  if (textLength(detail) && !validateTextLimit(detail, 120, '详细地址')) valid = false;
+  if (!valid) return;
+  showToast('收货信息提交成功！','success');
+}
+
+function submitOrderAddress() {
+  var actions = document.getElementById('order-modal-actions');
+  var nameEl = document.getElementById('addr-name');
+  var phoneEl = document.getElementById('addr-phone');
+  var regionEl = document.getElementById('addr-region');
+  var detailEl = document.getElementById('addr-detail');
+  var valid = true;
+  clearFieldErrorsIn(actions);
+  if (!requireField(nameEl, '请输入收货人姓名')) valid = false;
+  if (!requireField(phoneEl, '请输入手机号')) valid = false;
+  else if (!validatePhone(phoneEl.value)) { setFieldError(phoneEl, '请输入正确的手机号'); valid = false; }
+  if (!requireField(regionEl, '请输入省市区')) valid = false;
+  if (!requireField(detailEl, '请输入详细地址')) valid = false;
+  if (!valid) return;
+  hideModal('modal-order-handle');
+  showToast('地址已填写，进入待发货', 'success');
+}
+
+function submitManualReissue() {
+  var modal = document.getElementById('modal-manual-reissue');
+  var noteEl = document.getElementById('manual-reissue-note');
+  var note = noteEl.value;
+  clearFieldErrorsIn(modal);
+  if (!requireField(noteEl, '请填写处理备注')) return;
+  if (textLength(note) < 5) return markFieldError(noteEl, '处理备注至少填写5字');
+  if (!validateTextLimit(note, 200, '处理备注')) return;
+  hideModal('modal-manual-reissue');
+  showToast('人工补发已提交','success');
+}
+
+function submitOrderManualHandle(btn) {
+  var ta = btn.parentElement.querySelector('textarea');
+  var note = ta ? ta.value : '';
+  clearFieldErrorsIn(btn.parentElement);
+  if (!requireField(ta, '请填写处理备注')) return;
+  if (textLength(note) < 5) return markFieldError(ta, '处理备注至少填写5字');
+  if (!validateTextLimit(note, 200, '处理备注')) return;
+  hideModal('modal-order-handle');
+  showToast('人工处理已记录','success');
+}
+
 function openOrderModal(btn, action) {
   var row = btn.closest('tr');
   var cells = row.querySelectorAll('td');
@@ -2387,19 +2529,19 @@ function openOrderModal(btn, action) {
   } else if (action === 'address') {
     actions.innerHTML = '<p class=\"text-xs text-gray-400 font-bold mb-2\">填写收货地址</p>' +
       '<div class=\"space-y-2\">' +
-      '<input type=\"text\" id=\"addr-name\" placeholder=\"收货人姓名\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
-      '<input type=\"tel\" id=\"addr-phone\" placeholder=\"手机号\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
-      '<input type=\"text\" id=\"addr-region\" placeholder=\"省市区\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
-      '<input type=\"text\" id=\"addr-detail\" placeholder=\"详细地址\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
+      '<input type=\"text\" id=\"addr-name\" maxlength=\"20\" placeholder=\"收货人姓名\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
+      '<input type=\"tel\" id=\"addr-phone\" maxlength=\"11\" placeholder=\"手机号\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
+      '<input type=\"text\" id=\"addr-region\" maxlength=\"50\" placeholder=\"省市区\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
+      '<input type=\"text\" id=\"addr-detail\" maxlength=\"120\" placeholder=\"详细地址\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
       '</div>' +
       '<div class=\"mt-2\">' +
-      modalButton('确认填写', '地址已填写，进入待发货', 'bg-primary text-white hover:bg-blue-700') +
+      '<button onclick=\"submitOrderAddress()\" class=\"w-full bg-primary text-white hover:bg-blue-700 px-4 py-2.5 rounded-xl text-sm font-bold transition-colors\">确认填写</button>' +
       '</div>';
   } else if (action === 'ship') {
     actions.innerHTML = '<p class="text-xs text-gray-400 font-bold mb-2">发货信息</p>' +
       '<div class=\"space-y-2\">' +
-      '<input type=\"text\" id=\"ship-tracking\" placeholder=\"请输入物流单号\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
-      '<input type=\"text\" id=\"ship-company\" placeholder=\"请输入物流公司（选填）\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
+      '<input type=\"text\" id=\"ship-tracking\" maxlength=\"50\" placeholder=\"请输入物流单号\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
+      '<input type=\"text\" id=\"ship-company\" maxlength=\"30\" placeholder=\"请输入物流公司（选填）\" class=\"w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm\">' +
       '</div>' +
       '<div class=\"mt-2\">' +
       modalButton('确认发货', '已标记为已发货', 'bg-primary text-white hover:bg-blue-700') +
@@ -2414,11 +2556,12 @@ function openOrderModal(btn, action) {
       modalButton('退积分', '已退积分，订单关闭', 'bg-white text-orange-500 border border-orange-200 hover:bg-orange-50') +
       '<div class=\"bg-gray-50 rounded-xl p-3 space-y-2 mt-2\">' +
       '<p class=\"text-xs text-gray-400 font-bold\">人工处理</p>' +
-      '<textarea rows=\"2\" placeholder=\"请填写处理方式和备注\" class=\"w-full border border-gray-200 rounded-lg px-3 py-2 text-xs resize-none\" id=\"manual-note\"></textarea>' +
-      modalButton('确认处理', '人工处理已记录', 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50') +
+      '<textarea rows=\"2\" maxlength=\"200\" placeholder=\"请填写处理方式和备注\" class=\"w-full border border-gray-200 rounded-lg px-3 py-2 text-xs resize-none\" id=\"manual-note\"></textarea>' +
+      '<button onclick=\"submitOrderManualHandle(this)\" class=\"w-full bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 px-4 py-2.5 rounded-xl text-sm font-bold transition-colors\">确认处理</button>' +
       '</div>';
   }
 
+  setupTextLimitCounters(actions);
   showModal('modal-order-handle');
 }
 
@@ -2555,11 +2698,28 @@ function openBehaviorRuleForm(mode, btn) {
 }
 
 function saveBehaviorRule() {
-  var name = document.getElementById('rule-name').value.trim();
-  if (!name) { showToast('请输入规则名称', 'error'); return; }
-  if (!document.getElementById('rule-module').value) { showToast('请选择业务模块', 'error'); return; }
-  var behaviorType = document.getElementById('rule-behavior-type').value;
-  if (!behaviorType) { showToast('请选择行为类型', 'error'); return; }
+  var modal = document.getElementById('modal-behavior-rule-form');
+  var nameEl = document.getElementById('rule-name');
+  var descEl = document.getElementById('rule-desc');
+  var moduleEl = document.getElementById('rule-module');
+  var behaviorEl = document.getElementById('rule-behavior-type');
+  var pointsEl = document.getElementById('rule-points');
+  var behaviorLimitEl = document.getElementById('rule-behavior-limit');
+  var pointsLimitEl = document.getElementById('rule-points-limit');
+  var name = nameEl.value.trim();
+  var desc = descEl.value.trim();
+  var behaviorType = behaviorEl.value;
+  var valid = true;
+  clearFieldErrorsIn(modal);
+  if (!requireField(nameEl, '请输入规则名称')) valid = false;
+  if (name && !validateTextLimit(name, 30, '规则名称')) valid = false;
+  if (desc && !validateTextLimit(desc, 200, '规则说明')) valid = false;
+  if (!requireSelect(moduleEl, '请选择业务模块')) valid = false;
+  if (!requireSelect(behaviorEl, '请选择行为类型')) valid = false;
+  if (!requirePositiveNumber(pointsEl, '请输入大于0的积分值')) valid = false;
+  if (!requirePositiveNumber(behaviorLimitEl, '请输入大于0的行为上限')) valid = false;
+  if (!requirePositiveNumber(pointsLimitEl, '请输入大于0的积分上限')) valid = false;
+  if (!valid) return;
 
   // 新增时检查行为类型是否已存在
   if (currentBehaviorMode === 'add') {
@@ -2611,12 +2771,13 @@ function renderActivityTiers() {
   tbody.innerHTML = activityTiers.map(function(t, i) {
     return '<tr>' +
       '<td class="px-2 py-1.5 text-gray-400 text-xs">' + (i + 1) + '</td>' +
-      '<td class="px-2 py-1.5"><input type="text" value="' + (t.scene || '') + '" onchange="activityTiers[' + i + '].scene=this.value" placeholder="如:一等奖" class="w-full border border-gray-200 rounded-lg px-1.5 py-1 text-xs"></td>' +
+      '<td class="px-2 py-1.5"><input type="text" maxlength="20" value="' + (t.scene || '') + '" onchange="activityTiers[' + i + '].scene=this.value" placeholder="如:一等奖" class="w-full border border-gray-200 rounded-lg px-1.5 py-1 text-xs"></td>' +
       '<td class="px-2 py-1.5"><input type="number" value="' + (t.points || '') + '" onchange="activityTiers[' + i + '].points=this.value" placeholder="50" class="w-full border border-gray-200 rounded-lg px-1.5 py-1 text-xs"></td>' +
-      '<td class="px-2 py-1.5"><input type="text" value="' + (t.budget || '') + '" onchange="activityTiers[' + i + '].budget=this.value" placeholder="预算" class="w-full border border-gray-200 rounded-lg px-1.5 py-1 text-xs"></td>' +
+      '<td class="px-2 py-1.5"><input type="text" maxlength="50" value="' + (t.budget || '') + '" onchange="activityTiers[' + i + '].budget=this.value" placeholder="预算" class="w-full border border-gray-200 rounded-lg px-1.5 py-1 text-xs"></td>' +
       '<td class="px-2 py-1.5 text-center"><button type="button" onclick="removeActivityTier(' + i + ')" class="text-red-500 hover:text-red-600 font-bold text-xs whitespace-nowrap">删除</button></td>' +
     '</tr>';
   }).join('');
+  setupTextLimitCounters(tbody);
 }
 
 function addActivityTier() {
@@ -2671,12 +2832,52 @@ function openActivityRuleForm(mode, btn) {
 }
 
 function saveActivityRule() {
-  var name = document.getElementById('activity-rule-name').value.trim();
-  if (!name) { showToast('请输入规则名称', 'error'); return; }
-  if (!document.getElementById('activity-rule-activity-name').value.trim()) { showToast('请输入活动名称', 'error'); return; }
+  var modal = document.getElementById('modal-activity-rule-form');
+  var nameEl = document.getElementById('activity-rule-name');
+  var activityNameEl = document.getElementById('activity-rule-activity-name');
+  var limitEl = document.getElementById('activity-rule-limit');
+  var budgetEl = document.getElementById('activity-rule-budget');
+  var name = nameEl.value.trim();
+  var activityName = activityNameEl.value.trim();
+  var limit = limitEl.value.trim();
+  var budget = budgetEl.value.trim();
+  var valid = true;
+  clearFieldErrorsIn(modal);
+  if (!requireField(nameEl, '请输入规则名称')) valid = false;
+  if (name && !validateTextLimit(name, 30, '规则名称')) valid = false;
+  if (!requireField(activityNameEl, '请输入活动名称')) valid = false;
+  if (activityName && !validateTextLimit(activityName, 50, '活动名称')) valid = false;
+  if (limit && !validateTextLimit(limit, 50, '用户限制')) valid = false;
+  if (budget && !validateTextLimit(budget, 50, '活动总预算')) valid = false;
+  var tierInputs = document.querySelectorAll('#activity-tiers-tbody tr');
+  tierInputs.forEach(function(row, i) {
+    var inputs = row.querySelectorAll('input');
+    if (!activityTiers[i]) activityTiers[i] = { scene: '', points: '', budget: '' };
+    activityTiers[i].scene = inputs[0] ? inputs[0].value : '';
+    activityTiers[i].points = inputs[1] ? inputs[1].value : '';
+    activityTiers[i].budget = inputs[2] ? inputs[2].value : '';
+  });
+  for (var i = 0; i < activityTiers.length; i++) {
+    var rowInputs = tierInputs[i] ? tierInputs[i].querySelectorAll('input') : [];
+    if (!activityTiers[i].scene || !activityTiers[i].scene.trim()) {
+      setFieldError(rowInputs[0], '请输入触发场景');
+      valid = false;
+    } else if (!validateTextLimit(activityTiers[i].scene, 20, '触发场景')) {
+      valid = false;
+    }
+    if (!activityTiers[i].points || isNaN(parseInt(activityTiers[i].points))) {
+      setFieldError(rowInputs[1], '请输入积分值');
+      valid = false;
+    }
+    if (activityTiers[i].budget && !validateTextLimit(activityTiers[i].budget, 50, '活动预算')) valid = false;
+  }
+  if (!valid) return;
   // 校验规则项配置
   var validTiers = activityTiers.filter(function(t) { return t.scene && t.scene.trim() && t.points && !isNaN(parseInt(t.points)); });
-  if (validTiers.length === 0) { showToast('请至少填写一行有效的规则项(触发场景+积分值)', 'error'); return; }
+  if (validTiers.length === 0) {
+    setFieldError(document.getElementById('section-rule-tiers'), '请至少填写一行有效的规则项');
+    return;
+  }
 
   var tbody = document.querySelector('#tab-activity tbody');
   var tierCount = validTiers.length;
@@ -2695,7 +2896,7 @@ function saveActivityRule() {
   tr.innerHTML =
     '<td class="px-4 py-3 font-bold text-gray-900">' + name + '</td>' +
     '<td class="px-4 py-3 text-gray-500 text-xs">会员后台</td>' +
-    '<td class="px-4 py-3 text-gray-900 text-xs">' + document.getElementById('activity-rule-activity-name').value.trim() + '</td>' +
+    '<td class="px-4 py-3 text-gray-900 text-xs">' + activityName + '</td>' +
     '<td class="px-4 py-3">' + tierBadge + '</td>' +
     '<td class="px-4 py-3 text-gray-700 font-bold text-xs">' + rangeText + '</td>' +
     '<td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-50 text-green-500">生效</span></td>' +
@@ -2928,13 +3129,14 @@ function savePrizeForm() {
 }
 
 function setFieldError(el, msg) {
-  if (el.tagName === 'INPUT' || el.tagName === 'SELECT') {
+  if (el.tagName === 'INPUT' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA') {
     el.classList.add('border-red-500');
-    var errEl = el.parentNode.querySelector('.field-error');
+    var host = getFieldErrorHost(el);
+    var errEl = host ? host.querySelector(':scope > .field-error') : null;
     if (!errEl) {
       errEl = document.createElement('p');
       errEl.className = 'field-error text-[10px] text-red-500 mt-1';
-      el.parentNode.appendChild(errEl);
+      if (host) host.appendChild(errEl);
     }
     errEl.textContent = msg;
   } else {
@@ -2951,9 +3153,10 @@ function setFieldError(el, msg) {
 }
 
 function clearFieldError(el) {
-  if (el.tagName === 'INPUT' || el.tagName === 'SELECT') {
+  if (el.tagName === 'INPUT' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA') {
     el.classList.remove('border-red-500');
-    var errEl = el.parentNode.querySelector('.field-error');
+    var host = getFieldErrorHost(el);
+    var errEl = host ? host.querySelector(':scope > .field-error') : null;
     if (errEl) errEl.remove();
   } else {
     el.classList.remove('border-2', 'border-red-500');
@@ -3260,6 +3463,8 @@ function editProductRow(btn) {
   document.getElementById('product-form-title').textContent = '编辑商品';
   handleProductTypeChange(type);
   if (type === 'physical') {
+    var productCode = row.dataset.productCode || getPhysicalProductCodeByName(name) || '';
+    document.getElementById('product-code').value = productCode;
     clearLinkSelection();
   } else {
     setLinkEditable(false);
@@ -3361,27 +3566,55 @@ document.addEventListener('click', function(e) {
 });
 
 function saveProductForm() {
-  var name = document.getElementById('product-name').value.trim();
-  var type = document.getElementById('product-type-select').value;
-  var price = parseInt(document.getElementById('product-price').value) || 0;
-  var stock = parseInt(document.getElementById('product-stock').value) || 0;
-  var limit = parseInt(document.getElementById('product-limit').value) || 0;
+  var page = document.getElementById('page-product-form');
+  var nameEl = document.getElementById('product-name');
+  var typeEl = document.getElementById('product-type-select');
+  var linkEl = document.getElementById('link-rule-search');
+  var productCodeEl = document.getElementById('product-code');
+  var productDescEl = document.getElementById('product-desc');
+  var productSpecEl = document.getElementById('product-spec');
+  var deliveryNoteEl = document.getElementById('product-delivery-note');
+  var priceEl = document.getElementById('product-price');
+  var stockEl = document.getElementById('product-stock');
+  var limitEl = document.getElementById('product-limit');
+  var offlineTimeEl = document.getElementById('product-offline-time');
+  var name = nameEl.value.trim();
+  var type = typeEl.value;
+  var productCode = productCodeEl.value.trim().toUpperCase();
+  var productDesc = productDescEl.value.trim();
+  var productSpec = productSpecEl.value.trim();
+  var deliveryNote = deliveryNoteEl.value.trim();
+  var price = parseInt(priceEl.value) || 0;
+  var stock = parseInt(stockEl.value) || 0;
+  var limit = parseInt(limitEl.value) || 0;
   var onlineTime = document.getElementById('product-online-time').value;
-  var offlineTime = document.getElementById('product-offline-time').value;
+  var offlineTime = offlineTimeEl.value;
   var status = document.getElementById('product-status').value;
   var valid = true;
 
-  if (!name) { showToast('商品名称不能为空','error'); valid = false; }
-  if (!type) { showToast('请选择商品类型','error'); valid = false; }
+  clearFieldErrorsIn(page);
+  if (!requireField(nameEl, '请输入商品名称')) valid = false;
+  if (name.length > 30) { setFieldError(nameEl, '商品名称不能超过30字'); valid = false; }
+  if (productDesc.length > 200) { setFieldError(productDescEl, '商品说明不能超过200字'); valid = false; }
+  if (productSpec.length > 40) { setFieldError(productSpecEl, '商品规格不能超过40字'); valid = false; }
+  if (deliveryNote.length > 200) { setFieldError(deliveryNoteEl, '发货说明不能超过200字'); valid = false; }
+  if (!requireSelect(typeEl, '请选择商品类型')) valid = false;
   if (type === 'virtual' && !document.getElementById('link-selected-name').textContent.trim()) {
-    showToast('请先关联权益','error');
+    setFieldError(linkEl, '请选择关联权益');
     valid = false;
   }
-  if (!price || price <= 0) { showToast('积分价格必须大于0','error'); valid = false; }
-  if (!stock || stock <= 0) { showToast('总库存必须大于0','error'); valid = false; }
-  if (limit < 0) { showToast('每人兑换限制不能小于0','error'); valid = false; }
-  if (offlineTime && onlineTime && offlineTime <= onlineTime) { showToast('下架时间不能早于上架时间','error'); valid = false; }
-  if (status === 'up' && stock <= 0) { showToast('上架商品必须有可用库存','error'); valid = false; }
+  if (type === 'physical' && !productCode) {
+    setFieldError(productCodeEl, '请输入商品编码');
+    valid = false;
+  } else if (type === 'physical' && !validatePhysicalProductCode(productCode)) {
+    setFieldError(productCodeEl, '商品编码无效，请确认商城商品是否存在且可用');
+    valid = false;
+  }
+  if (!requirePositiveNumber(priceEl, '请输入大于0的积分价格')) valid = false;
+  if (!requirePositiveNumber(stockEl, '请输入大于0的总库存')) valid = false;
+  if (limit < 0) { setFieldError(limitEl, '每人兑换限制不能小于0'); valid = false; }
+  if (offlineTime && onlineTime && offlineTime <= onlineTime) { setFieldError(offlineTimeEl, '下架时间不能早于上架时间'); valid = false; }
+  if (status === 'up' && stock <= 0) { setFieldError(stockEl, '上架商品必须有可用库存'); valid = false; }
   if (!valid) return;
 
   var typeNames = { virtual: '软件码', physical: '实物商品' };
@@ -3396,6 +3629,7 @@ function saveProductForm() {
   var tbody = document.querySelector('#page-product-manage tbody');
   var tr = document.createElement('tr');
   tr.className = 'hover:bg-gray-50/30';
+  if (type === 'physical') tr.dataset.productCode = productCode;
   tr.innerHTML =
     '<td class="px-6 py-4 font-bold text-gray-900">' + name + '</td>' +
     '<td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider ' + typeColors[type] + '">' + typeNames[type] + '</span></td>' +
@@ -3419,12 +3653,15 @@ function openProductFormAdd() {
   document.getElementById('product-price').value = '';
   document.getElementById('product-stock').value = '';
   document.getElementById('product-limit').value = '';
+  document.getElementById('product-desc').value = '';
   document.getElementById('product-online-time').value = '';
   document.getElementById('product-offline-time').value = '';
   document.getElementById('product-status').value = 'up';
   document.getElementById('product-type-select').value = '';
+  var productCode = document.getElementById('product-code');
   var spec = document.getElementById('product-spec');
   var deliveryNote = document.getElementById('product-delivery-note');
+  if (productCode) productCode.value = '';
   if (spec) spec.value = '';
   if (deliveryNote) deliveryNote.value = '';
   clearLinkSelection();
@@ -3441,6 +3678,26 @@ var linkOptions = {
   ],
 };
 var currentProductType = '';
+var physicalProductCatalog = {
+  '10002345': { name: '罗技 MX Master 3S 鼠标', status: 'active' },
+  '10002346': { name: '社区定制保温杯', status: 'active' },
+  '10002347': { name: '品牌蓝牙耳机', status: 'active' },
+  '10002348': { name: '精美书籍套装', status: 'active' }
+};
+
+function validatePhysicalProductCode(code) {
+  var normalizedCode = (code || '').trim().toUpperCase();
+  var product = physicalProductCatalog[normalizedCode];
+  return !!(product && product.status === 'active');
+}
+
+function getPhysicalProductCodeByName(name) {
+  var codes = Object.keys(physicalProductCatalog);
+  for (var i = 0; i < codes.length; i++) {
+    if (physicalProductCatalog[codes[i]].name === name) return codes[i];
+  }
+  return '';
+}
 
 function handleProductTypeChange(type) {
   currentProductType = type;
@@ -3609,6 +3866,7 @@ function triggerManualSync() {
 }
 
 
+setupTextLimitCounters();
 renderOrderActions();
 </script>
 
