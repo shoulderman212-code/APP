@@ -694,7 +694,7 @@ tailwind.config = {
         
         <div><label class="text-xs text-gray-500 font-bold mb-1 block">发放类型</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部</option><option>线下发放</option><option>公用优惠码</option><option>社区专用</option></select></div>
         <div><label class="text-xs text-gray-500 font-bold mb-1 block">活动状态</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部</option><option>未开始</option><option>活动中</option><option>已过期</option></select></div>
-        <div><label class="text-xs text-gray-500 font-bold mb-1 block">启用状态</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部</option><option>启用</option><option>停用</option></select></div>
+        <div><label class="text-xs text-gray-500 font-bold mb-1 block">展示状态</label><select class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white"><option>全部</option><option>已上架</option><option>已下架</option></select></div>
         
         
         
@@ -709,10 +709,10 @@ tailwind.config = {
       </div>
     </div>
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-x-auto">
-      <table class="w-full text-sm whitespace-nowrap"><thead><tr class="bg-gray-50/50 text-left"><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商城券ID</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">优惠券名称</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">发放类型</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">优惠券金额</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">积分价格</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">发放总量</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">活动状态</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">站点来源</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">已领取</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">已使用</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">同步时间</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">启用状态</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th></tr></thead><tbody class="divide-y divide-gray-50">
-<tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">MALL001</td><td class="px-4 py-3 font-bold text-gray-900">满100减20</td><td class="px-4 py-3 text-gray-600 text-xs">社区专用</td><td class="px-4 py-3 text-gray-900 font-bold">¥20</td><td class="px-4 py-3 text-gray-900 font-bold">200</td><td class="px-4 py-3 text-gray-900 font-bold">10,000</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">活动中</span></td><td class="px-4 py-3 text-gray-600 text-xs">美国站</td><td class="px-4 py-3"><button onclick="showCouponUsers(this,'claimed')" class="text-primary hover:text-blue-700 font-bold text-sm underline decoration-dotted underline-offset-2">3,421</button></td><td class="px-4 py-3"><button onclick="showCouponUsers(this,'used')" class="text-primary hover:text-blue-700 font-bold text-sm underline decoration-dotted underline-offset-2">1,892</button></td><td class="px-4 py-3 text-gray-500 text-xs">2026-12-31 10:30:25</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">启用</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="toggleCouponStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button></div></td></tr>
-<tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">MALL002</td><td class="px-4 py-3 font-bold text-gray-900">满200减50</td><td class="px-4 py-3 text-gray-600 text-xs">公用优惠码</td><td class="px-4 py-3 text-gray-900 font-bold">¥50</td><td class="px-4 py-3 text-gray-900 font-bold">500</td><td class="px-4 py-3 text-gray-900 font-bold">8,000</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-blue-50 text-blue-500">未开始</span></td><td class="px-4 py-3 text-gray-600 text-xs">日本站</td><td class="px-4 py-3"><button onclick="showCouponUsers(this,'claimed')" class="text-primary hover:text-blue-700 font-bold text-sm underline decoration-dotted underline-offset-2">0</button></td><td class="px-4 py-3"><button onclick="showCouponUsers(this,'used')" class="text-primary hover:text-blue-700 font-bold text-sm underline decoration-dotted underline-offset-2">0</button></td><td class="px-4 py-3 text-gray-500 text-xs">2026-09-30 16:00:00</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">启用</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="toggleCouponStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button></div></td></tr>
-<tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">MALL003</td><td class="px-4 py-3 font-bold text-gray-900">满50减10</td><td class="px-4 py-3 text-gray-600 text-xs">线下发放</td><td class="px-4 py-3 text-gray-900 font-bold">¥10</td><td class="px-4 py-3 text-gray-900 font-bold">100</td><td class="px-4 py-3 text-gray-900 font-bold">20,000</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-500">已过期</span></td><td class="px-4 py-3 text-gray-600 text-xs">英国站</td><td class="px-4 py-3"><button onclick="showCouponUsers(this,'claimed')" class="text-primary hover:text-blue-700 font-bold text-sm underline decoration-dotted underline-offset-2">8,500</button></td><td class="px-4 py-3"><button onclick="showCouponUsers(this,'used')" class="text-primary hover:text-blue-700 font-bold text-sm underline decoration-dotted underline-offset-2">4,200</button></td><td class="px-4 py-3 text-gray-500 text-xs">2026-03-31 10:00:00</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-400">停用</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="toggleCouponStatus(this)" class="text-green-500 hover:text-green-600 font-bold text-xs">启用</button></div></td></tr>
+      <table class="w-full text-sm whitespace-nowrap"><thead><tr class="bg-gray-50/50 text-left"><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">商城券ID</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">优惠券名称</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">发放类型</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">优惠券金额</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">积分价格</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">发放总量</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">活动状态</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">站点来源</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">已领取</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">已使用</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">同步时间</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">展示状态</th><th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th></tr></thead><tbody class="divide-y divide-gray-50">
+<tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">MALL001</td><td class="px-4 py-3 font-bold text-gray-900">满100减20</td><td class="px-4 py-3 text-gray-600 text-xs">社区专用</td><td class="px-4 py-3 text-gray-900 font-bold">¥20</td><td class="px-4 py-3 text-gray-900 font-bold">200</td><td class="px-4 py-3 text-gray-900 font-bold">10,000</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">活动中</span></td><td class="px-4 py-3 text-gray-600 text-xs">美国站</td><td class="px-4 py-3"><button onclick="showCouponUsers(this,'claimed')" class="text-primary hover:text-blue-700 font-bold text-sm underline decoration-dotted underline-offset-2">3,421</button></td><td class="px-4 py-3"><button onclick="showCouponUsers(this,'used')" class="text-primary hover:text-blue-700 font-bold text-sm underline decoration-dotted underline-offset-2">1,892</button></td><td class="px-4 py-3 text-gray-500 text-xs">2026-12-31 10:30:25</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">已上架</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="toggleCouponStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
+<tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">MALL002</td><td class="px-4 py-3 font-bold text-gray-900">满200减50</td><td class="px-4 py-3 text-gray-600 text-xs">公用优惠码</td><td class="px-4 py-3 text-gray-900 font-bold">¥50</td><td class="px-4 py-3 text-gray-900 font-bold">500</td><td class="px-4 py-3 text-gray-900 font-bold">8,000</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-blue-50 text-blue-500">未开始</span></td><td class="px-4 py-3 text-gray-600 text-xs">日本站</td><td class="px-4 py-3"><button onclick="showCouponUsers(this,'claimed')" class="text-primary hover:text-blue-700 font-bold text-sm underline decoration-dotted underline-offset-2">0</button></td><td class="px-4 py-3"><button onclick="showCouponUsers(this,'used')" class="text-primary hover:text-blue-700 font-bold text-sm underline decoration-dotted underline-offset-2">0</button></td><td class="px-4 py-3 text-gray-500 text-xs">2026-09-30 16:00:00</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">已上架</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="toggleCouponStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">下架</button></div></td></tr>
+<tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-mono text-xs text-primary font-bold">MALL003</td><td class="px-4 py-3 font-bold text-gray-900">满50减10</td><td class="px-4 py-3 text-gray-600 text-xs">线下发放</td><td class="px-4 py-3 text-gray-900 font-bold">¥10</td><td class="px-4 py-3 text-gray-900 font-bold">100</td><td class="px-4 py-3 text-gray-900 font-bold">20,000</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-500">已过期</span></td><td class="px-4 py-3 text-gray-600 text-xs">英国站</td><td class="px-4 py-3"><button onclick="showCouponUsers(this,'claimed')" class="text-primary hover:text-blue-700 font-bold text-sm underline decoration-dotted underline-offset-2">8,500</button></td><td class="px-4 py-3"><button onclick="showCouponUsers(this,'used')" class="text-primary hover:text-blue-700 font-bold text-sm underline decoration-dotted underline-offset-2">4,200</button></td><td class="px-4 py-3 text-gray-500 text-xs">2026-03-31 10:00:00</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-400">已下架</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="toggleCouponStatus(this)" class="text-green-500 hover:text-green-600 font-bold text-xs">上架</button></div></td></tr>
 </tbody></table>
       <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500"><div class="flex items-center gap-3"><span>共 3 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white" onchange="changePageSize(this)"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div><div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 1 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div></div>
     </div>
@@ -1219,14 +1219,14 @@ tailwind.config = {
           <th class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">操作</th>
         </tr></thead>
         <tbody class="divide-y divide-gray-50">
-          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">新用户注册奖励</td><td class="px-4 py-3 text-gray-600 text-xs">会员</td><td class="px-4 py-3 text-gray-600 text-xs">注册</td><td class="px-4 py-3 text-green-600 font-bold">+20</td><td class="px-4 py-3 text-gray-600">1次</td><td class="px-4 py-3 text-gray-600">一次性</td><td class="px-4 py-3 text-gray-600">20</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="openBehaviorRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button></div></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">订阅积分奖励</td><td class="px-4 py-3 text-gray-600 text-xs">会员</td><td class="px-4 py-3 text-gray-600 text-xs">订阅</td><td class="px-4 py-3 text-green-600 font-bold">+10</td><td class="px-4 py-3 text-gray-600">1次</td><td class="px-4 py-3 text-gray-600">月</td><td class="px-4 py-3 text-gray-600">10</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="openBehaviorRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button></div></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">每日签到奖励</td><td class="px-4 py-3 text-gray-600 text-xs">会员</td><td class="px-4 py-3 text-gray-600 text-xs">签到</td><td class="px-4 py-3 text-green-600 font-bold">+3</td><td class="px-4 py-3 text-gray-600">1次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">93</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="openBehaviorRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button></div></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">社区发帖奖励积分</td><td class="px-4 py-3 text-gray-600 text-xs">社区</td><td class="px-4 py-3 text-gray-600 text-xs">发帖</td><td class="px-4 py-3 text-green-600 font-bold">+5</td><td class="px-4 py-3 text-gray-600">10次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">50</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="openBehaviorRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button></div></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">评论互动奖励</td><td class="px-4 py-3 text-gray-600 text-xs">社区</td><td class="px-4 py-3 text-gray-600 text-xs">评论</td><td class="px-4 py-3 text-green-600 font-bold">+2</td><td class="px-4 py-3 text-gray-600">20次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">40</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="openBehaviorRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button></div></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">点赞奖励</td><td class="px-4 py-3 text-gray-600 text-xs">社区</td><td class="px-4 py-3 text-gray-600 text-xs">点赞</td><td class="px-4 py-3 text-green-600 font-bold">+1</td><td class="px-4 py-3 text-gray-600">30次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">30</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="openBehaviorRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button></div></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">收藏奖励</td><td class="px-4 py-3 text-gray-600 text-xs">社区</td><td class="px-4 py-3 text-gray-600 text-xs">收藏</td><td class="px-4 py-3 text-green-600 font-bold">+2</td><td class="px-4 py-3 text-gray-600">15次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">30</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-400">关</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="openBehaviorRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-green-500 hover:text-green-600 font-bold text-xs">启用</button><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button></div></td></tr>
-          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">分享转发奖励</td><td class="px-4 py-3 text-gray-600 text-xs">社区</td><td class="px-4 py-3 text-gray-600 text-xs">分享转发</td><td class="px-4 py-3 text-green-600 font-bold">+5</td><td class="px-4 py-3 text-gray-600">5次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">25</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="openBehaviorRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">新用户注册奖励</td><td class="px-4 py-3 text-gray-600 text-xs">会员</td><td class="px-4 py-3 text-gray-600 text-xs">注册</td><td class="px-4 py-3 text-green-600 font-bold">+20</td><td class="px-4 py-3 text-gray-600">1次</td><td class="px-4 py-3 text-gray-600">一次性</td><td class="px-4 py-3 text-gray-600">20</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showToast('规则已复制','success')" class="text-primary hover:text-blue-700 font-bold text-xs">复制</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">订阅积分奖励</td><td class="px-4 py-3 text-gray-600 text-xs">会员</td><td class="px-4 py-3 text-gray-600 text-xs">订阅</td><td class="px-4 py-3 text-green-600 font-bold">+10</td><td class="px-4 py-3 text-gray-600">1次</td><td class="px-4 py-3 text-gray-600">月</td><td class="px-4 py-3 text-gray-600">10</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showToast('规则已复制','success')" class="text-primary hover:text-blue-700 font-bold text-xs">复制</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">每日签到奖励</td><td class="px-4 py-3 text-gray-600 text-xs">会员</td><td class="px-4 py-3 text-gray-600 text-xs">签到</td><td class="px-4 py-3 text-green-600 font-bold">+3</td><td class="px-4 py-3 text-gray-600">1次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">93</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showToast('规则已复制','success')" class="text-primary hover:text-blue-700 font-bold text-xs">复制</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">社区发帖奖励积分</td><td class="px-4 py-3 text-gray-600 text-xs">社区</td><td class="px-4 py-3 text-gray-600 text-xs">发帖</td><td class="px-4 py-3 text-green-600 font-bold">+5</td><td class="px-4 py-3 text-gray-600">10次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">50</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showToast('规则已复制','success')" class="text-primary hover:text-blue-700 font-bold text-xs">复制</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">评论互动奖励</td><td class="px-4 py-3 text-gray-600 text-xs">社区</td><td class="px-4 py-3 text-gray-600 text-xs">评论</td><td class="px-4 py-3 text-green-600 font-bold">+2</td><td class="px-4 py-3 text-gray-600">20次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">40</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showToast('规则已复制','success')" class="text-primary hover:text-blue-700 font-bold text-xs">复制</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">点赞奖励</td><td class="px-4 py-3 text-gray-600 text-xs">社区</td><td class="px-4 py-3 text-gray-600 text-xs">点赞</td><td class="px-4 py-3 text-green-600 font-bold">+1</td><td class="px-4 py-3 text-gray-600">30次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">30</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showToast('规则已复制','success')" class="text-primary hover:text-blue-700 font-bold text-xs">复制</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">收藏奖励</td><td class="px-4 py-3 text-gray-600 text-xs">社区</td><td class="px-4 py-3 text-gray-600 text-xs">收藏</td><td class="px-4 py-3 text-green-600 font-bold">+2</td><td class="px-4 py-3 text-gray-600">15次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">30</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-400">关</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="openBehaviorRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-green-500 hover:text-green-600 font-bold text-xs">启用</button><button onclick="showToast('规则已复制','success')" class="text-primary hover:text-blue-700 font-bold text-xs">复制</button></div></td></tr>
+          <tr class="hover:bg-gray-50/30"><td class="px-4 py-3 font-bold text-gray-900">分享转发奖励</td><td class="px-4 py-3 text-gray-600 text-xs">社区</td><td class="px-4 py-3 text-gray-600 text-xs">分享转发</td><td class="px-4 py-3 text-green-600 font-bold">+5</td><td class="px-4 py-3 text-gray-600">5次</td><td class="px-4 py-3 text-gray-600">日</td><td class="px-4 py-3 text-gray-600">25</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500">开</span></td><td class="px-4 py-3"><div class="flex items-center gap-2"><button onclick="showBehaviorRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button><button onclick="toggleBehaviorRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button><button onclick="showToast('规则已复制','success')" class="text-primary hover:text-blue-700 font-bold text-xs">复制</button></div></td></tr>
         </tbody>
       </table>
       <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500"><div class="flex items-center gap-3"><span>共 8 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white" onchange="changePageSize(this)"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div><div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 1 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div></div>
@@ -1305,9 +1305,22 @@ tailwind.config = {
             <td class="px-4 py-3 text-gray-700 font-bold text-xs">+50 ~ +1000</td>
             <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-50 text-green-500">生效</span></td>
             <td class="px-4 py-3"><div class="flex items-center gap-2">
-              <button onclick="openActivityRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button>
+              <button onclick="viewActivityRule(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button>
               <button onclick="toggleActivityRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button>
-              <button onclick="showActivityRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button>
+              <button onclick="showToast('规则已复制','success')" class="text-primary hover:text-blue-700 font-bold text-xs">复制</button>
+            </div></td>
+          </tr>
+          <tr class="hover:bg-gray-50/30">
+            <td class="px-4 py-3 font-bold text-gray-900">绘画比赛积分包</td>
+            <td class="px-4 py-3 text-gray-500 text-xs">会员后台</td>
+            <td class="px-4 py-3 text-gray-900 text-xs">社区绘画比赛</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-500">5 档</span></td>
+            <td class="px-4 py-3 text-gray-700 font-bold text-xs">+50 ~ +1000</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-400">停用</span></td>
+            <td class="px-4 py-3"><div class="flex items-center gap-2">
+              <button onclick="openActivityRuleForm('edit', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button>
+              <button onclick="toggleActivityRuleStatus(this)" class="text-green-500 hover:text-green-600 font-bold text-xs">启用</button>
+              <button onclick="showToast('规则已复制','success')" class="text-primary hover:text-blue-700 font-bold text-xs">复制</button>
             </div></td>
           </tr>
           <tr class="hover:bg-gray-50/30">
@@ -1378,7 +1391,7 @@ tailwind.config = {
         </tbody>
       </table>
       <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
-        <div class="flex items-center gap-3"><span>共 6 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div>
+        <div class="flex items-center gap-3"><span>共 7 条记录</span><select class="border border-gray-200 rounded-lg px-2 py-1 text-xs bg-white"><option value="50">50 条/页</option><option value="100">100 条/页</option><option value="200">200 条/页</option></select></div>
         <div class="flex items-center gap-2"><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">上一页</button><span class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold">1</span><button class="px-3 py-1 border border-gray-200 rounded-lg text-xs font-bold hover:bg-gray-50">下一页</button><span class="text-xs text-gray-400">共 1 页</span><span class="text-xs text-gray-400">跳至</span><input type="number" min="1" value="1" class="w-12 border border-gray-200 rounded-lg px-2 py-1 text-xs text-center"><span class="text-xs text-gray-400">页</span></div>
       </div>
     </div>
@@ -1561,77 +1574,6 @@ tailwind.config = {
           <div class="bg-gray-50 rounded-lg p-2"><span class="text-gray-400">已发放</span><div class="font-bold text-green-500">128</div></div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- ========== MODAL: 人工补发 ========== -->
-<div class="modal-overlay" id="modal-store-coupon-form" onclick="if(event.target===this)hideModal('modal-store-coupon-form')">
-  <div class="bg-white rounded-2xl w-full max-w-2xl p-6 shadow-xl relative max-h-[88vh] overflow-y-auto">
-    <div class="flex items-center justify-between mb-5">
-      <div>
-        <h3 class="text-lg font-bold text-gray-900">新增优惠券</h3>
-        <p class="text-xs text-gray-400 mt-0.5">创建商城商品优惠券/码，社区专用类型可配置积分价格</p>
-      </div>
-      <button onclick="hideModal('modal-store-coupon-form')" class="text-gray-400 hover:text-gray-600 transition-colors">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
-    </div>
-
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <label class="text-xs text-gray-500 font-bold mb-1 block">优惠券名称 <span class="text-red-500">*</span></label>
-        <input id="store-coupon-form-name" type="text" placeholder="请输入优惠券名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
-      </div>
-      <div>
-        <label class="text-xs text-gray-500 font-bold mb-1 block">优惠类型 <span class="text-red-500">*</span></label>
-        <select class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
-          <option>商品优惠码</option>
-          <option>商品优惠券</option>
-        </select>
-      </div>
-      <div>
-        <label class="text-xs text-gray-500 font-bold mb-1 block">发放类型 <span class="text-red-500">*</span></label>
-        <select id="store-coupon-grant-type" onchange="toggleStoreCouponPointsField()" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white">
-          <option>线下发放</option>
-          <option>公用优惠码</option>
-          <option>社区专用</option>
-        </select>
-      </div>
-      <div>
-        <label class="text-xs text-gray-500 font-bold mb-1 block">优惠码</label>
-        <input type="text" placeholder="公用优惠码可填写" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
-      </div>
-      <div>
-        <label class="text-xs text-gray-500 font-bold mb-1 block">优惠券金额 <span class="text-red-500">*</span></label>
-        <input type="text" placeholder="如 30% 或 20.00" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
-      </div>
-      <div>
-        <label class="text-xs text-gray-500 font-bold mb-1 block">满订单金额</label>
-        <input type="number" min="0" placeholder="0.00" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
-      </div>
-      <div>
-        <label class="text-xs text-gray-500 font-bold mb-1 block">使用截止日期</label>
-        <input type="datetime-local" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
-      </div>
-      <div>
-        <label class="text-xs text-gray-500 font-bold mb-1 block">商品名称</label>
-        <input type="text" placeholder="请输入关联商品名称" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
-      </div>
-      <div id="store-coupon-points-field" class="hidden">
-        <label class="text-xs text-gray-500 font-bold mb-1 block">积分价格</label>
-        <input id="store-coupon-points-price" type="number" min="0" placeholder="非必填，社区专用时可配置" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
-      </div>
-    </div>
-
-    <div class="mt-4">
-      <label class="text-xs text-gray-500 font-bold mb-1 block">备注</label>
-      <textarea rows="3" placeholder="填写运营备注，非必填" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
-    </div>
-
-    <div class="flex items-center justify-end gap-3 mt-5 pt-4 border-t border-gray-100">
-      <button onclick="hideModal('modal-store-coupon-form')" class="bg-white text-gray-700 border border-gray-200 px-6 py-2 rounded-xl text-sm font-bold hover:bg-gray-50 transition-colors shadow-sm">取消</button>
-      <button onclick="submitStoreCouponForm()" class="bg-primary text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors shadow-sm">保存</button>
     </div>
   </div>
 </div>
@@ -2128,16 +2070,16 @@ tailwind.config = {
       </div>
     </div>
 
-    <!-- 奖项阶梯 -->
+    <!-- 奖励项配置 -->
     <div class="mb-5" id="section-rule-tiers">
       <div class="flex items-center justify-between mb-3">
         <div class="flex items-center gap-2">
           <div class="w-1 h-4 bg-primary rounded-full"></div>
-          <h4 class="text-sm font-bold text-gray-900">奖项阶梯 <span class="text-red-500">*</span></h4>
+          <h4 class="text-sm font-bold text-gray-900">奖励项配置 <span class="text-red-500">*</span></h4>
         </div>
         <button type="button" onclick="addActivityTier()" class="text-primary hover:text-blue-700 text-xs font-bold flex items-center gap-1">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-          添加奖项行
+          添加奖励项
         </button>
       </div>
       <div class="border border-gray-100 rounded-xl overflow-hidden">
@@ -2152,7 +2094,7 @@ tailwind.config = {
           <tbody id="activity-tiers-tbody" class="divide-y divide-gray-50"></tbody>
         </table>
       </div>
-      <p class="text-[10px] text-gray-400 mt-1">每条规则至少填一行奖项。正数为新增积分,负数为扣减积分。</p>
+      <p class="text-[10px] text-gray-400 mt-1">每条规则至少填一行奖励项。正数为新增积分,负数为扣减积分。</p>
     </div>
 
     <!-- 限制 -->
@@ -2505,19 +2447,19 @@ function switchRuleTab(tab) {
 function toggleCouponStatus(btn) {
   var row = btn.closest("tr");
   var badge = row.querySelector("td:nth-child(12) span");
-  var isEnabled = badge.textContent === "启用";
-  if (isEnabled) {
-    badge.textContent = "停用";
+  var isUp = badge.textContent === "已上架";
+  if (isUp) {
+    badge.textContent = "已下架";
     badge.className = "px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-400";
-    btn.textContent = "启用";
+    btn.textContent = "上架";
     btn.className = "text-green-500 hover:text-green-600 font-bold text-xs";
-    showToast("已停用", "success");
+    showToast("优惠券已下架", "success");
   } else {
-    badge.textContent = "启用";
+    badge.textContent = "已上架";
     badge.className = "px-2 py-0.5 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500";
-    btn.textContent = "停用";
+    btn.textContent = "下架";
     btn.className = "text-red-500 hover:text-red-600 font-bold text-xs";
-    showToast("已启用", "success");
+    showToast("优惠券已上架", "success");
   }
 }
 
@@ -2670,8 +2612,8 @@ function toggleBehaviorRuleStatus(btn) {
   }
 }
 
-// ========== 活动积分规则:奖项阶梯数据 ==========
-var activityTiers = []; // 当前编辑中的奖项阶梯
+// ========== 活动积分规则:奖励项配置数据 ==========
+var activityTiers = []; // 当前编辑中的奖励项配置
 
 function renderActivityTiers() {
   var tbody = document.getElementById('activity-tiers-tbody');
@@ -2720,7 +2662,7 @@ function openActivityRuleForm(mode, btn) {
     document.getElementById('activity-rule-activity-name').value = cells[2].textContent.trim();
     document.getElementById('activity-rule-limit').value = '';
     document.getElementById('activity-rule-budget').value = '';
-    // 从行数据推断奖项阶梯(多档用积分范围,单档直接填)
+    // 从行数据推断奖励项配置(多档用积分范围,单档直接填)
     var tierText = cells[3].textContent.trim();
     var rangeText = cells[4].textContent.trim();
     if (tierText.indexOf('5') !== -1) {
@@ -2744,7 +2686,7 @@ function saveActivityRule() {
   var name = document.getElementById('activity-rule-name').value.trim();
   if (!name) { showToast('请输入规则名称', 'error'); return; }
   if (!document.getElementById('activity-rule-activity-name').value.trim()) { showToast('请输入活动名称', 'error'); return; }
-  // 校验奖项阶梯
+  // 校验奖励项配置
   var validTiers = activityTiers.filter(function(t) { return t.scene && t.scene.trim() && t.points && !isNaN(parseInt(t.points)); });
   if (validTiers.length === 0) { showToast('请至少填写一行有效的奖项(触发场景+积分值)', 'error'); return; }
 
@@ -2770,9 +2712,9 @@ function saveActivityRule() {
     '<td class="px-4 py-3 text-gray-700 font-bold text-xs">' + rangeText + '</td>' +
     '<td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-50 text-green-500">生效</span></td>' +
     '<td class="px-4 py-3"><div class="flex items-center gap-2">' +
-      '<button onclick="openActivityRuleForm(\'edit\', this)" class="text-primary hover:text-blue-700 font-bold text-xs">编辑</button>' +
+      '<button onclick="viewActivityRule(this)" class="text-primary hover:text-blue-700 font-bold text-xs">查看</button>' +
       '<button onclick="toggleActivityRuleStatus(this)" class="text-red-500 hover:text-red-600 font-bold text-xs">停用</button>' +
-      '<button onclick="showActivityRuleDetail(this)" class="text-primary hover:text-blue-700 font-bold text-xs">明细</button>' +
+      '<button onclick="showToast(\'规则已复制\',\'success\')" class="text-primary hover:text-blue-700 font-bold text-xs">复制</button>' +
     '</div></td>';
   tbody.appendChild(tr);
 
@@ -3658,46 +3600,6 @@ function resetStoreCouponFilters() {
   if (codeFilter) codeFilter.value = '';
   if (statusFilter) statusFilter.value = '全部状态';
   filterStoreCouponList();
-}
-
-function openStoreCouponForm() {
-  document.getElementById('store-coupon-form-name').value = '';
-  document.getElementById('store-coupon-grant-type').value = '线下发放';
-  document.getElementById('store-coupon-points-price').value = '';
-  toggleStoreCouponPointsField();
-  showModal('modal-store-coupon-form');
-}
-
-function toggleStoreCouponPointsField() {
-  var grantType = document.getElementById('store-coupon-grant-type').value;
-  document.getElementById('store-coupon-points-field').classList.toggle('hidden', grantType !== '社区专用');
-}
-
-function submitStoreCouponForm() {
-  var name = document.getElementById('store-coupon-form-name').value.trim();
-  if (!name) {
-    showToast('请填写优惠券名称', 'error');
-    return;
-  }
-  hideModal('modal-store-coupon-form');
-  showToast('优惠券已保存', 'success');
-}
-
-function toggleStoreCouponStatus(btn) {
-  var enabled = btn.textContent.trim() === '启用';
-  btn.textContent = enabled ? '停用' : '启用';
-  btn.className = enabled
-    ? 'px-3 py-1 rounded-full text-[10px] uppercase font-bold bg-gray-100 text-gray-500'
-    : 'px-3 py-1 rounded-full text-[10px] uppercase font-bold bg-green-50 text-green-500';
-  showToast(enabled ? '优惠券已停用' : '优惠券已启用', 'success');
-}
-
-function removeStoreCouponRow(btn) {
-  var row = btn.closest('tr');
-  if (!row) return;
-  row.remove();
-  filterStoreCouponList();
-  showToast('优惠券已删除', 'success');
 }
 
 function showToast(msg, type) {
